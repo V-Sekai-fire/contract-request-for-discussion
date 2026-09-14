@@ -206,6 +206,7 @@ defmodule Serials.VSekaiFabric do
       serial 2248, "the-avatar-body-is-a-closed-solid"
       serial 2249, "cloth-by-vertex-block-descent", flight_level: :l2
       serial 2250, "cloth-fit-as-one-burrito-binary"
+      serial 2251, "image-to-godot-character-as-an-fbd"
     end
 
     deleted do
