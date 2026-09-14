@@ -25,7 +25,7 @@ defmodule Plan.FourloopsPlan do
       "XL"
     ])
     string_list("sources", [
-      "7-service/service-livebook/priv/python/weft_loop.py",
+      "7-service/livebook/priv/python/weft_loop.py",
       "6-datasource/anny-render-corpus/score_edits.py",
       "6-datasource/anny-render-corpus/gen_posed_from_reference.py",
       "6-datasource/anny-render-corpus/render_view.py",
@@ -83,7 +83,7 @@ defmodule Plan.FourloopsPlan do
         prim("AnnyFit", [
           attr("kind", "token", "fit", [uniform: true]),
           attr("state", "token", "exists", [uniform: true]),
-          attr("entry", "string", "7-service/service-livebook/priv/python/loop1_fit.py:fit_2d"),
+          attr("entry", "string", "7-service/livebook/priv/python/loop1_fit.py:fit_2d"),
           attr("outputs", "string", "pose, keypoints2d, residual_px, stature_px, camera"),
           attr("roundTripMedianPx", "float", 1.56),
           attr("roundTripPctOfStature", "float", 0.263),
@@ -152,8 +152,8 @@ defmodule Plan.FourloopsPlan do
         prim("Harness", [
           attr("kind", "token", "harness", [uniform: true]),
           attr("state", "token", "measure", [uniform: true]),
-          attr("entry", "string", "7-service/service-livebook/priv/python/weft_loop.py"),
-          attr("controls", "string", "7-service/service-livebook/priv/python/test_weft_loop.py")
+          attr("entry", "string", "7-service/livebook/priv/python/weft_loop.py"),
+          attr("controls", "string", "7-service/livebook/priv/python/test_weft_loop.py")
         ])
       ]),
       scope("Loops", [
