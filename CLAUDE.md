@@ -609,6 +609,12 @@ workspace's reviewed permission set; `settings.local.json` beside it is per-desk
 and gitignored, and Claude Code merges the two with local winning. The split is
 the tool's; only the tracking decision is ours.
 
+The editor configuration is `weftspun/dot-vscode`, checked out at `.vscode`. It
+holds the scons build tasks for the `4-entities/godot-*` checkouts, which each
+gitignore `.vscode/` — a task written inside one is untracked on the desk that
+wrote it and absent on the next, and there are nine of them against one
+upstream. At the workspace root it is written once and arrives as a diff.
+
 ## The Rule for Adding a Permission
 
 An allowlist entry removes a question somebody would otherwise be asked, so add
