@@ -9,33 +9,26 @@ defmodule RFD2252 do
   rfd 2252, "the llm module splits across cards and drafts" do
     state :discussion
 
-    feature "the godot-language-model `modules/llm` surface carries the\nmulti-GPU split, batch, drafter, and jinja-template knobs that a\nGemma4-31B QAT recipe on 4090 + 3090 needs to clear 220 tok/s"
+    feature "`modules/llm` carries the split, batch, drafter and jinja\nknobs a Gemma4-31B QAT recipe on 4090 + 3090 needs for 220 tok/s"
 
-    scope "`4-entities/godot-language-model/modules/llm`: `LLMContext`,\n`LLMModel`, a new `LLMDraft`, and the sampler on `LLMChat`. No\nchange to the vendored `thirdparty/llama_cpp` tree; every new knob\nforwards to a llama.cpp flag that already exists there."
+    scope "`4-entities/godot-language-model/modules/llm`: `LLMContext`,\n`LLMModel`, a new `LLMDraft`, `LLMChat`. No llama.cpp change."
 
     decision ~S"""
-    Ten properties land, grouped by class. `LLMModel` gains
-    `split_mode` (enum: none/layer/row), `main_gpu` (int), and
-    `tensor_split` (PackedFloat32Array). `LLMContext` gains
-    `n_batch` (default 2048), `n_ubatch` (default 512), `n_parallel`
-    (default 1), and `kv_unified` (bool). `LLMChat` gains `min_p`
-    (float) and `jinja_template` (bool, default true). Speculative
-    decode ships as `LLMDraft`: a RefCounted holding `draft_model`
-    (LLMModel), `spec_type` (enum: none/dflash), `n_max` (int),
-    `n_min` (int), and `dflash_cross_ctx` (int). `LLMChat.setup`
-    takes an optional `LLMDraft`.
+    Ten properties land. `LLMModel` gains `split_mode`, `main_gpu`
+    and `tensor_split`. `LLMContext` gains `n_batch`, `n_ubatch`,
+    `n_parallel` and `kv_unified`. `LLMChat` gains `min_p` and
+    `jinja_template`. Speculative decode ships as `LLMDraft`, a
+    RefCounted that `LLMChat.setup` takes as an optional argument.
+    `DETAILS.md` carries the knob table, the types and the defaults.
     """
 
     problem ~S"""
-    The `modules/llm` surface exposes `model_path`, `n_gpu_layers`,
-    `n_ctx`, `cache_type_k/v`, `flash_attn`, and the sampler triple.
-    A GGUF Gemma4-31B recipe that runs on 4090 + 3090 at the
-    club-3090 rig's measured rate (~157 tok/s with dflash draft, per
-    beellama's 2026-06-01 dual-3090 bench) cannot be expressed
-    against that surface: no split-mode, no per-card `main_gpu`, no
-    batch sizing, no drafter, no jinja template toggle. The
-    operator's 220 tok/s target on 4090 + 3090 depends on three of
-    those four groups; the fourth is a template correctness fix.
+    The surface exposes `model_path`, `n_gpu_layers`, `n_ctx`,
+    `cache_type_k/v`, `flash_attn` and the sampler triple. A GGUF
+    Gemma4-31B recipe on 4090 + 3090 cannot be expressed against
+    it: no split mode, no `main_gpu`, no batch sizing, no drafter,
+    no jinja toggle. The first four gate 220 tok/s; jinja is
+    correctness.
     """
 
     related ~S"""
@@ -45,14 +38,8 @@ defmodule RFD2252 do
       the native-Godot-module pattern this RFD applies to `llm`.
     - [RFD 2242](../2242-ggml-consumers-as-native-godot-modules/):
       the ggml-consumer siblings on the same manifest.
-    - upstream: `noonghunna/club-3090`
-      `models/gemma-4-31b/beellama/compose/dual/beellama-q4ks-dflash/dflash.yml`,
-      read 2026-09-15, preserved as
-      `apparatus/2252-llm-module-splits-and-drafts/reference-dflash.yml`.
-      Beellama engine is retired 2026-07-27 upstream; the flag set
-      is portable to llama.cpp mainline once the dflash draft type
-      lands there, and the `LLMDraft.spec_type` enum leaves room
-      for `none` in the interim.
+    - upstream `noonghunna/club-3090` `dflash.yml`, read 2026-09-15,
+      preserved under `apparatus/2252-llm-module-splits-and-drafts/`.
     """
 
     details_title "the llm module splits across cards and drafts"
@@ -87,6 +74,22 @@ defmodule RFD2252 do
     | `--spec-draft-n-max <int>` | `n_max` | LLMDraft |
     | `--spec-draft-n-min <int>` | `n_min` | LLMDraft |
     | `--spec-dflash-cross-ctx <int>` | `dflash_cross_ctx` | LLMDraft |
+
+    Types and defaults: `split_mode` is an enum (none/layer/row),
+    `main_gpu` an int, `tensor_split` a PackedFloat32Array;
+    `n_batch` defaults to 2048, `n_ubatch` to 512, `n_parallel` to
+    1, `kv_unified` is a bool, `jinja_template` a bool defaulting
+    to true, `min_p` a float. `LLMDraft` holds `draft_model`
+    (LLMModel), `spec_type` (enum: none/dflash), and `n_max`,
+    `n_min` and `dflash_cross_ctx` as ints.
+
+    The beellama engine is retired upstream as of 2026-07-27. The
+    flag set is portable to llama.cpp mainline once the dflash
+    draft type lands there, and `LLMDraft.spec_type` carries `none`
+    for the interim. The club-3090 rig measures ~157 tok/s with the
+    dflash draft on its 2026-06-01 dual-3090 bench, and the full
+    compose path is
+    `models/gemma-4-31b/beellama/compose/dual/beellama-q4ks-dflash/dflash.yml`.
 
     `--cache-ram 0` and `--no-host` are process-wide flags rather
     than per-context knobs; they belong on `LLMServer` boot config,
@@ -127,7 +130,7 @@ defmodule RFD2252 do
     rung 3 and above needs the ten properties in the knob table.
     """
 
-    details "Beyond 220 — the second half of the ladder", ~S"""
+    details "Beyond 220: the second half of the ladder", ~S"""
     The target 220 tok/s is the stopping point of the first half,
     not the ceiling. Four rungs beyond it, each one a smaller step
     and a narrower assumption. The multipliers compound against
@@ -158,7 +161,7 @@ defmodule RFD2252 do
     decode pass reads ~15.5 GB, so the single-stream memory-bound
     wall on the 4090 is ~65 tok/s. Rung 4 already stands 3.4×
     over that wall, which is exactly what speculative decode
-    buys — an accepted draft token amortises the read that would
+    buys: an accepted draft token amortises the read that would
     otherwise cost a full pass. Every rung past 4 is either a
     smaller read (IQ3_M at rung 8 drops the wall to ~84 tok/s
     single-stream) or a higher accept rate (rungs 5, 9, 10). A
