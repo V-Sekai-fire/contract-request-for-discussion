@@ -262,6 +262,7 @@ defmodule Serials.VSekaiFabric do
       serial 2227, "workspace-ggml-models-on-platform-web-webgpu"
       serial 2228, "webgpu-native-drop-platform-web", flight_level: :l2
       serial 2231, "drop-webgpu-use-vulkan", flight_level: :l2
+      serial 2252, "llm-module-splits-and-drafts"
     end
   end
 end
