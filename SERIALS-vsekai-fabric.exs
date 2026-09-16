@@ -208,6 +208,7 @@ defmodule Serials.VSekaiFabric do
       serial 2250, "cloth-fit-as-one-burrito-binary"
       serial 2251, "image-to-godot-character-as-an-fbd"
       serial 2252, "llm-module-splits-and-drafts"
+      serial 2253, "a-character-creator-on-anny", flight_level: :l2
     end
 
     deleted do
