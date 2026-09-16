@@ -11,16 +11,16 @@ defmodule RFD2253 do
 
     flight_level :l2
 
-    feature "a character creator a person opens: sliders over the canonical\nANNY fixture in the one Godot binary, exporting the shuttle that\nRFD 2251's chain consumes"
+    feature "a character creator a person opens: sliders over the baked ANNY\nasset in the one Godot binary, exporting the shuttle that\nRFD 2251's chain consumes"
 
-    scope "`4-entities/anny-creator`, a Godot project the RFD 2239 binary runs;\nthe canonical ANNY usdz fixture; RFD 2251's `rig` through `render`"
+    scope "`4-entities/anny-creator`, a Godot project the RFD 2239 binary runs;\nthe baked ANNY asset; RFD 2251's `rig` through `render`"
 
     decision ~S"""
     The creator is RFD 2251's second front door: where 2251 hands the
-    chain a generated body, a person sets 317 shape weights on the
-    canonical ANNY fixture. Eleven phenotype axes, 52 facial actions
-    under FACS action-unit numbers, 254 local dials by hm08 region.
-    Joints follow the shape through the JointCubes helper geometry.
+    chain a generated body, a person sets 948 target weights on the
+    baked ANNY asset. Six phenotype axes, 52 facial actions under
+    FACS action-unit numbers, 254 signed local dials by body region.
+    Joints follow the shape through ANNY's own joint tables.
     `rig` through `render` are 2251's blocks, unchanged. Export is
     pure data: morph targets, skin weights, one humanoid bone map.
     """
@@ -28,8 +28,8 @@ defmodule RFD2253 do
     problem ~S"""
     VRoid Studio is proprietary, MakeHuman is ageing, SMPL is
     non-commercial; a person wanting a permissive parametric human has
-    no creator to open. Every part of one is here: the fixture, the
-    partition proofs, the anthropometry tables, a slider demo in the
+    no creator to open. Every part of one is here: the model, the
+    joint tables, the anthropometry tables, a slider demo in the
     Python the runtime forbids. Nothing joins them into a thing used.
     """
 
@@ -68,8 +68,9 @@ defmodule RFD2253 do
 
     | ingredient | path | what it gives the creator |
     | --- | --- | --- |
-    | canonical fixture | the stored usdz RFD 1053's exemption was written for, generated from `6-datasource/anny-render-corpus` | 19,158 vertices, 104 joints, 9-influence skinning, 317 shapes, the source's UVs |
-    | phenotype math | `3-interactor/anny/src/anny/models/phenotype.py`, `utils/interpolation.py` | nine macro axes, piecewise-linear anchors per axis |
+    | baked asset | `4-entities/anny-creator/tools/bake_anny.py`, run once under the `bake` pixi environment | the `anny` topology at 13,718 vertices and 27,420 triangles, 104 joints, 8 of 9 influences kept (2 vertices lose a 0.001 weight), 948 morph targets in one 64 MB glb |
+    | phenotype math | `3-interactor/anny/src/anny/models/phenotype.py`, `utils/interpolation.py` | six free axes over 17 anchor slots; race, cup and firmness are constants folded into the bake |
+    | joint tables | `3-interactor/anny/src/anny/data/cached/anny.pth`, read by the bake | per-target joint head deltas and orientation-matrix deltas, linear in the same coefficients |
     | facial actions | `3-interactor/anny/src/anny/data/faceunits01/targets/faceunits/` | 52 targets, computed as deltas by `compute_blendshape_targets.py` |
     | local dials | `3-interactor/anny/src/anny/data/mpfb2/targets/` | 254 targets grouped by body region |
     | partition proofs | `2-contract/hm08-partition` | `body`, `HelperGeometry`, `JointCubes` partition the mesh with no gap; Lean 4, no `sorry` |
@@ -83,24 +84,32 @@ defmodule RFD2253 do
     Three kinds of control, one operator underneath (RFD 2244).
 
     A phenotype axis is a scalar in [0, 1]. ANNY resolves it to
-    weights over that axis's anchor targets by piecewise-linear
-    interpolation (`linear_interpolation_coefficients`), and the
-    weight on a combined macro target is the product of its axes'
-    coefficients. That is a few dozen lines of GDScript over the
-    baked targets, and the port is checked against the Python model
-    on a fixed set of parameter vectors before a slider is trusted.
+    weights over that axis's anchors by piecewise-linear
+    interpolation (`linear_interpolation_coefficients`; age anchors
+    run from a third below zero to one), and the weight on a macro
+    target is the product of the anchor weights its name carries:
+    four factors for a `universal` target, five for `height` and
+    `proportions`. The bake folds the constant race, cup and firmness
+    slots in and merges rows that share a free pattern, leaving 388
+    macro targets. `scripts/anny_coeffs.gd` is the port, checked
+    against the Python model on 20 seeded parameter vectors before a
+    slider is trusted.
 
     A facial action and a local dial are direct target weights. The
-    creator groups the 254 dials by the hm08 region their vertices
-    fall in, so the panel reads as head, torso, arms, legs, hands and
-    feet rather than as a list of 254 names.
+    creator groups the 254 dials by the body region ANNY's target
+    index files them under, so the panel reads as head, torso, arms,
+    legs, hands and feet rather than as a list of 254 names.
 
-    After the shape is set, each joint rests at the centroid of its
-    JointCube, the helper geometry hm08 carries for that purpose; RFD
-    1121 measured the cube set at 1,000 vertices in 125 cubes. The
-    creator never authors a joint position, so a slider moves the
-    skeleton with the skin, which is the property a creator needs and
-    a static rig lacks.
+    ANNY's `anny` rig does not read the JointCubes; that is the
+    `makehuman` rig's strategy. It carries, for every target, a delta
+    on each joint head and a delta on a per-joint 3x3 matrix whose
+    nearest rotation is the joint's rest orientation, both linear in
+    the same coefficient vector the mesh uses. The bake writes those
+    tables beside the glb and `scripts/anny_rig.gd` evaluates them
+    (polar iteration for the nearest rotation), then writes bone
+    rests and the matching skin bind poses. The creator never authors
+    a joint position, so a slider moves the skeleton with the skin,
+    which is the property a creator needs and a static rig lacks.
     """
 
     details "The seam with RFD 2251", ~S"""
@@ -124,14 +133,14 @@ defmodule RFD2253 do
     details "What is measured before it ships", ~S"""
     | check | pass condition | control |
     | --- | --- | --- |
-    | slider parity | for 20 seeded parameter vectors, the ported shape and the Python model agree at every vertex within the fixture's own usdz round-trip error | a deliberately mis-ordered anchor table must fail |
+    | slider parity | for 20 seeded parameter vectors, the ported shape and the Python model agree at every vertex within the asset's own glb round-trip error | a deliberately mis-ordered anchor table must fail |
     | joints follow shape | every joint sits at its cube centroid after any slider move | a planted cube range one vertex short must fail |
     | pure-data export | the exported glTF parses with no extension outside `KHR_*` and `VRMC_*`, and no node carries a script | a file with one driver added must fail |
     | presets hit the table | the 5th, 50th and 95th percentile stature presets land within a stated tolerance of the Appendix E `human` rows | a preset built from the fictional config must fail |
-    | topology pinned | the loaded fixture has 19,158 vertices and the `anny` or `soma` topology; the SMPL-X interop topology is not loadable | a fixture at the SMPL-X vertex count must fail |
+    | topology pinned | the loaded asset has 13,718 vertices, 27,420 triangles and 104 bones, the `anny` topology; the SMPL-X interop topology is never baked | an asset at the SMPL-X vertex count must fail |
 
     A tolerance is stated in millimetres and in a household object
-    when the check is written, not here, because the fixture's
+    when the check is written, not here, because the asset's
     round-trip error is measured at that point rather than assumed.
     """
 
