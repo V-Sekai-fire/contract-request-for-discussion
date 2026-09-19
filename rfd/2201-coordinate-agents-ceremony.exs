@@ -58,7 +58,7 @@ defmodule RFD2201 do
     Coordinator writes its own row to `agents/<coordinator-cn>` with the
     current `phase` set to `coordinating` and `task` naming the sweep. If
     the coordinator's row is more than 15 minutes stale, older heartbeats
-    in the store are also stale by relative comparison and the sweep
+    in the store are also stale by relative comparison, so the sweep
     reads worse than it is. The row shape is defined in the `agent-sync`
     skill.
 
@@ -78,7 +78,7 @@ defmodule RFD2201 do
     **Artefact:** an in-message table of `(peer, hb_age, phase, task)` per
     live row. The coordinator's own row is included, marked (self).
 
-    **Done when:** the table is written and each row is categorised as
+    **Done when:** the table is written with each row categorised as
     live, stale, or unenrolled.
     """
 

@@ -41,8 +41,7 @@ tells us to preserve.
   lease TTL. The caveat primitive stays scoped to sqlar-cas.
 - **`Taskweft.SQL` module:** retracted before it existed — the
   `service-sqlar-cas` persona reflex docstring named it as a
-  follow-up; the planner is already the ground-truth solver and
-  no new module is needed.
+  follow-up; the planner is already the ground-truth solver, so no new module is needed.
 
 Every retraction leaves a one-line pointer at its former section,
 per CLAUDE.md's "How Retracted RFD Topics Are Deleted" doctrine.

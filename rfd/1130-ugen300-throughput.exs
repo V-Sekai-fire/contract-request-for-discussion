@@ -118,7 +118,7 @@ defmodule RFD1130 do
             plugging back in on purpose.
 
             **Backfilled 2026-08-29: throughput at 1.5A now exists, and it is the same.** A frame ladder
-            of raw uint8 transport, a 1x1 convolution, so the compute is negligible and the number is
+            of raw uint8 transport, a 1x1 convolution, so the compute is negligible, leaving the number as
             the link, was run at pipeline depth 4 across three different ports, each advertising 1.5A:
 
                 frame    in MB   out MB   ms/frame   frames/s   MB/s

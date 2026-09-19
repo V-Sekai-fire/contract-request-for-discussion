@@ -35,8 +35,7 @@ defmodule RFD1145 do
     problem ~S"""
     Loop 3 is loop 2 with a style transfer in front of it: CycleGAN
     proposes a restyled image, OmniGen2 edits it, EditScore scores the
-    result and OmniGen2 repairs. The artifact is an edited png and the size
-    is M, the same as loop 2.
+    result and OmniGen2 repairs. The artifact is an edited png at the size M, the same as loop 2.
 
     What makes it a separate loop rather than a variant is where its input
     comes from, and that is a licensing question before it is a technical

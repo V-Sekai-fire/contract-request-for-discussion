@@ -349,7 +349,7 @@ defmodule RFD1123 do
     **The SDK is quiet.** `gopro/cineform-sdk` has few contributors and slow traffic. Vendor it at
     a pinned commit and record the hash. Do not track a moving branch.
 
-    **Windows and Linux both matter.** The desk is Windows and the pods are Linux. Build both from
+    **Windows and Linux both matter.** The desk is Windows where the pods are Linux. Build both from
     the start, because a decoder that works on one is half a decoder.
 
     **FFmpeg writes the files and the SDK reads them.** Two implementations of one format will

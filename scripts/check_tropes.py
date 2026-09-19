@@ -31,6 +31,9 @@ TELLS = {
     # The relation is subordinate, so say it: "for every build tree". A comma
     # before `and` is ordinary English and is left alone.
     "welded_clauses": re.compile(
+        # Not a condition: "only when a handoff is active and the app is in PiP"
+        # conjoins two conditions, where `and` is the logic rather than a weld.
+        r"(?<!when )(?<!where )(?<!unless )(?<!only when )"
         r"\b(?:A|An|The)\s+[a-z][a-z-]*\s+(?:is|are)\s+"
         r"(?!.*\b(?:that|which|when|where|if|whether|because)\b)"
         r"[^.;,\n]{3,60}\s+and\s+"

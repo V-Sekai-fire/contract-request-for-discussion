@@ -76,7 +76,7 @@ defmodule RFD1136 do
     """
 
     details "What the bands are, and why the inverse is not a function", ~S"""
-    A phrase is a band and a parameter is a point, so reading a prompt back
+    A phrase is a band where a parameter is a point, so reading a prompt back
     gives an interval. Boundaries sit midway between neighbours. Distance
     boundaries are geometric, because 0.6, 1.0 and 1.8 are multipliers: the
     arithmetic midpoint of 0.6 and 1.0 is 0.8 and the geometric one is 0.775,
@@ -127,7 +127,7 @@ defmodule RFD1136 do
     The distinction that resolves it, if it is accepted: the Hammersley
     sequence exists to measure error without a view being picked to flatter
     it, and the grid exists to pair a render with the words for its camera.
-    The first is a measurement instrument and the second is a label. A grid
+    The first is a measurement instrument where the second is a label. A grid
     used for measurement would be the failure the rule was written for, and
     the rule should say which of the two it governs.
     """

@@ -41,7 +41,7 @@ defmodule RFD1167 do
     have been exported, and one near the bottom may be further along than
     anything above it.
 
-    A rank is a judgment and a rung is a fact. One table for both lets an
+    A rank is a judgment where a rung is a fact. One table for both lets an
     opinion about value borrow the authority of a measurement.
     """
 
@@ -135,7 +135,7 @@ defmodule RFD1167 do
 
     **No script in this workspace reproduces that row.** `pixal3d-upstream`
     has no export site, and the RoPE rewrite that produced 544 nodes lived
-    in a scratch file that is gone. The measurement is recorded and the
+    in a scratch file that is gone. The measurement is recorded where the
     apparatus is not, which is the half CLAUDE.md asks for by name. Rung 2
     therefore rests on a number nobody here can re-derive, and re-earning
     it means writing the export that should have been committed the first

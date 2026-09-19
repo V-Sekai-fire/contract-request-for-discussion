@@ -72,7 +72,7 @@ defmodule RFD1171 do
         build     624 blendshapes          soft silhouette
         depth     soft_depth               a monocular estimator
 
-    **The forwards are arithmetic and the inverses are not.** Posing a mesh
+    **The forwards are arithmetic where the inverses are not.** Posing a mesh
     from joint angles has one answer. Recovering the joint angles from a
     picture has many, and the whole of `pose-consensus` exists because of
     that asymmetry: the LBFGS fit, the silhouette and the depth term are
@@ -676,7 +676,7 @@ defmodule RFD1171 do
 
     That measurement is still true and it is true about a model this
     workspace has now decided not to use. MoGe-2 and MoGe-3 are ViT-L, so
-    the graph is larger and the operator census has to be redone rather than
+    the graph is larger, leaving the operator census to be redone rather than
     assumed to carry over. **The rung entry stands with that caveat rather
     than being deleted**, because the number was measured and deleting it
     would lose the fact that the family exports cleanly at all.

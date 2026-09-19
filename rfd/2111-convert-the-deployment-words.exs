@@ -241,7 +241,7 @@ defmodule RFD2111 do
     `transport` would read as a name that went missing.
 
     `gyreplane` carries the retired word inside a compound. It is a process that
-    holds entities, so the word is retired there as well and the name is
+    holds entities, so the word is retired there as well, with the name
     regularised to `interactor-gyre`. A compound is not an exemption.
 
     `fabric-flow-adapters` and its `-project` companion carry RFD 2028's
@@ -260,8 +260,7 @@ defmodule RFD2111 do
     declares both, and its README states the reason it is a git repository of
     its own: "a contract that lives in either side makes the other its
     dependent". A name of `interactor-anything` picks the side the git
-    repository exists to avoid picking. The type is contract and the subject is
-    the command, so it is `contract-command`. "Contract" is the one type word
+    repository exists to avoid picking. The type is contract for the subject, the command, so it is `contract-command`. "Contract" is the one type word
     here that Netflix does not supply, and the entry above says where it comes
     from. `fabric-harness` is the same argument about the bus and the limits, and
     becomes `contract-bus` when that pass is taken.
