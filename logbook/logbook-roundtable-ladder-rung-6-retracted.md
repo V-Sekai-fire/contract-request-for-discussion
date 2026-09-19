@@ -49,6 +49,6 @@ is the workload where Rung 6 pays; that measurement is separate.
 
 ## What comes off the ladder
 
-The line in the plan predicting Rung 6 would push YCSB throughput toward
-14,711. It does not. The record on this box, on this workload, remains
+The line in the plan predicting Rung 6 would push YCSB throughput toward 14,711 is withdrawn:
+the measurement does not reach it. The record on this box, on this workload, remains
 Rung 5+7 (4 workers × batch 1000) at 14,711 ops/s.

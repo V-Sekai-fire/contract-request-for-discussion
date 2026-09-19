@@ -9,7 +9,13 @@ Usage:
 
 import argparse
 import json
+import os
 import re
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+import md_ast
 import subprocess
 import sys
 from pathlib import Path
@@ -24,7 +30,7 @@ REPO = re.compile(r"`([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+|dot-claude|manifest-weftsp
 
 
 def paragraphs(text):
-    return re.split(r"\n\s*\n", text)
+    return md_ast.paragraphs(text) or re.split(r"\n\s*\n", text)
 
 
 def claimed_ids(texts, default_repo=None):

@@ -192,14 +192,16 @@ repos:
       - id: blocklist-detail
         name: every blocklist row has its argument, and every argument its row
         entry: python scripts/check_blocklist_detail.py
-        language: system
+        additional_dependencies: ["markdown-it-py==3.0.0"]
+        language: python
         files: ^(CLAUDE\.md|BLOCKLIST\.md|scripts/check_blocklist_detail\.py)$
         pass_filenames: false
 
       - id: blocklist-detail-self-test
         name: the blocklist-detail gate still fails on a row with no argument
         entry: python scripts/check_blocklist_detail.py --self-test
-        language: system
+        additional_dependencies: ["markdown-it-py==3.0.0"]
+        language: python
         files: ^scripts/check_blocklist_detail\.py$
         pass_filenames: false
 
@@ -233,6 +235,7 @@ repos:
       - id: trope-density
         name: trope density (report mode; self-test does the gating)
         entry: python scripts/check_tropes.py
+        additional_dependencies: ["markdown-it-py==3.0.0"]
         language: python
         files: '^(rfd/[0-9]{4}-[^/]+\.exs|rfd/[^/]+/(README|DETAILS)\.md|logbook/.*\.md|scripts/check_tropes\.py)$'
         pass_filenames: false
@@ -240,6 +243,7 @@ repos:
       - id: trope-density-self-test
         name: the trope-density gate still fails on planted-broken prose
         entry: python scripts/check_tropes.py --self-test
+        additional_dependencies: ["markdown-it-py==3.0.0"]
         language: python
         files: ^scripts/check_tropes\.py$
         pass_filenames: false

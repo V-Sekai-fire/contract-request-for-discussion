@@ -63,9 +63,8 @@ falls short of a health check.
 ## The ceiling is per-tensor, and a width sweep alone gets it wrong
 
 Growing width at depth 8 put the cliff between 1543.7 MiB and 1599.3 MiB of fp16 weights,
-16/16 operations dropping to 1/16. Read alone that says the device holds about 1.5 GiB.
-
-It does not. Holding parameters near constant and changing shape moves the cliff:
+16/16 operations dropping to 1/16. Read alone that says the device holds about 1.5 GiB. The device holds no
+such ceiling: the limit is per-tensor. Holding parameters near constant and changing shape moves the cliff:
 
     depth  width   params        pkg MiB   ANE fraction
     8      3584    809,392,640   1543.7    1.000
