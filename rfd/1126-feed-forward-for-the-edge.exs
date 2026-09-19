@@ -181,8 +181,7 @@ defmodule RFD1126 do
     details "What is unmeasured, and matters", ~S"""
     <!-- gate: ste100 -->
 
-    **Utilisation.** Every percentage above divides by 40 TOPS as though the part
-    reaches peak. It does not. If the true figure is 50%, the 61% rig becomes 122%
+    **Utilisation.** Every percentage above divides by 40 TOPS as though the part reaches peak. The part does not reach peak. If the true figure is 50%, the 61% rig becomes 122%
     and nothing in that table fits. The Dataflow Compiler has a profiler and it has
     not been run. Treat the table as a ranking, not a budget.
 

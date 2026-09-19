@@ -11,6 +11,10 @@ import re
 import subprocess
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+import md_ast
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 
@@ -26,6 +30,13 @@ TELLS = {
     ),
     "pompous_copula": re.compile(r"\b(is|are)\s+what\s+(makes|proves|shows|says)\b", re.I),
     "exact_window": re.compile(r"\bthe exact (window|moment|shape|line|point|reason|failure)\b", re.I),
+    "elided_predicate": re.compile(
+        r"(?:(?<=\. )|(?<=\.\n)|(?<=^))"
+        r"(?:It|They|This|That|We)\s+"
+        r"(?:is|are|was|were|does|do|did|has|have|had|can|could|will|would|should|must|may)"
+        r"\s+not\s*\.",
+        re.I | re.M,
+    ),
     "welded_clauses": re.compile(
         r"(?<!when )(?<!where )(?<!unless )(?<!only when )"
         r"\b(?:A|An|The)\s+[a-z][a-z-]*\s+(?:is|are)\s+"
@@ -50,8 +61,8 @@ def in_scope(path: str) -> bool:
 
 
 def count_tropes(text: str) -> tuple[int, dict[str, int]]:
-    text_no_code = re.sub(r"```.*?```", "", text, flags=re.DOTALL)
-    per = {name: len(rx.findall(text_no_code)) for name, rx in TELLS.items()}
+    readable = md_ast.prose(text)
+    per = {name: len(rx.findall(readable)) for name, rx in TELLS.items()}
     return sum(per.values()), per
 
 
@@ -167,6 +178,30 @@ def self_test() -> int:
         ("pompous copula", "The second check is what proves the restart.", "pompous_copula", 1),
         ("plain because", "The second check proves the restart because a stale write would fail.", "pompous_copula", 0),
         ("exact window", "That is the exact window in which a shard can stall.", "exact_window", 1),
+        (
+            "a sentence that is only a negated auxiliary",
+            "The card should carry the whole graph. It does not.",
+            "elided_predicate",
+            1,
+        ),
+        (
+            "the predicate spelled out",
+            "The card should carry the whole graph. It carries eleven of nineteen operators.",
+            "elided_predicate",
+            0,
+        ),
+        (
+            "ellipsis with its antecedent in the same sentence",
+            "The forwards are arithmetic where the inverses are not.",
+            "elided_predicate",
+            0,
+        ),
+        (
+            "a negated auxiliary that still has a predicate",
+            "It does not divide by 24.",
+            "elided_predicate",
+            0,
+        ),
         (
             "two clauses welded by a bare and",
             "A release is one flat namespace and every build tree says fdbserver.",

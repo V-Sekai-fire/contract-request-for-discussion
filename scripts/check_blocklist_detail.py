@@ -37,7 +37,13 @@ Exit codes: 0 the two agree, 1 they do not, 2 bad usage.
 from __future__ import annotations
 
 import pathlib
+import os
 import re
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+import md_ast
 import sys
 
 #: Words too common to identify a subject. Matching on these pairs anything with anything.
@@ -86,7 +92,7 @@ def table_rows(claude_md):
 
 
 def detail_sections(blocklist_md):
-    return [(m, tokens(m)) for m in re.findall(r"^### (.+)$", blocklist_md, re.M)]
+    return [(h, tokens(h)) for _, h in md_ast.headings(blocklist_md, 3)]
 
 
 def check(claude_md, blocklist_md):

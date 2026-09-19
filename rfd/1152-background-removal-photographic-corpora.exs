@@ -88,8 +88,8 @@ defmodule RFD1152 do
     ships `deformable_im2col_half` but not `deformable_im2col_bfloat`, so bf16 fails
     inside the forward pass while fp16 is fine. Reading that bf16-specific error as
     "no half precision available" forced fp32, and fp32 at 2048x2048 exhausts 32 GB
-    of unified memory: one image per five minutes with the machine paging, which
-    looked like the model being infeasible on this hardware. It is not. The dtype is
+    of unified memory: one image per five minutes with the machine paging, which looked like the model being infeasible on this hardware. The model
+    is feasible: the bf16 error was read as a missing precision. The dtype is
     not about the weights, which are under a gigabyte either way; it is about
     activations, where a single feature map at that resolution runs to gigabytes.
     """

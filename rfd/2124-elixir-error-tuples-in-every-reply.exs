@@ -75,7 +75,7 @@ defmodule RFD2124 do
 
     details "What `[:safe]` does, measured rather than assumed", ~S"""
     The first run above decoded under `[:safe]` although `:res_below_minimum` is not an atom any
-    release ships. That looked like evidence that `[:safe]` permits new atoms. It is not. The test
+    release ships. That looked like evidence that `[:safe]` permits new atoms. It is evidence of nothing of the sort: the atom already existed. The test
     script names the atom in its own `case` clause, so compiling the script created the atom before
     the decode ran.
 
