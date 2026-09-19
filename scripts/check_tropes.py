@@ -26,6 +26,18 @@ TELLS = {
     ),
     "pompous_copula": re.compile(r"\b(is|are)\s+what\s+(makes|proves|shows|says)\b", re.I),
     "exact_window": re.compile(r"\bthe exact (window|moment|shape|line|point|reason|failure)\b", re.I),
+    # Two independent clauses welded by a bare `and`, the first a definition:
+    # "A release is one flat namespace and every build tree says fdbserver."
+    # The relation is subordinate, so say it: "for every build tree". A comma
+    # before `and` is ordinary English and is left alone.
+    "welded_clauses": re.compile(
+        r"\b(?:A|An|The)\s+[a-z][a-z-]*\s+(?:is|are)\s+"
+        r"(?!.*\b(?:that|which|when|where|if|whether|because)\b)"
+        r"[^.;,\n]{3,60}\s+and\s+"
+        r"(?:a|an|the|every|each|no|its|this)\s+(?:[a-z][a-z-]*\s+){1,2}"
+        r"(?:is|are|says|does|has|have|carries|reads|means|makes|gets)\b",
+        re.I,
+    ),
 }
 
 FILE_PATTERNS = (
@@ -158,6 +170,36 @@ def self_test() -> int:
         ("pompous copula", "The second check is what proves the restart.", "pompous_copula", 1),
         ("plain because", "The second check proves the restart because a stale write would fail.", "pompous_copula", 0),
         ("exact window", "That is the exact window in which a shard can stall.", "exact_window", 1),
+        (
+            "two clauses welded by a bare and",
+            "A release is one flat namespace and every build tree says fdbserver.",
+            "welded_clauses",
+            1,
+        ),
+        (
+            "the same point subordinated",
+            "A release is one flat namespace for every build tree.",
+            "welded_clauses",
+            0,
+        ),
+        (
+            "a comma before and is ordinary English",
+            "The account is five characters, and the corpus is 3.2 GB.",
+            "welded_clauses",
+            0,
+        ),
+        (
+            "a compound predicate is not two clauses",
+            "A permission is not a preference and cannot be granted sideways.",
+            "welded_clauses",
+            0,
+        ),
+        (
+            "and inside a subordinate clause",
+            "A build is the confirmation that auth and the endpoint are reachable.",
+            "welded_clauses",
+            0,
+        ),
     ]
     fails = 0
     for label, text, tell, expected in controls:
