@@ -178,7 +178,7 @@ mergers -- and report which addition first refuses.
 
 The target is proven rather than hoped for: a 304M ViT of the same
 shape is a supported hailo10h model in the vendor's own zoo. The export
-is correct and the contract is checkable -- `mtmd_contract.py` reads all
+is correct, so the contract is checkable -- `mtmd_contract.py` reads all
 four outputs and the embedded config through the `.sigs` shim, and
 rejects both HEFs on this desk with `got 1, mtmd requires 4` and
 `hailo-config.json absent`.

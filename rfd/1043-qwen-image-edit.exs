@@ -50,7 +50,7 @@ defmodule RFD1043 do
 
     The count covers the edit backbone and the vision language encoder
     that reads the instruction. The encoder is not optional, because the
-    instruction is text and the edit is spatial.
+    instruction is text while the edit is spatial.
     """
 
     details "The interface", ~S"""

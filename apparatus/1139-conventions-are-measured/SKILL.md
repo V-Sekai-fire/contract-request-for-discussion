@@ -61,7 +61,7 @@ both sit at the origin, separation 0.0, because the hips are the local
 root. The cross product is zero and the azimuth reads 0, which looks
 like an answer.
 
-**The phrase is about the subject and the camera is placed in world
+**The phrase is about the subject, while the camera is placed in world
 azimuth.** They are the same number only for a rig facing world zero.
 ANNY faces 270, and without that offset every frame the grid called a
 front view was a profile.

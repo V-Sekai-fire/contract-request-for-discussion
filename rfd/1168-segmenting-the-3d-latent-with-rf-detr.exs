@@ -158,7 +158,7 @@ defmodule RFD1168 do
         the difference                            -> that layer, whole
 
     Both frames come from the same rig, the same seed and the same camera
-    sequence, so the pair is exact and the label is true by construction. No
+    sequence, so the pair is exact, with the label true by construction. No
     annotator, no inference, and no generated data, this is the
     constructed synthetic CLAUDE.md admits as ordinary training data, with
     `syn_data.py`'s Live2D renders as the reference case.
@@ -177,7 +177,7 @@ defmodule RFD1168 do
     data.**
 
     That is the same wall RFD 1166 records for Kimodo, reached from a
-    different direction: the model is available and the corpus is not. What
+    different direction: the model is available where the corpus is not. What
     is on hand:
 
     - **Constructed synthetic is the honest candidate, and the corruption

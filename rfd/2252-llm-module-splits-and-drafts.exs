@@ -135,8 +135,7 @@ defmodule RFD2252 do
     not the ceiling. Four rungs beyond it, each one a smaller step
     and a narrower assumption. The multipliers compound against
     rung 4; where a rung already has a measured multiplier it is
-    cited, and where it does not the rung is marked projected and
-    the assumption is stated. Rung 8 sits at roughly twice rung 4,
+    cited, and where it does not the rung is marked projected with the assumption stated. Rung 8 sits at roughly twice rung 4,
     and the second half of the ladder is what buys that factor.
 
     | rung | config | knob | tok/s | source |

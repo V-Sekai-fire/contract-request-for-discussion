@@ -20,7 +20,7 @@ DOCS = ("CLAUDE.md", "PITFALLS.md")
 CLAIM = re.compile(r"ruleset\s*\(?\s*(?:id\s*)?(\d{5,})", re.I)
 RETRACTED = re.compile(r"\bretract(?:ed|s|ion)?\b", re.I)
 REPO = re.compile(r"`([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+|dot-claude|manifest-weftspun"
-                  r"|request-for-discussion)`")
+                  r"|contract-manifest-taskweft|request-for-discussion)`")
 
 
 def paragraphs(text):

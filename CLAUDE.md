@@ -273,10 +273,12 @@ its one check, `skills`. It had no workflow at all until
 2026-09-13, so a queue there would have serialised merges past
 nothing; the gate came first and the queue followed.
 
-`manifest-weftspun` runs it under ruleset 23147036, gating on its
-five: bootstrap, manifest-comments, manifest-dupes, manifest-root
-and manifest-root-shepherd. It had the weakest guard of the three
-and the most expensive failure: a bad `default.xml` stops
+`contract-manifest-taskweft` runs it under ruleset 23147036, gating
+on its six: bootstrap, manifest-comments, manifest-dupes,
+manifest-root, manifest-root-shepherd and manifest-xml. The
+repository answers to its former name as well, which is a redirect
+and so somebody else's promise rather than a name to write down. It had the weakest guard of the three and the most
+expensive failure: a bad `default.xml` stops
 `repo sync` for every checkout in the workspace, which it did
 three times on 2026-09-13.
 
