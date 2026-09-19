@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Mitsuba 3 depth, verified against an exact z-buffer and timed with Dr.Jit actually synced.
 
 Three defects in the first pass, each of which flattered the result:

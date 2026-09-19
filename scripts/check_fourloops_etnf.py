@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Check `fourloops-etnf.usda` against itself and against the code it describes.
 
 WHY THIS EXISTS. The ETNF layer is a design written down: which relations exist, which

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 # Rejects a taskweft domain or problem that is not valid Elixir.
 #
 # RFD 1037 records that a RECTGTN domain is Elixir DSL source, and the

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Gate: commit subjects on our own repos are sentence-case prose, no Conventional Commits prefix.
 
 WHY. RFD 2026 picked sentence-case prose over Conventional Commits for our own repos. A

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Typed asset-prefix naming.
 
 Assets under 5-repository and 6-datasource carry a typed prefix that

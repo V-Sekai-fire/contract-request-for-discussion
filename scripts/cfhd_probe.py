@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Can depth survive CineForm, and does Matroska accept it?
 
 CineForm is a wavelet codec sold as VISUALLY lossless. Depth is not a picture, it is a

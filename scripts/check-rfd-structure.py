@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Check that every RFD document has the shape the corpus already uses.
 
 The rules here were measured, not recalled. Each one was run against all 116

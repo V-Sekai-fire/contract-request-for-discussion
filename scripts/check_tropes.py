@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Trope density did not rise.
 
     python scripts/check_tropes.py                # report

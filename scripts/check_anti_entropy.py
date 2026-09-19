@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Inventory and anti-entropy check over the workspace. CLAUDE.md names this check.
 
 METHOD, AND WHY IT IS MOSTLY NOT RANDOM. CLAUDE.md rule 5: "A sampled check only sees

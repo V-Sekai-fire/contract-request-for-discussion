@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Gate: a blocklist row without its argument, or an argument without its row.
 
 WHY THIS EXISTS. `CLAUDE.md` used to carry the blocklist table and 592 lines of reasoning

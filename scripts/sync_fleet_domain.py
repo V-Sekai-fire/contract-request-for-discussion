@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Reconcile rectgtn/fleet.jsonld's capabilities section with live Bao state.
 
 RFD 2204 defines the fleet domain as a single JSON-LD document peers query with

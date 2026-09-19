@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Gate: every goal manifest CLAUDE.md names as live is actually live.
 
 WHY THIS EXISTS. The Sides rule decides where a repository is placed, and it decides it by

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Checks each model folder's Docker image.
 
 RFD 1036 gives the rules. This script covers the ones a reader

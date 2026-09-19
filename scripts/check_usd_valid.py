@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Gate: every USD layer we write is valid, and survives a round trip through crate.
 
 WHY THIS EXISTS. `rfd1122-plan.usda` opened in Python, composed without error, and read

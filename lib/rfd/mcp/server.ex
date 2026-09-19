@@ -1,5 +1,5 @@
 # Copyright (c) 2026 K. S. Ernest (iFire) Lee
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 
 defmodule RFD.MCP.Server do
   @moduledoc "The corpus as MCP tools: public, read-only, the same data the site renders."

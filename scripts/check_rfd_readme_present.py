@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Every RFD directory with a DETAILS.md carries a README.md beside it.
 
 the site lists a directory by its README.md, so a directory

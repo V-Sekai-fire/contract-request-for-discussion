@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """One GGML source tree in the workspace (RFD 2188).
 
 Walks the manifest checkout and fails if a `ggml.h` or `src/ggml.c` shows up

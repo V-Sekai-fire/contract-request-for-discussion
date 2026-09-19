@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Recompute RFD 1166's rank with `starvote` and fail if the document disagrees.
 
 A hand-rolled runoff is a claim about STAR rather than STAR.

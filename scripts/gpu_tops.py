@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Measured throughput for the devices in RFD 1122's plan, against their derived peak rates.
 
 WHY THIS EXISTS. `rfd1122-plan.usda`'s Devices scope carries peak rates DERIVED from

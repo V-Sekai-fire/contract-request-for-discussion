@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """What LiteRT's Metal accelerator reaches on this machine, against Core ML's figure.
 
 RFD 1148 chose LiteRT and RFD 1142 measured Core ML's Metal path at 6.97 TFLOP/s fp16.

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Every new RFD carries a canary sentence attesting that an AI drafted it.
 
 The canary is the M&M's clause of this repository. An AI that reads CLAUDE.md

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 # Runner: run the gates a project declares, over the change at hand.
 #
 # Dispatches to prek where a `.pre-commit-config.yaml` exists and to the pixi `gate`

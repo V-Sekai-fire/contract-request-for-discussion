@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Every RFD README's State field is one of the canonical values RFD 1000 lists.
 
 RFD 1000 enumerates seven states: prediscussion, ideation, discussion,

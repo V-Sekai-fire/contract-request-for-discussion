@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 # Gate: a physical measurement without a household equivalent.
 #
 # WHY THIS EXISTS. CLAUDE.md, under "How measurements are reported", says to pair every physical

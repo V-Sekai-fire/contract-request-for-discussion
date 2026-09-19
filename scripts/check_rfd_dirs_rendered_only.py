@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Nothing tracked lives under rfd/NNNN-slug/.
 
 RFD 2232 renders README.md and DETAILS.md there from rfd/NNNN-slug.exs, so the

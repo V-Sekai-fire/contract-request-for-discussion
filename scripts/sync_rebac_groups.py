@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Reconcile Bao identity groups with the ReBAC role tuples in relationships/.
 
 RFD 2200 defined role tuples as data. RFD 2202 wires them to Bao identity groups so the
