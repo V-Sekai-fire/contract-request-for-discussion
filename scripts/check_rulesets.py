@@ -19,9 +19,6 @@ DOCS = ("CLAUDE.md", "PITFALLS.md")
 
 CLAIM = re.compile(r"ruleset\s*\(?\s*(?:id\s*)?(\d{5,})", re.I)
 RETRACTED = re.compile(r"\bretract(?:ed|s|ion)?\b", re.I)
-# Bare names are spelled out because a repository is written without its owner in
-# these documents. `manifest-weftspun` stays alongside its current name: the
-# rename redirects, so older paragraphs still resolve.
 REPO = re.compile(r"`([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+|dot-claude|manifest-weftspun"
                   r"|contract-manifest-taskweft|request-for-discussion)`")
 
