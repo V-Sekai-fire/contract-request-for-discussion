@@ -1,5 +1,5 @@
 # Copyright (c) 2026 K. S. Ernest (iFire) Lee
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 
 defmodule RFD.HTML do
   @moduledoc "The site's pages: one layout, Markdown through Earmark, tables built here."

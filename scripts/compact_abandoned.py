@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Compact the DETAILS.md of an abandoned RFD, leaving the README whole.
 
 The anti-entropy check reads every pair and reports drift. This does the

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Check `pen-66606.usda`, the composed view of every serial the PEN has issued.
 
 WHY THIS EXISTS. A serial is the last arc of an OID under PEN 66606, so it names one

@@ -1,5 +1,5 @@
 # Copyright (c) 2026 K. S. Ernest (iFire) Lee
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 
 defmodule Mix.Tasks.Rfd.Mcp do
   @shortdoc "Serve the MCP tools over stdio, for a local MCP client"

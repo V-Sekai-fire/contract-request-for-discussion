@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Anti-entropy check: the Taskweft shim source at
 7-service/service-taskweft-bao/planner/shim.cpp and
 3-interactor/taskweft/wasm/taskweft-shim.cpp MUST be byte-identical.

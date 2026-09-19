@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Check the serial register against the tree, and against its own last revision.
 
 RFD 1000 gives the rule. A serial is allocated once, and it names one document

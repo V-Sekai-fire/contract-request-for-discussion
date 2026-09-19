@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Every manifest project's README.md tagline is <= 144 characters.
 
 The tagline is the first prose paragraph, which is what a reader sees before

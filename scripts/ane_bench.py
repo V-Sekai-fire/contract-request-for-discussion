@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """What the Apple Neural Engine can address, and what precision buys once it can.
 
 WHY THIS EXISTS. `rfd1122-plan.usda`'s M2Pro scope ends in two booleans:

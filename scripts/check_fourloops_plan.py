@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Check `fourloops-plan.usda` against its sources, against the chart, and against itself.
 
 WHY THIS EXISTS. Three documents describe the same four loops: the stage, the chart beside

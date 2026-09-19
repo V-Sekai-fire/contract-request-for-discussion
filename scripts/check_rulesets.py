@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Gate: the rulesets the working agreements describe are the rulesets the repository has.
 
 Reads the claimed ids out of CLAUDE.md and PITFALLS.md rather than restating them.

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Compile rectgtn/fleet.jsonld into rectgtn/fleet.sqlite for the Bao plugin.
 
 The plugin (service-taskweft-bao, database-plugin type per RFD 2205) reads

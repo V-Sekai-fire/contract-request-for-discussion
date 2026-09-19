@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Invariants on the chibifire/starforged HF dataset (parquet shards).
 
 Every counter carries a control (CLAUDE.md rule 2). --self-test plants

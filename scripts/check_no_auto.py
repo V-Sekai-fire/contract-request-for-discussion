@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """C++ we write uses no `auto`. Explicit types are the point of a wire-level
 codebase: the reader of a NIF or a bus endpoint should see the struct they are
 holding, not deduce it. This gate scans the given files or directories for the

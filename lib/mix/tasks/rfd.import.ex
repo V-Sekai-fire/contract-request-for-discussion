@@ -1,5 +1,5 @@
 # Copyright (c) 2026 K. S. Ernest (iFire) Lee
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 
 defmodule Mix.Tasks.Rfd.Import do
   @shortdoc "Write rfd/NNNN-slug.exs from an RFD directory's README.md and DETAILS.md"

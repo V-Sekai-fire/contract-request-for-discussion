@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 # Gate: the aphoristic negative definition, ratcheted toward how people actually write.
 #
 # THE TROPE. "A number nobody waited for isn't a measurement." "An ignore is not a lock."

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 import os, sys, time, numpy as np, torch
 sys.path.insert(0, os.environ.get(
     "POSE_CONSENSUS_PYTHON", "../3-interactor/pose-consensus/python"))

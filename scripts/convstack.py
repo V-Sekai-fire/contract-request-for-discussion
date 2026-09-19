@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """The synthetic graph both accelerator benches measure, and its operation count.
 
 WHY THIS IS ITS OWN MODULE. `ane_bench.py` measures Core ML and imports coremltools at the

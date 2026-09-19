@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Does the animation this workspace writes actually conform to Lottie?
 
 WHY THIS EXISTS. `keypoint_render.py` emits a file and calls it Lottie, which is a claim about

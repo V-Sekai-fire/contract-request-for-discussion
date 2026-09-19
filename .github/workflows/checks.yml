@@ -229,6 +229,16 @@ jobs:
   # that is deleted or never created leaves both documents asserting a policy nothing
   # applies, and the file describing the gate reads as evidence the gate is there. RFD 2245
   # merged with six of nine checks red because of exactly that gap.
+  spdx:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - run: python scripts/check_spdx.py --self-test
+      - run: python scripts/check_spdx.py
+
   rulesets:
     if: github.event_name == 'pull_request' || github.event_name == 'merge_group'
     runs-on: ubuntu-latest

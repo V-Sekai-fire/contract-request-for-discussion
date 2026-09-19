@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Import a hand-authored `.usda` apparatus layer into an `RFD.Plan` Elixir source.
 
 RFD 2232 makes the layer a build artifact and the `.exs` the tracked source. This reads a

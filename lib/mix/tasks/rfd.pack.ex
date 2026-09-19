@@ -1,5 +1,5 @@
 # Copyright (c) 2026 K. S. Ernest (iFire) Lee
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 
 defmodule Mix.Tasks.Rfd.Pack do
   @shortdoc "Write priv/corpus.bin so a release serves the corpus without compiling the sources"

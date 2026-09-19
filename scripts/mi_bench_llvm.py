@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Time the renderer's SHIPPING variant, which no benchmark here had ever timed.
 
 WHY THIS EXISTS. `logbook-soft-renderer-and-mitsuba.md` reports Mitsuba at 1.79 ms/image and

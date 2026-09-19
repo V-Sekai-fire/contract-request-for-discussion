@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Check `rfd1122-plan.usda` against RFD 1122, and against itself.
 
 WHY THIS EXISTS. A plan written as prose can say step 8 depends on step 9 and nobody

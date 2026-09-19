@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Check that every RFD number follows the org-qualified decimal rule.
 
 RFD 1000 gives the rule. This script enforces it. Run --self-test to see each

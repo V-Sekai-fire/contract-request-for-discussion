@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Gate: a document carries no index of the files beside it.
 
 WHY THIS EXISTS. A hand-written index of a directory is a second copy of `ls`, and the two

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Fixture invariants for docs/fixtures/starforged.sqlite.
 
 Every counter carries a control (CLAUDE.md rule 2). --self-test plants

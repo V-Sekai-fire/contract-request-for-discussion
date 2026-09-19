@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Reformat rsek/dataforged's dist/starforged JSON as an HF dataset.
 
 Produces one wide-row parquet per Starforged content category (moves, assets,

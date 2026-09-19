@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Sample corpus renders: Mitsuba depth, keypoints coloured by See-Through layer in OKHSL.
 
 WHAT IT WRITES, AND WHY IT IS ONE FILE. A PNG per view to look at, and one Lottie holding

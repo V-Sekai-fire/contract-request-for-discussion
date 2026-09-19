@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Compile dataforged Starforged JSON into a SQLite fixture for the WASM demo.
 
 Ships as `7-service/service-sqlar-cas/docs/fixtures/starforged.sqlite`, loaded

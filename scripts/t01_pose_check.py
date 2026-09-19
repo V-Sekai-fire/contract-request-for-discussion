@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """T01, projected from the viewpoints Pixal3D's sequence chooses rather than from an axis.
 
 WHY NOT front OR side. The first two sheets picked a world axis by hand, and the choice decided

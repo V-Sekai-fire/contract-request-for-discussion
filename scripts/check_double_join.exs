@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 # Gate: a comparison joined twice.
 #
 # WHY THIS EXISTS. A comparison has one join in it -- "X along the travel axis against Y across

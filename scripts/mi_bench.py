@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 """Mitsuba 3 as the corpus depth renderer, measured against the torch soft renderer.
 
 THE TRAP THIS SCRIPT AVOIDS. Mitsuba's `depth` AOV is the ray parameter t -- distance from

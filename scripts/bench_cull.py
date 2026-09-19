@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0 OR MIT
 import os
 import sys, time, numpy as np, torch
 sys.path.insert(0, os.environ.get(
