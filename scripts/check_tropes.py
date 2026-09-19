@@ -26,13 +26,7 @@ TELLS = {
     ),
     "pompous_copula": re.compile(r"\b(is|are)\s+what\s+(makes|proves|shows|says)\b", re.I),
     "exact_window": re.compile(r"\bthe exact (window|moment|shape|line|point|reason|failure)\b", re.I),
-    # Two independent clauses welded by a bare `and`, the first a definition:
-    # "A release is one flat namespace and every build tree says fdbserver."
-    # The relation is subordinate, so say it: "for every build tree". A comma
-    # before `and` is ordinary English and is left alone.
     "welded_clauses": re.compile(
-        # Not a condition: "only when a handoff is active and the app is in PiP"
-        # conjoins two conditions, where `and` is the logic rather than a weld.
         r"(?<!when )(?<!where )(?<!unless )(?<!only when )"
         r"\b(?:A|An|The)\s+[a-z][a-z-]*\s+(?:is|are)\s+"
         r"(?!.*\b(?:that|which|when|where|if|whether|because)\b)"
