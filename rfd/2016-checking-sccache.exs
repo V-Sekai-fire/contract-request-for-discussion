@@ -7,10 +7,19 @@ defmodule RFD2016 do
   use RFD.DSL
 
   rfd 2016, "Checking sccache" do
-    state :prediscussion
+    state :committed
 
     decision ~S"""
-    See `DETAILS.md` for the full argument.
+    `sccache --show-stats` is how anyone confirms the cache is healthy, and
+    `Cache errors 0` after a build is the confirmation that the bucket,
+    region and credentials are all right. Nothing else proves it: a
+    misconfigured sccache falls back to local disk and the build still
+    succeeds, so "the build worked" is not evidence the cache worked.
+
+    Native builds route through sccache against `chibifire-sccache`, and
+    `scons` keeps its own cache alongside it. That pairing is settled; an
+    install that forgets the `SCCACHE_*` environment is an installation
+    defect rather than an open question.
     """
 
     problem ~S"""
@@ -25,7 +34,10 @@ defmodule RFD2016 do
     """
 
     related ~S"""
-    See `DETAILS.md` for the full argument.
+    - RFD 2017 compiles the engine through this cache.
+    - `CLAUDE.md` blocklists WSL as a way to run anything, so the
+      cross-shell requirement in the drivers below means PowerShell and
+      Linux, not PowerShell and WSL.
     """
 
     details_title "Checking sccache"
