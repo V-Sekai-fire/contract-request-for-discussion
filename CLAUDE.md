@@ -274,8 +274,9 @@ its one check, `skills`. It had no workflow at all until
 nothing; the gate came first and the queue followed.
 
 `contract-manifest-taskweft` runs it under ruleset 23147036, gating
-on its six: bootstrap, manifest-comments, manifest-dupes,
-manifest-root, manifest-root-shepherd and manifest-xml. The
+on its seven: bootstrap, manifest-comments, manifest-dupes,
+manifest-root, manifest-root-shepherd, manifest-xml and
+sync-preflight. The
 repository answers to its former name as well, which is a redirect
 and so somebody else's promise rather than a name to write down. It had the weakest guard of the three and the most
 expensive failure: a bad `default.xml` stops
@@ -658,6 +659,23 @@ pennies" does.
 Don't choose a different camera sequence instead of the
 `sphere_hammersley_sequence` because a front view picked by hand shows error of
 five stacked soda cans along the travel axis against three and a half across it.
+
+## A sync is preflighted
+
+`repo sync` walks every project in `default.xml`, and one checkout in the wrong
+state stops the walk for all of them — leaving the client at a mixture of
+revisions, which is where the next run starts from. Three states have done it
+here: a feature branch left checked out on a project the manifest pins at a tag,
+which `repo` tries to rebase forward and then leaves mid-rebase; a plain
+`git init` repository at a manifest path, which `repo` reports as `unsupported
+checkout state`; and the rebase or merge residue of a previous failure.
+
+    python .repo/manifests/check_sync_preflight.py .
+
+It enumerates rather than samples, repairs nothing, and reports unpushed commits
+separately from whether the sync will stop — that is what decides whether parking
+a branch is free or destructive. Two positive and six negative controls. CI runs
+the controls only, because CI has no `repo` client, and the job says so.
 
 ## The anti-entropy check
 
