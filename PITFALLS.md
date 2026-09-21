@@ -263,3 +263,32 @@ faults the release (operator, 2026-09-07: "it must fault"); only an unreachable 
 degrades. `scripts/issue_cluster_credentials.sh` in `transport-taskweft-acp` is the
 shape, and rule 3 above (a silent skip reads like a pass) is the same guard for a
 script's silent stop.
+
+## 13. A rename applied to prose changes facts, not names
+
+Renaming GRAFCET to FBD across `interactor-taskweft` ran a find/replace over
+comments and docstrings as well as identifiers. Identifiers are ours to rename.
+Prose carries facts about the world, and three of them were rewritten into
+falsehoods in one pass:
+
+1. `IEC 60848 GRAFCET` became `IEC 60848 FBD` in two moduledocs. IEC 60848 **is**
+   GRAFCET; FBD belongs to IEC 61131-3. The file now paired a standard with a
+   notation that standard does not define.
+2. `Project-AGRAFE/GRAFCET-static-analysis` became `Project-AGRAFE/FBD-static-analysis`.
+   That is somebody else's project name. A citation naming a thing that does not
+   exist is worse than no citation, because it reads as checkable.
+3. The same file cites IEC 60848 four more times, correctly, describing firing
+   semantics. Those are about GRAFCET and had to survive a rename away from it.
+
+Nothing would have caught this. The code compiles either way, no test reads a
+moduledoc, and the comment-density gate counts lines rather than claims. It
+surfaced only because a later question — whether the IEC number would be a better
+name than FBD — sent someone grepping for `60848`.
+
+**Guard:** a rename touches identifiers, not citations. Before a bulk substitution,
+list what the old word names: our module, or a standard, an upstream project, a
+notation, a person. The first is renamed; the rest are facts and stay. Where the two
+appear in one line, the line gets rewritten by hand. After the pass, grep for the
+things the old name was attached to — the standard numbers, the upstream URLs — and
+read what they say now, because a substitution that produced valid prose is exactly
+the one no tool will flag.
