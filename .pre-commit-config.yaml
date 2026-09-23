@@ -424,7 +424,7 @@ repos:
 
       # RFD 2188: one canonical ggml under 2-contract/ggml. A consumer bringing
       # its own copy fails this gate. The two llama.cpp checkouts are exempt
-      # (vendor runtime, per CLAUDE.md's ggml row). Manual stage until Phase 2
+      # (vendor runtime, per RFD 2188). Manual stage until Phase 2
       # migrates the remaining consumers, so the framework can land without CI
       # blocking on the drift it exists to remove.
       - id: ggml-singleton

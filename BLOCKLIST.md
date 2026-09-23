@@ -389,15 +389,8 @@ customer is a term that cannot be gated on at corpus-build time.
 small deployer, not for every possible customer" — this entry is that flag
 resolved rather than carried.
 
-**The second reason is newer and independent.** RFD 1016's plan for it was the
-Q4_K_M GGUF set: 33.8 GB bf16 down to 9.30 GB quantised, because that is what
-fits. GGUF is blocklisted as a model format (see the ggml row above), and the
-Q4_K_M path is exactly what GGUF's blocklist entry addresses. So even with the
-licence resolved, the deployment shape RFD 1016 planned is closed by the GGUF
-row rather than by the licence row.
-
-Neither reason depends on the other. A permissive re-licence would leave the Q4
-problem, and a 48 GB card running bf16 would leave the revenue gate.
+The licence reason stands on its own, and hardware does not move it. A 48 GB
+card running bf16 would still leave the revenue gate.
 
 ### A corpus generator must be a checkpoint we hold
 
@@ -804,94 +797,6 @@ onnxruntime keeps two more jobs here whichever provider wins. It is the
 interchange format the Hailo Dataflow Compiler reads, and its CPU provider is
 the numeric oracle every other row gets diffed against — `gate_onnx_device.py`
 measures 5.066e-06 against PyTorch there.
-
-### ggml and GGUF are blocklisted, and the missing graph is why
-
-ggml is quick on this desk. This entry turns on a different question — where a
-model in GGUF can go — and the answer is: this GPU and other desktop GPUs, the
-Cloud TPU not at all, and Hailo through the vendor's own runtime rather than
-through the compiler.
-
-**"NEITHER OF THE DEVICES THIS WORK IS AIMED AT" IS RETRACTED, AND HALF OF IT WAS
-ALWAYS WRONG.** `3-interactor/llama-cpp-npu-vision-upstream` is pinned in the live
-manifest at `6a272903`, and the commit under it is `d35d0ec1`, authored by
-`hailort@hailo.ai` and merged from `hailo-ai/hailo-mtmd-vision-encoder`. It
-offloads a vision encoder to a Hailo NPU from inside llama.cpp, reading input
-size, patch size and embedding sizes out of a `.hef` passed to `--mmproj`. GGUF
-reaches Hailo. It reached Hailo while this paragraph said it could not, and the
-checkout proving it sat in the same manifest as the paragraph.
-
-The Cloud TPU half stands: PJRT consumes StableHLO and ggml still does not emit
-it. So the sentence was half a measurement and half an assumption, and the
-assumption is the half that shipped.
-
-Hailo's Dataflow Compiler parses a TensorFlow checkpoint, a TensorFlow frozen
-graph, a TFLite file or an ONNX file. GGUF is on none of those lists. Cloud TPU
-runs PJRT, which consumes StableHLO, and ggml does not emit it. So ggml's
-target set is a strict subset of LiteRT's, and a format that cannot reach the
-deliverable hardware cannot be the single format however fast it is locally.
-
-**No exporter can close this, which is the part worth writing down.** GGUF
-carries no graph at all. `convert_ss_dec_to_gguf.py` in
-`3-interactor/trellis2cpp` writes key-value metadata -- `kv_u32`, `kv_f32`,
-`kv_bool`, `kv_str` -- and tensor bytes, and nothing else. The graph is 3420
-lines of hand-written C++ in `trellis2.cpp`: 79 distinct `ggml_*` ops across 7
-`ggml_build_forward_expand` sites, for one model. A ggml-to-anything converter
-would have to lift imperative C++ back into an IR, so the gap is structural
-rather than a missing tool somebody could write.
-
-That answers a question that was asked directly and is worth closing: **ggml
-cannot be converted to LiteRT.** The two share an ancestor -- the torch model
-both descend from -- not an edge between them.
-
-**This entry does not say ggml is slow, and must not be edited to say so.** No
-Metal figure belongs here, and neither does the 0.27x measured against
-onnxruntime's WebGPU EP. ggml was excluded on where it can go, not on how fast
-it gets there. An entry that overstates its case invites the next reader to
-re-derive it, find ggml quick, and quietly drop the whole row.
-
-**What it costs, stated rather than discovered.** ggml was the only candidate
-that produced a single static executable for macOS, Windows and Linux, with
-native Metal, CUDA, HIP, Vulkan, SYCL, OpenCL and BLAS backends in `ggml/src`
-and `GGML_METAL_EMBED_LIBRARY ON` compiling the shader source into the binary.
-
-**"NO PROVIDER AT ALL" IS RETRACTED.** `V-Sekai-fire/turboquant-godot`, branch
-`feat/turboquant-on-master`, carries "Add LLM module with llama.cpp for on-device
-inference" dated 2026-07-29, MIT like the engine around it. A Godot binary with an
-embedded llama.cpp module is the single-binary deliverable this paragraph said had
-no provider. The loss was real when it was written and it has since been repaid —
-by a repository in no manifest, which is why nobody noticed. Placement is the fix
-for that, not this entry.
-
-**The checkouts stay.** `3-interactor/trellis2cpp` and the `weftspun/ggml` fork
-pinned at `331b9cba` remain in the live manifest, and so do the TRELLIS.2 port's
-published f16 figures -- rel L2 2e-5 on the SS decoder, under 1e-3 on the SS-flow
-DiT -- which are the nearest correctness reference for whatever replaces them.
-
-**"THIS ENTRY GOVERNS NEW WORK" IS RETRACTED.** It was written as a boundary and
-did not hold as one. Two of the checkouts above are new ggml work done after this
-entry: Hailo's vision encoder at `d35d0ec1`, dated 2026-08-27, and the Godot LLM
-module dated 2026-07-29. A rule new work crosses twice with no exception filed is
-not governing new work, it is describing a preference. Saying so is cheaper than a
-third crossing.
-
-**Both crossings are allowed, named here so nobody has to file for them.**
-`3-interactor/llama-cpp-npu-vision-upstream` and `V-Sekai-fire/turboquant-godot`
-are permitted uses of ggml, and so is new work on either. A vendor's own runtime
-reaching a vendor's own device is exempt, which is the ONNX row's wording and the
-same reasoning: Hailo shipping a Hailo NPU encoder inside llama.cpp is Hailo's
-business, not our interchange decision. An on-device single-binary deliverable is
-exempt for the reason ggml was valued here in the first place — that was recorded
-above as the cost of the ban and it is now the ground for the exemption.
-
-What the row still says is narrow and factual: **GGUF carries no graph, so nothing
-converts out of it.** That is the finding worth keeping, and it constrains where a
-model of ours is _stored for conversion_ rather than which runtimes may be built.
-Neither repository converts a GGUF to anything — Hailo runs a separate HEF beside
-ggml, Godot embeds ggml whole — so neither is affected by it.
-
-A blocklisted backend with live checkouts is exactly the shape that rots quietly,
-and this row rotted three claims deep before a reader went and looked.
 
 ### The CPU is blocklisted as a model execution target, and orchestration is exempt
 
