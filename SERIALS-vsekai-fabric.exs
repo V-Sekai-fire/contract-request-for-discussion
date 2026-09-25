@@ -212,6 +212,7 @@ defmodule Serials.VSekaiFabric do
       serial 2254, "order-independent-transparency-for-cad", flight_level: :l2
       serial 2255, "bao-ssh-tunnel"
       serial 2256, "webtransport-inside-a-sandbox-guest"
+      serial 2257, "tooling-runs-in-the-linux-subsystem"
     end
 
     deleted do
