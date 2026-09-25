@@ -13,9 +13,16 @@ defmodule RFD2242 do
 
     flight_level :l2
 
-    feature "each ggml consumer in the workspace becomes a native\nGodot engine C++ module inside `entities-godot-sandbox/modules/`,\nall stacked on a foundational `modules/ggml/` that hosts the\nggml library itself. GDScript adapters are not the interface."
+    feature "each ggml consumer in the workspace becomes a native
+Godot engine C++ module inside `entities-godot-sandbox/modules/`,
+all stacked on a foundational `modules/ggml/` that hosts the
+ggml library itself. GDScript adapters are not the interface."
 
-    scope "`entities-godot-sandbox/modules/ggml/` (new),\n`modules/motion_bricks/`, `modules/skin_tokens/`,\n`modules/pixal3d/`, `modules/kimodo/`, `modules/rf_detr/`,\nRFD 2230 (retracts its GDScript-adapters shape), RFD 2229\n(this is another consolidation landing under its policy)"
+    scope "`entities-godot-sandbox/modules/ggml/` (new),
+`modules/motion_bricks/`, `modules/skin_tokens/`,
+`modules/pixal3d/`, `modules/kimodo/`, `modules/rf_detr/`,
+RFD 2230 (retracts its GDScript-adapters shape), RFD 2229
+(this is another consolidation landing under its policy)"
 
     decision ~S"""
     Operator, 2026-09-09, verbatim: *"consolidate so that each of

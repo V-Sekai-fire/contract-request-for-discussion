@@ -11,7 +11,9 @@ defmodule RFD2165 do
 
     flight_level :l1
 
-    feature "one emit script covering all 8 MaskScore stubs (mesh,\ndepth, pose, keypoints, multimodal, text, speech, video) at 10 ranks\nper candidate per edit, ETNF three-parquet form."
+    feature "one emit script covering all 8 MaskScore stubs (mesh,
+depth, pose, keypoints, multimodal, text, speech, video) at 10 ranks
+per candidate per edit, ETNF three-parquet form."
 
     scope "`6-datasource/anny-render-corpus`"
 

@@ -11,9 +11,13 @@ defmodule RFD2254 do
 
     flight_level :l2
 
-    feature "Mix-blended surfaces composite in any draw order on the\nMobile and Forward+ renderers, so a CAD assembly with parts\nturned transparent reads correctly from every angle"
+    feature "Mix-blended surfaces composite in any draw order on the
+Mobile and Forward+ renderers, so a CAD assembly with parts
+turned transparent reads correctly from every angle"
 
-    scope "`entities-godot` branch `feat/oit-avboit` (PR #110);\n`4-entities/order-independent-transparency`, the project that\nchecks it"
+    scope "`entities-godot` branch `feat/oit-avboit` (PR #110);
+`4-entities/order-independent-transparency`, the project that
+checks it"
 
     decision ~S"""
     The engine patch exists so that computer-aided design can turn

@@ -11,7 +11,8 @@ defmodule RFD2213 do
 
     state :discussion
 
-    feature "how VRM 1.0 assets load in the atelier native binary\nwithout adding new C++ or forking upstream"
+    feature "how VRM 1.0 assets load in the atelier native binary
+without adding new C++ or forking upstream"
 
     scope "`3-interactor/entities-godot-sandbox/modules/sandbox`,\n`V-Sekai/godot-vrm`"
 

@@ -9,7 +9,8 @@ defmodule RFD2149 do
   rfd 2149, "GRAFCET static analysis in Lean 4, from Elixir" do
     state :prediscussion
 
-    feature "port `Project-AGRAFE/GRAFCET-static-analysis` (Java, MIT)\nto Lean 4 with a plain C ABI, called from Elixir via a C NIF"
+    feature "port `Project-AGRAFE/GRAFCET-static-analysis` (Java, MIT)
+to Lean 4 with a plain C ABI, called from Elixir via a C NIF"
 
     scope "taskweft-grafcet-static (new repo), taskweft (NIF module)"
 

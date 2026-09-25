@@ -9,7 +9,8 @@ defmodule RFD1114 do
   rfd 1114, "App chrome layout invariants" do
     state :committed
 
-    scope "`App.jsx`, `App.css`, `TaskProgressBar.{jsx,css}`,\n`src/pages/Appearance*`, `BottomDisplayMenu.jsx`"
+    scope "`App.jsx`, `App.css`, `TaskProgressBar.{jsx,css}`,
+`src/pages/Appearance*`, `BottomDisplayMenu.jsx`"
 
     attest_in :none
 
@@ -27,7 +28,8 @@ defmodule RFD1114 do
     override.
 
     Three z-index layers stack in one order: side panels at 998
-    (`--z-side-panel`), the header at 1001, the scene controls row at 1002. A side panel overlapping the header gets a `top` fix, never a
+    (`--z-side-panel`), the header at 1001, the scene controls row at 1002. A side panel
+    overlapping the header gets a `top` fix, never a
     z-index raise past 998.
 
     See `DETAILS.md` for the full token table, the forbidden-change

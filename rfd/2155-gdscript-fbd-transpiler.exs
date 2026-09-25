@@ -9,7 +9,9 @@ defmodule RFD2155 do
   rfd 2155, "GDScript <-> IEC 61131-3 FBD transpiler" do
     state :prediscussion
 
-    feature "bidirectional transpile between GDScript and PLCopen FBD\n(RFD 2150): Godot users author in a familiar language, taskweft renders\nRECTGTN-produced FBD back as GDScript for humans"
+    feature "bidirectional transpile between GDScript and PLCopen FBD
+(RFD 2150): Godot users author in a familiar language, taskweft renders
+RECTGTN-produced FBD back as GDScript for humans"
 
     scope "taskweft, new sibling `taskweft-gdscript-fbd`"
 

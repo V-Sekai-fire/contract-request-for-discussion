@@ -56,7 +56,8 @@ defmodule RFD2081 do
     """
 
     details "Lean 4 modules", ~S"""
-    - `TpccVerification/Spsc.lean`, SPSC ring buffer specification with proofs: `init_safe`, `push_safe`, `pop_safe`
+    - `TpccVerification/Spsc.lean`, SPSC ring buffer specification with proofs: `init_safe`,
+    `push_safe`, `pop_safe`
     - `TpccVerification/Basic.lean`, TPC-C invariant predicates for plausible-witness-dag
     """
 

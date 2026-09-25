@@ -9,9 +9,11 @@ defmodule RFD2198 do
   rfd 2198, "LLaDA-o speed work for the dressing overlay" do
     state :discussion
 
-    feature "distillation and pruning to make LLaDA-o viable as an\ninference-time dressing overlay generator"
+    feature "distillation and pruning to make LLaDA-o viable as an
+inference-time dressing overlay generator"
 
-    scope "speed-side work only; the quality-side result opening it is\n`logbook-lladao-n1-quality-beats-omnigen2.md`"
+    scope "speed-side work only; the quality-side result opening it is
+`logbook-lladao-n1-quality-beats-omnigen2.md`"
 
     decision ~S"""
     LLaDA-o becomes a candidate primary generator for RFD 2186's dressing

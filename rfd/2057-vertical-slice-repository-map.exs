@@ -117,7 +117,8 @@ defmodule RFD2057 do
     - [`lean-humanoid-rom`](https://github.com/v-sekai-multiplayer-fabric/lean-humanoid-rom):
       humanoid range-of-motion and IK constraints (Kusudama, muscle and
       prismatic limits).
-    - [`lean-fabric-protocol`](https://github.com/v-sekai-multiplayer-fabric/lean-fabric-protocol):
+    -
+    [`lean-fabric-protocol`](https://github.com/v-sekai-multiplayer-fabric/lean-fabric-protocol):
       the fabric networking and SLA proofs: saturation, waypoint bounds,
       the abyssal SLA.
     - [`lean-interest-mgmt`](https://github.com/v-sekai-multiplayer-fabric/lean-interest-mgmt):

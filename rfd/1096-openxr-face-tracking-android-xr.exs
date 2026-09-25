@@ -99,11 +99,15 @@ defmodule RFD1096 do
     """
 
     details "The native OpenXR runtime loop (C API), optional", ~S"""
-    1. Enable `XR_ANDROID_face_tracking` on the `XrInstance` or session, per the loader's own setup.
+    1. Enable `XR_ANDROID_face_tracking` on the `XrInstance` or session, per the loader's own
+    setup.
     2. `xrCreateFaceTrackerANDROID` returns an `XrFaceTrackerANDROID`.
-    3. Each frame, or at 30 or 60 Hz: `xrGetFaceStateANDROID` with `XrFaceStateGetInfoANDROID`, filling `XrFaceStateANDROID`.
-    4. Read the `parameters` float buffer, capacity `XR_ANDROID_FACE_PARAMETER_COUNT` (68, per the current enum). `isValid`, `sampleTime`, and `regionConfidences` are optional extras.
-    5. Either map indices to WebXR key names in Kotlin or Java, or send the dense array as `openxrParameters` in the JS bridge payload.
+    3. Each frame, or at 30 or 60 Hz: `xrGetFaceStateANDROID` with `XrFaceStateGetInfoANDROID`,
+    filling `XrFaceStateANDROID`.
+    4. Read the `parameters` float buffer, capacity `XR_ANDROID_FACE_PARAMETER_COUNT` (68, per the
+    current enum). `isValid`, `sampleTime`, and `regionConfidences` are optional extras.
+    5. Either map indices to WebXR key names in Kotlin or Java, or send the dense array as
+    `openxrParameters` in the JS bridge payload.
 
     Older drafts or slide decks sometimes name different functions;
     trust the Khronos man pages linked above over any of them.

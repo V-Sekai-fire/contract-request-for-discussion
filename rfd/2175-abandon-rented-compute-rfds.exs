@@ -14,11 +14,16 @@ defmodule RFD2175 do
     scope "RFDs 1132, 1140, 1163, 2133, 2138"
 
     decision ~S"""
-    Abandon five RFDs (1132, 1140, 1163, 2133, 2138) whose decisions name RunPod or Vast.ai rented compute, which CLAUDE.md's hard constraint now blocklists. Each moves to `abandoned` alongside this document landing.
+    Abandon five RFDs (1132, 1140, 1163, 2133, 2138) whose decisions name RunPod or Vast.ai rented
+    compute, which CLAUDE.md's hard constraint now blocklists. Each moves to `abandoned` alongside
+    this document landing.
     """
 
     problem ~S"""
-    CLAUDE.md's hard constraint is "the local desktop GPU is the only compute; RunPod and Vast.ai blocklisted". Five open RFDs still name rented compute as their decision, so the RFD's whole reason for existing contradicts the blocklist. The RFDs themselves stay in the register for citation, per CLAUDE.md's "retractions stay in place next to what they retract".
+    CLAUDE.md's hard constraint is "the local desktop GPU is the only compute; RunPod and Vast.ai
+    blocklisted". Five open RFDs still name rented compute as their decision, so the RFD's whole
+    reason for existing contradicts the blocklist. The RFDs themselves stay in the register for
+    citation, per CLAUDE.md's "retractions stay in place next to what they retract".
     """
 
     section "The five", ~S"""
@@ -34,7 +39,8 @@ defmodule RFD2175 do
     """
 
     related ~S"""
-    Retracts: urn:oid:1.3.6.1.4.1.66606.1.1.{1132,1140,1163}, urn:oid:1.3.6.1.4.1.66606.1.2.{2133,2138}
+    Retracts: urn:oid:1.3.6.1.4.1.66606.1.1.{1132,1140,1163},
+    urn:oid:1.3.6.1.4.1.66606.1.2.{2133,2138}
     Anchor: CLAUDE.md's Compute hard constraint and the RunPod, Vast.ai blocklist rows.
     Companion: RFD 2169 (studio-core abandonment), same class of walk-back.
     """

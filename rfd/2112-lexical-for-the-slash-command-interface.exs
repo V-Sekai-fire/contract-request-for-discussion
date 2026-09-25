@@ -40,7 +40,8 @@ defmodule RFD2112 do
     The typing part is the harder half. When a player types `/commission`, the field must show the
     parameter as an inline block that the player cannot edit, with editable space around it. An
     `<input>` and a `<textarea>` hold plain text, so neither can show such a block. A
-    `contenteditable` element can. Written by hand it fails on the caret, on mobile autocorrect, on
+    `contenteditable` element can. Written by hand it fails on the caret, on mobile autocorrect,
+    on
     IME composition, and on paste, and it fails in the input path of every command.
     """
 
@@ -91,7 +92,8 @@ defmodule RFD2112 do
     """
 
     details "The ward as a zone, and its rows as entities", ~S"""
-    The Queen's rows are entities, and they take spatial coordinates. That puts the ward inside the
+    The Queen's rows are entities, and they take spatial coordinates. That puts the ward inside
+    the
     zone and entity model the rest of the stack already uses, and it makes the interest filter
     apply to this game without inventing anything.
 
@@ -102,16 +104,19 @@ defmodule RFD2112 do
     | the Queen                         | 1                                           | the authority, and the single writer     |
     | a contract on the board           | `BOARD_SIZE` 6, or 9 with the Transit Rails | a marker at the place the work is        |
 
-    `spark_t` holds `id`, `purse`, and `wear` today, and no position. Adding `pos_um_x`, `pos_um_y`,
+    `spark_t` holds `id`, `purse`, and `wear` today, and no position. Adding `pos_um_x`,
+    `pos_um_y`,
     and `pos_um_z` is the change that connects the two models, because those are the fields
     `XRGridEntityPacket` already carries in int64 micrometres.
     """
 
     details "How a local command becomes a global one", ~S"""
-    The interest filter decides how many players see a change. RFD 2111 retires the word plane, and
+    The interest filter decides how many players see a change. RFD 2111 retires the word plane,
+    and
     the filter lives in `fabric-fanout-edge`, which is a transport layer.
 
-    `lean-interest-mgmt/core/AuthorityInterest.lean` separates authority from interest. Exactly one
+    `lean-interest-mgmt/core/AuthorityInterest.lean` separates authority from interest. Exactly
+    one
     zone advances an entity each tick, and a neighbour holds a read-only ghost. An entity enters
     that neighbour's interest when its k-tick kinematic expansion overlaps the neighbour's volume,
     with `interestLookahead` of 6 ticks. Then `fabric-fanout-edge/src/fanout.cpp` filters per
@@ -162,16 +167,19 @@ defmodule RFD2112 do
     transaction and refuses the write with `SQLITE_READONLY` when the value has moved. Its comment
     records why it exists: the VFS locks are no-ops, so two writers both believed they held the
     write lock, both reported success, `PRAGMA integrity_check` passed, and one writer's 300 rows
-    were gone. The fence turns that into a refusal the caller can see. So an old primary that comes
+    were gone. The fence turns that into a refusal the caller can see. So an old primary that
+    comes
     back after a promotion is refused rather than silently losing the ward.
 
     `PRAGMA locking_mode=EXCLUSIVE` in `open_db` does not block a promotion. `fdb_lock`,
-    `fdb_unlock`, and `fdb_check_lock` all return success without doing anything, and the pragma is
+    `fdb_unlock`, and `fdb_check_lock` all return success without doing anything, and the pragma
+    is
     there to stop SQLite re-reading page one, which over a network database is a round trip per
     query. A dead primary holds nothing that a new one must break.
 
     A tab that goes to the background stops being worth sending to. The browser throttles a hidden
-    tab and reports the change through `visibilitychange`, so the client stops asking for slices and
+    tab and reports the change through `visibilitychange`, so the client stops asking for slices
+    and
     holds the session with a keepalive. The leaf keeps the `subscriber_t` and sends nothing. When
     the tab comes back the slices resume, with no reconnect and no second authorization. RFD 2050
     already sets a five-second transaction limit, which is the natural place to start for the
@@ -187,9 +195,12 @@ defmodule RFD2112 do
     """
 
     details "Three hazards this exposes", ~S"""
-    `MAX_SPARKS` is 64 and `MAX_SLICE_ENTITIES` is 64. Those two constants were written in different
-    repositories for different reasons, and they are equal. A ward at full size therefore fills one
-    subscriber's slice with Sparks alone, and `fanout_one` stops at the cap, so the six venues, the
+    `MAX_SPARKS` is 64 and `MAX_SLICE_ENTITIES` is 64. Those two constants were written in
+    different
+    repositories for different reasons, and they are equal. A ward at full size therefore fills
+    one
+    subscriber's slice with Sparks alone, and `fanout_one` stops at the cap, so the six venues,
+    the
     Queen, and every contract marker fall off the end. A full ward is 64 Sparks, 6 venues, the
     Queen, and up to 9 contracts, which is 80 entities against a cap of 64.
 
@@ -198,7 +209,8 @@ defmodule RFD2112 do
 
     `/commission` shows the second hazard. It changes two things at once: a venue, which has a
     place, and the treasury, which does not. An interest box can carry the first and can never
-    carry the second. The ward scalars `treasury`, `debt`, `issued`, `retired`, and `spent` are not
+    carry the second. The ward scalars `treasury`, `debt`, `issued`, `retired`, and `spent` are
+    not
     spatial, and no `Aabb` describes them. They need the reliable control stream, and RFD 2049
     holds the channel classes for it.
 
@@ -210,10 +222,12 @@ defmodule RFD2112 do
 
     details "What serves it, and where", ~S"""
     `fabric-asset-edge` serves the built client on Fly. It is a transport layer, so it holds the
-    listening socket. It shares nothing per tick, so it needs no ring, and it belongs to no service.
+    listening socket. It shares nothing per tick, so it needs no ring, and it belongs to no
+    service.
     That is the same reason its README already gives for standing alone.
 
-    `queen` gains a transport layer of its own for the live game, because it has none today. RFD 2111
+    `queen` gains a transport layer of its own for the live game, because it has none today. RFD
+    2111
     renames these git repositories, and the names here are the names on disk.
     """
 

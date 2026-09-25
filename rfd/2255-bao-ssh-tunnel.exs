@@ -9,9 +9,13 @@ defmodule RFD2255 do
   rfd 2255, "an SSH tunnel to Bao for Bao-signed certificates" do
     state :committed
 
-    feature "A desk with no tailnet and no private-network peer reaches\nBao's listener through sshd on the Bao machine, using a\none-hour SSH certificate that Bao itself signs"
+    feature "A desk with no tailnet and no private-network peer reaches
+Bao's listener through sshd on the Bao machine, using a
+one-hour SSH certificate that Bao itself signs"
 
-    scope "`service-openbao` (`sshd_config`, `Dockerfile.fdb`,\n`entrypoint-fdb.sh`, `fly.toml`), and Bao's `ssh/` mount,\n`ssh/roles/bao-tunnel` and the `ssh-bao-tunnel` policy"
+    scope "`service-openbao` (`sshd_config`, `Dockerfile.fdb`,
+`entrypoint-fdb.sh`, `fly.toml`), and Bao's `ssh/` mount,
+`ssh/roles/bao-tunnel` and the `ssh-bao-tunnel` policy"
 
     decision ~S"""
     The Bao machine runs sshd on port 2222. It trusts one user CA,

@@ -11,7 +11,8 @@ defmodule RFD1150 do
 
     feature "skin tone equity in a toon material"
 
-    scope "`6-datasource/anny-render-corpus/anime_materials.usda`,\n`check_anime_materials.py`, `anime-materials.cff`"
+    scope "`6-datasource/anny-render-corpus/anime_materials.usda`,
+`check_anime_materials.py`, `anime-materials.cff`"
 
     attest_in :none
 

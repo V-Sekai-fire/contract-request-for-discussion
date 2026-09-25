@@ -104,7 +104,8 @@ defmodule RFD1061 do
     Two functions now exist, so the test the gap left red passes and
     `TaskManager.jsx`'s import resolves.
 
-    `computeApiUploadSimplifyRatio(sourceVerts, sourceFaces, maxVertices, maxFaces, headroom = 0.85)`
+    `computeApiUploadSimplifyRatio(sourceVerts, sourceFaces, maxVertices, maxFaces, headroom =
+    0.85)`
     gives the fraction of the _current_ mesh to keep, driven by whichever
     cap (verts or faces) needs the deeper cut. It returns `1` when both
     are already under cap.

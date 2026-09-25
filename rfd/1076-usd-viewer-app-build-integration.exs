@@ -9,7 +9,9 @@ defmodule RFD1076 do
   rfd 1076, "usd_viewer_app, its own app, reached through a port" do
     state :prediscussion
 
-    scope "`usd_viewer_app/`, `lib/weftspun_studio/ports/gallery_source.ex`,\n`lib/weftspun_studio/adapters/http_gallery.ex`, `lib/weftspun_studio/router.ex`,\n`deploy/quadlet/`, `Dockerfile`, `Dockerfile.fly`"
+    scope "`usd_viewer_app/`, `lib/weftspun_studio/ports/gallery_source.ex`,
+`lib/weftspun_studio/adapters/http_gallery.ex`, `lib/weftspun_studio/router.ex`,
+`deploy/quadlet/`, `Dockerfile`, `Dockerfile.fly`"
 
     attest_in :none
 
@@ -73,7 +75,8 @@ defmodule RFD1076 do
     legacy client, "which one is the host" stops applying. Every
     `.build`/`.container` Quadlet path, `Dockerfile.fly`'s
     `working-directory` in `.github/workflows/deploy-fly.yml`,
-    `.pre-commit-config.yaml`'s file patterns, and `scripts/{ci,studio-test,deploy-weftspun-quadlet}.sh`
+    `.pre-commit-config.yaml`'s file patterns, and
+    `scripts/{ci,studio-test,deploy-weftspun-quadlet}.sh`
     were updated to the new paths, and `mix compile` was re-verified
     from `apps/weftspun_studio/` after the move. `weftspun_studio`'s own
     `.formatter.exs` split in two: a repo-root one for `decisions/**` (no

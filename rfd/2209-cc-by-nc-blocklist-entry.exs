@@ -11,9 +11,14 @@ defmodule RFD2209 do
 
     state :discussion
 
-    feature "add `CC-BY-NC` (all versions) to CLAUDE.md's blocklist\nalongside `CC-BY-SA`, and gate build scripts to drop CC-BY-NC rows\nbefore shipping any derived corpus"
+    feature "add `CC-BY-NC` (all versions) to CLAUDE.md's blocklist
+alongside `CC-BY-SA`, and gate build scripts to drop CC-BY-NC rows
+before shipping any derived corpus"
 
-    scope "every corpus builder that reads a mixed-licence source\ndocument; today's concrete case is\n`scripts/build_starforged_hf.py` and `build_starforged_sqlite.py`\nagainst the dataforged repo"
+    scope "every corpus builder that reads a mixed-licence source
+document; today's concrete case is
+`scripts/build_starforged_hf.py` and `build_starforged_sqlite.py`
+against the dataforged repo"
 
     decision ~S"""
     Add a row to CLAUDE.md's "Blocklists" table:

@@ -144,12 +144,20 @@ defmodule RFD1082 do
 
     ### Implemented that same pass
 
-    1. Headless OpenXR (Phase 1b): `openxr_face_engine.cpp` prefers PBuffer EGL; `OpenXrFaceEngine.tryStartNative` needs no `TextureView` or `surfaceReady`.
-    2. Chrome handoff: `FaceKeeperActivity.onResume` calls `setActivity`, `setSessionHost`, `ensureFacePipeline("keeper-onResume")`.
-    3. Coordinator: `OpenXrFaceEngine.ensureFacePipeline` always runs; Jetpack also runs when `!OpenXrFaceEngine.isCollecting()` or `chromeHandoff`.
-    4. Watchdog and recycle: `CHROME_HANDOFF_STALE_MS` is 10 seconds. A forced recycle happens when the relay stays quiet twice that threshold (roughly 20 seconds), even if the collector still ticks; `COLLECTOR_STUCK_CHROME_MS` is 20 seconds.
-    5. Foreground service type: `dataSync|camera|microphone` (the microphone type gated to API 34+); the manifest declares `FOREGROUND_SERVICE_MICROPHONE`.
-    6. Handoff expiry: a restored handoff only applies if the last successful relay ingest was under 60 seconds ago. A cold launcher start clears the handoff; `FaceKeeperActivity` finishes if the handoff flag is false.
+    1. Headless OpenXR (Phase 1b): `openxr_face_engine.cpp` prefers PBuffer EGL;
+    `OpenXrFaceEngine.tryStartNative` needs no `TextureView` or `surfaceReady`.
+    2. Chrome handoff: `FaceKeeperActivity.onResume` calls `setActivity`, `setSessionHost`,
+    `ensureFacePipeline("keeper-onResume")`.
+    3. Coordinator: `OpenXrFaceEngine.ensureFacePipeline` always runs; Jetpack also runs when
+    `!OpenXrFaceEngine.isCollecting()` or `chromeHandoff`.
+    4. Watchdog and recycle: `CHROME_HANDOFF_STALE_MS` is 10 seconds. A forced recycle happens
+    when the relay stays quiet twice that threshold (roughly 20 seconds), even if the collector
+    still ticks; `COLLECTOR_STUCK_CHROME_MS` is 20 seconds.
+    5. Foreground service type: `dataSync|camera|microphone` (the microphone type gated to API
+    34+); the manifest declares `FOREGROUND_SERVICE_MICROPHONE`.
+    6. Handoff expiry: a restored handoff only applies if the last successful relay ingest was
+    under 60 seconds ago. A cold launcher start clears the handoff; `FaceKeeperActivity` finishes
+    if the handoff flag is false.
 
     ### Known gaps, not fully fixed
 
@@ -190,18 +198,27 @@ defmodule RFD1082 do
 
     details "Platform constraints, do not violate", ~S"""
     1. WebView is not WebXR; never attempt immersive XR inside WebView. Chrome only, for AR or VR.
-    2. The Galaxy XR OpenXR runtime accepts API 1.0.x only (1.1 is rejected: "Max supported version is 1.0.34").
+    2. The Galaxy XR OpenXR runtime accepts API 1.0.x only (1.1 is rejected: "Max supported
+    version is 1.0.34").
     3. `android.permission.FACE_TRACKING` is required before `xrCreateFaceTrackerANDROID`.
-    4. Chrome cannot share an OpenXR session with this APK; a headless, separate OpenXR instance is the intended Phase 1b approach.
-    5. The dev URL comes from `local.properties`: `weftspun3dStudio.url=https://<PC_LAN_IP>:3000/` (the legacy alias `characterStudio.url` still works). The PC runs `npm run dev --host`, and the firewall allows TCP 3000.
-    6. HTTPS: debug builds trust dev certificates for the relay POST; a release build must never blindly `proceed()` on an SSL error.
+    4. Chrome cannot share an OpenXR session with this APK; a headless, separate OpenXR instance
+    is the intended Phase 1b approach.
+    5. The dev URL comes from `local.properties`: `weftspun3dStudio.url=https://<PC_LAN_IP>:3000/`
+    (the legacy alias `characterStudio.url` still works). The PC runs `npm run dev --host`, and
+    the firewall allows TCP 3000.
+    6. HTTPS: debug builds trust dev certificates for the relay POST; a release build must never
+    blindly `proceed()` on an SSL error.
     """
 
     details "Follow-up tasks, if Full Space AR still fails", ~S"""
-    1. Verify OpenXR actually posts in AR: check logcat's `ON-OpenXrFace` tag, or a remote-log `faceSrc=openxr` / payload `"source":"openxr"`.
-    2. Reduce Jetpack/OpenXR contention: consider running Jetpack only when `!OpenXrFaceEngine.isCollecting()` during handoff (today, Jetpack always runs on handoff).
-    3. Confirm the `FACE_TRACKING` runtime permission is granted before `xrCreateFaceTrackerANDROID` runs.
-    4. If a future Google release documents face data reaching Chrome WebXR without a relay, prefer that path for production.
+    1. Verify OpenXR actually posts in AR: check logcat's `ON-OpenXrFace` tag, or a remote-log
+    `faceSrc=openxr` / payload `"source":"openxr"`.
+    2. Reduce Jetpack/OpenXR contention: consider running Jetpack only when
+    `!OpenXrFaceEngine.isCollecting()` during handoff (today, Jetpack always runs on handoff).
+    3. Confirm the `FACE_TRACKING` runtime permission is granted before
+    `xrCreateFaceTrackerANDROID` runs.
+    4. If a future Google release documents face data reaching Chrome WebXR without a relay,
+    prefer that path for production.
 
     Do not remove the HTTP relay without a Chrome replacement ready. Do
     not break WebView's `evaluateJavascript` path. Never commit a secret
@@ -213,8 +230,10 @@ defmodule RFD1082 do
     2. Install the debug APK; grant face, notification, and camera permissions.
     3. Open the app, load the site, then the menu's "Open in Chrome for WebXR (+ face)".
     4. Keep the Weftspun XR Face app visible, or its picture-in-picture bubble, in Home Space.
-    5. Enter AR in Chrome; watch the PC's `logs/remote-log.txt` for `[ON-NATIVE-FACE-DIAG] nativeKeys=… relay=… xrPresenting=…`.
-    6. Use `adb logcat` with the tags above, or this repository's own `scripts/capture-apk-logcat.ps1`.
+    5. Enter AR in Chrome; watch the PC's `logs/remote-log.txt` for `[ON-NATIVE-FACE-DIAG]
+    nativeKeys=… relay=… xrPresenting=…`.
+    6. Use `adb logcat` with the tags above, or this repository's own
+    `scripts/capture-apk-logcat.ps1`.
     """
 
     details "Related web repository paths", ~S"""

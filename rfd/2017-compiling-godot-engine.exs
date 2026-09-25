@@ -136,14 +136,16 @@ defmodule RFD2017 do
 
     details "WSL / Linux: `~/.bashrc`", ~S"""
     ```bash
-    # Godot V-Sekai linuxbsd build. sccache is the only object cache; S3 backend shares it across hosts.
+    # Godot V-Sekai linuxbsd build. sccache is the only object cache; S3 backend shares it across
+    hosts.
     export GODOT_SRC="${GODOT_SRC:-$HOME/godot}"                 # engine checkout
     export SCCACHE_BUCKET="${SCCACHE_BUCKET:-<your-sccache-bucket>}"
     export SCCACHE_ENDPOINT="${SCCACHE_ENDPOINT:-<region>.example-object-store.com}"
     export SCCACHE_REGION="${SCCACHE_REGION:-<region>}"
     export SCCACHE_S3_USE_SSL="${SCCACHE_S3_USE_SSL:-true}"
     export SCCACHE_S3_KEY_PREFIX="${SCCACHE_S3_KEY_PREFIX:-godot}"
-    export AWS_PROFILE="${AWS_PROFILE:-<your-s3-profile>}"       # keys in ~/.aws/credentials, never committed
+    export AWS_PROFILE="${AWS_PROFILE:-<your-s3-profile>}"       # keys in ~/.aws/credentials,
+    never committed
     # Strip the checkout root from compile paths so cache hits survive a moved/renamed build dir.
     export SCCACHE_BASEDIRS="${SCCACHE_BASEDIRS:-$GODOT_SRC}"
     gscons() {
@@ -212,8 +214,10 @@ defmodule RFD2017 do
     """
 
     details "Further reading", ~S"""
-    - sccache S3 storage (`SCCACHE_BUCKET`, `SCCACHE_ENDPOINT`, `SCCACHE_S3_KEY_PREFIX`): https://github.com/mozilla/sccache/blob/main/docs/S3.md
-    - sccache configuration (`SCCACHE_BASEDIRS`): https://github.com/mozilla/sccache/blob/main/docs/Configuration.md
+    - sccache S3 storage (`SCCACHE_BUCKET`, `SCCACHE_ENDPOINT`, `SCCACHE_S3_KEY_PREFIX`):
+    https://github.com/mozilla/sccache/blob/main/docs/S3.md
+    - sccache configuration (`SCCACHE_BASEDIRS`):
+    https://github.com/mozilla/sccache/blob/main/docs/Configuration.md
     - Godot `SConstruct`: https://github.com/godotengine/godot/blob/master/SConstruct
     """
 

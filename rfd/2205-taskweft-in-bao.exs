@@ -11,9 +11,14 @@ defmodule RFD2205 do
 
     state :discussion
 
-    feature "the RECTGTN planner lives inside weftspun-bao as a\ndatabase-plugin-type Bao plugin (Go binary, cgo-linked C++ from\n`taskweft_nif/standalone/`); the same C++ compiles via emcc to a\n`taskweft.wasm` blob callable from the browser"
+    feature "the RECTGTN planner lives inside weftspun-bao as a
+database-plugin-type Bao plugin (Go binary, cgo-linked C++ from
+`taskweft_nif/standalone/`); the same C++ compiles via emcc to a
+`taskweft.wasm` blob callable from the browser"
 
-    scope "the plugin binary itself; the weftspun-bao deploy that\nloads it; the git-tracked fleet.jsonld → fleet.sqlite mirror pipeline;\nthe browser-side WASM parity target"
+    scope "the plugin binary itself; the weftspun-bao deploy that
+loads it; the git-tracked fleet.jsonld → fleet.sqlite mirror pipeline;
+the browser-side WASM parity target"
 
     decision ~S"""
     Ship one C++ planner (`taskweft_nif/standalone/*.hpp`, unchanged),

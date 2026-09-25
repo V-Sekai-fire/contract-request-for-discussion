@@ -274,7 +274,8 @@ defmodule RFD2196 do
 
     details "Reference commit set", ~S"""
     - `chibifire/editreward-bench`, commit `057671b9…`, `.arrow` → parquet, viewer restored.
-    - `chibifire/editscore-rl-train`, post-fix commit (row_group_size=100), 110 shards under `data/`.
+    - `chibifire/editscore-rl-train`, post-fix commit (row_group_size=100), 110 shards under
+    `data/`.
     - `chibifire/editscore-reward-train`, post-fix commit, 97,256 rows written, no silent drops.
     """
 

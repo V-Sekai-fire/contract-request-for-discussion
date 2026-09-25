@@ -32,7 +32,8 @@ defmodule RFD2058 do
     details_title "Webtransport persistent framed stream"
 
     details "Context and problem statement", ~S"""
-    The fabric's reliability classes ([fabric channels](../2049-fabric-channels-as-reliability-classes/README.md))
+    The fabric's reliability classes ([fabric
+    channels](../2049-fabric-channels-as-reliability-classes/README.md))
     run over ENet for the local slice. WebTransport carries the same
     classes for the browser and Quest paths over one QUIC connection per
     client. The picoquic WebTransport server goes silent within seconds

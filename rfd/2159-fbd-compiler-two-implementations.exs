@@ -11,7 +11,9 @@ defmodule RFD2159 do
 
     state :committed
 
-    feature "ship two independent RISC-V ELF implementations of the\ncompiler RFD 2157 formalises in Lean 4. Outputs cross-check on the\nsame fixtures; both are graded against the spec."
+    feature "ship two independent RISC-V ELF implementations of the
+compiler RFD 2157 formalises in Lean 4. Outputs cross-check on the
+same fixtures; both are graded against the spec."
 
     scope "two sibling repos + a differential harness"
 

@@ -45,15 +45,15 @@ def added_lines(repo, base):
 
 
 def heredoc_indent(lines):
-    """Map line index -> closing-quote indent, for lines inside a triple-quoted string."""
-    inside, start, spans = False, 0, {}
+    """Map line index -> closing-quote indent, for lines inside a ~S (non-interpolating) heredoc."""
+    inside, sigil, start, spans = False, False, 0, {}
     for i, text in enumerate(lines):
         quotes = text.count('"""')
         if not inside and quotes == 1 and text.rstrip().endswith('"""'):
-            inside, start = True, i + 1
+            inside, sigil, start = True, text.rstrip().endswith('~S"""'), i + 1
         elif inside and text.strip().startswith('"""'):
             indent = len(text) - len(text.lstrip())
-            for j in range(start, i):
+            for j in range(start, i) if sigil else ():
                 spans[j] = indent
             inside = False
     return spans
@@ -76,9 +76,10 @@ def fix(repo, path, lines_to_fix, limit):
             out.extend((escaped.group(1) + '"' + escaped.group(2) + '"').split("\\n"))
         elif (i + 1) in lines_to_fix and len(text) > limit and i in spans and fixable(text, spans[i]):
             pad = " " * spans[i]
-            out.extend(textwrap.wrap(text.strip(), width=limit, initial_indent=pad,
-                                     subsequent_indent=pad, break_long_words=False,
-                                     break_on_hyphens=False))
+            wrapped = textwrap.wrap(text.strip(), width=limit, initial_indent=pad,
+                                    subsequent_indent=pad, break_long_words=False,
+                                    break_on_hyphens=False)
+            out.extend(wrapped if max(map(len, wrapped)) <= limit else [text])
         else:
             out.append(text)
     open(full, "w", encoding="utf-8").write("\n".join(out))
@@ -125,6 +126,8 @@ def self_test():
         ("--fix rewraps long heredoc prose and then passes",
          [("a.exs", '  x ~S"""\n' + long_prose + '\n    """')], None, 0, "fix"),
         ("--fix leaves a long code line failing", [("a.exs", long_code)], None, 1, "fix"),
+        ("--fix leaves an interpolating heredoc alone",
+         [("a.exs", '  x """\n' + long_prose + ' #{a}\n    """')], None, 1, "fix"),
         ("--fix turns \\n escapes in a long string into line breaks and then passes",
          [("a.exs", '    feature "' + "\\n".join(["short words here"] * 5) + '"')], None, 0, "fix"),
     ]

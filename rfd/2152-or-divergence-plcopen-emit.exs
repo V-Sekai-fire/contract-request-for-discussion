@@ -9,7 +9,8 @@ defmodule RFD2152 do
   rfd 2152, "OR-divergence emit in PLCopen SFC" do
     state :discussion
 
-    feature "extend `Taskweft.OpenPLC.PLCopen.emit/1` to cover `|>`\nand `|<` markers from the compact GRAFCET DSL"
+    feature "extend `Taskweft.OpenPLC.PLCopen.emit/1` to cover `|>`
+and `|<` markers from the compact GRAFCET DSL"
 
     scope "taskweft (`lib/taskweft/openplc/plcopen.ex`)"
 

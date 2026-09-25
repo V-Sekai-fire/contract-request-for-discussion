@@ -9,9 +9,12 @@ defmodule RFD2154 do
   rfd 2154, "OpenPLC v4 into Godot Sandbox, from Elixir" do
     state :prediscussion
 
-    feature "compile RECTGTN → FBD → OpenPLC v4 → RISC-V shared\nobject, load into Godot through Godot Sandbox (`libriscv`), embed\nthat Godot from Elixir via the `lib_godot_connector` NIF"
+    feature "compile RECTGTN → FBD → OpenPLC v4 → RISC-V shared
+object, load into Godot through Godot Sandbox (`libriscv`), embed
+that Godot from Elixir via the `lib_godot_connector` NIF"
 
-    scope "taskweft compile chain, new `taskweft-godot-sandbox`\nproject (Elixir + Godot scene + Godot Sandbox addon)"
+    scope "taskweft compile chain, new `taskweft-godot-sandbox`
+project (Elixir + Godot scene + Godot Sandbox addon)"
 
     decision ~S"""
     Reuse three MIT pieces:

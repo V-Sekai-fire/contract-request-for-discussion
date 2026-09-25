@@ -26,7 +26,8 @@ defmodule RFD2124 do
     details_title "Elixir error tuples in every reply"
 
     details "Both encodings were built and measured", ~S"""
-    ETF was written first. The decision moved to CBOR after both were shown to reach the same term,
+    ETF was written first. The decision moved to CBOR after both were shown to reach the same
+    term,
     so this records what each cost rather than an argument from taste.
 
     |                          | ETF                        | CBOR, tag 39                           |
@@ -75,8 +76,10 @@ defmodule RFD2124 do
 
     details "What `[:safe]` does, measured rather than assumed", ~S"""
     The first run above decoded under `[:safe]` although `:res_below_minimum` is not an atom any
-    release ships. That looked like evidence that `[:safe]` permits new atoms. It is evidence of nothing of the sort: the atom already existed. The test
-    script names the atom in its own `case` clause, so compiling the script created the atom before
+    release ships. That looked like evidence that `[:safe]` permits new atoms. It is evidence of
+    nothing of the sort: the atom already existed. The test
+    script names the atom in its own `case` clause, so compiling the script created the atom
+    before
     the decode ran.
 
     A second test used an atom that no module names:
@@ -85,8 +88,10 @@ defmodule RFD2124 do
         atom_count before=18541 after=18914
         without :safe: {:error, :zz_never_seen_atom_9f3a2b}
 
-    So `[:safe]` refuses an atom the virtual machine does not have, and a decode without it creates
-    one. Both halves are necessary to the decision: `[:safe]` is what stops a reply from growing the
+    So `[:safe]` refuses an atom the virtual machine does not have, and a decode without it
+    creates
+    one. Both halves are necessary to the decision: `[:safe]` is what stops a reply from growing
+    the
     atom table, and the caller's own clauses are what make the reasons it expects decodable.
 
     This is recorded because the first reading was wrong and the wrong reading was the comfortable

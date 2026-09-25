@@ -11,7 +11,12 @@ defmodule RFD2150 do
 
     state :prediscussion
 
-    feature "compile RECTGTN plans to IEC 61131-3 **FBD**. Runtime\nhosts for OpenPLC v4's compiled binary: PLC, ESP32, Godot Sandbox\n(RISC-V). Node-graph converter targets from the same FBD network:\nglTF Interactivity, VRChat Udon, UE 4/5 Blueprint, Resonite ProtoFlux.\nCoordination is in-process linking (RFD 2154); CoAP+OSCORE (RFD 2151)\nis parked until a deployment leaves Godot's networking."
+    feature "compile RECTGTN plans to IEC 61131-3 **FBD**. Runtime
+hosts for OpenPLC v4's compiled binary: PLC, ESP32, Godot Sandbox
+(RISC-V). Node-graph converter targets from the same FBD network:
+glTF Interactivity, VRChat Udon, UE 4/5 Blueprint, Resonite ProtoFlux.
+Coordination is in-process linking (RFD 2154); CoAP+OSCORE (RFD 2151)
+is parked until a deployment leaves Godot's networking."
 
     decision ~S"""
     Translate RECTGTN to **FBD** via RFD 2148's compact GRAFCET, emit

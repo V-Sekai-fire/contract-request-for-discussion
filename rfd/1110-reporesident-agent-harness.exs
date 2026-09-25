@@ -9,7 +9,8 @@ defmodule RFD1110 do
   rfd 1110, "RepoResident, a file-based operating harness for coding agents" do
     state :committed
 
-    scope "`CLAUDE.md`, `AGENTS.md`, `.agent/` (`STATE.md`, `MAP.md`, `PROJECT.md`,\n`DECISIONS.md`, `ISSUES.md`, `workflows/`, `designs/`, `areas/`, `journal/`, `scratch/`)"
+    scope "`CLAUDE.md`, `AGENTS.md`, `.agent/` (`STATE.md`, `MAP.md`, `PROJECT.md`,
+`DECISIONS.md`, `ISSUES.md`, `workflows/`, `designs/`, `areas/`, `journal/`, `scratch/`)"
 
     attest_in :none
 

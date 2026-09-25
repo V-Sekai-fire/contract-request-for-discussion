@@ -11,9 +11,16 @@ defmodule RFD2206 do
 
     state :discussion
 
-    feature "the visual convention for a VRM avatar staged as a\nFaceTime-style portrait, fixed eye-level camera, LookAt on the\ncamera with periodic glance-away, breathing sway, blink cycle,\nreaction blendshapes that fade over about the width of a golf ball\nof time (~1.6 s)"
+    feature "the visual convention for a VRM avatar staged as a
+FaceTime-style portrait, fixed eye-level camera, LookAt on the
+camera with periodic glance-away, breathing sway, blink cycle,
+reaction blendshapes that fade over about the width of a golf ball
+of time (~1.6 s)"
 
-    scope "any browser demo or shipped surface that presents a VRM\nas an interlocutor rather than an inhabitant of a world; today's\nconcrete case is the Starforged play surface in\n`7-service/service-sqlar-cas/docs/`"
+    scope "any browser demo or shipped surface that presents a VRM
+as an interlocutor rather than an inhabitant of a world; today's
+concrete case is the Starforged play surface in
+`7-service/service-sqlar-cas/docs/`"
 
     decision ~S"""
     A VRM presented as an interlocutor is staged as **a 3D character in
@@ -46,7 +53,8 @@ defmodule RFD2206 do
 
     details "Amendment 2026-09-05: runtime swap to Godot `platform=web`", ~S"""
     The portrait originally shipped as `@pixiv/three-vrm` in
-    `7-service/service-sqlar-cas/docs/vrm.js`. Per [RFD 2210](../2210-atelier-godot-web-shipping-surface/)
+    `7-service/service-sqlar-cas/docs/vrm.js`. Per [RFD
+    2210](../2210-atelier-godot-web-shipping-surface/)
     (L3) and [RFD 2216](../2216-threejs-blocklist/) (three.js blocklist),
     the three-vrm path is retired. VRM 1.0 loading now happens via
     [RFD 2213](../2213-vrm-via-godot-sandbox-elf/), `V-Sekai/godot-vrm`

@@ -12,11 +12,14 @@ defmodule RFD2098 do
     scope "the apparatus in this directory"
 
     decision ~S"""
-    None recorded. The serial was allocated and the apparatus (`rollback.cpp`) was written; the document was not. The serial stays allocated, as RFD 1000 says a serial never moves once issued.
+    None recorded. The serial was allocated and the apparatus (`rollback.cpp`) was written; the
+    document was not. The serial stays allocated, as RFD 1000 says a serial never moves once
+    issued.
     """
 
     problem ~S"""
-    A directory with code and no README reads as a document that was deleted rather than one that was never written. This page names which it is.
+    A directory with code and no README reads as a document that was deleted rather than one that
+    was never written. This page names which it is.
     """
 
     drafted_by :ai

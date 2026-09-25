@@ -151,7 +151,8 @@ defmodule RFD1020 do
     """
 
     details "The facts table", ~S"""
-    **Unchanged.** Every type here is portable, including `tags`. `ecto_sqlite3` stores an array as
+    **Unchanged.** Every type here is portable, including `tags`. `ecto_sqlite3` stores an array
+    as
     JSON, and it round-trips and queries through `json_each`, which was measured rather than
     assumed.
 

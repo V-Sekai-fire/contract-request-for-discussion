@@ -11,9 +11,12 @@ defmodule RFD2166 do
 
     flight_level :l1
 
-    feature "one Cineform MKV per edit bundling the video frames,\naudio, and the WebVTT ASR panel (per RFD 1102 task catalog), produced through the\nservice-cineform pair per RFD 1137."
+    feature "one Cineform MKV per edit bundling the video frames,
+audio, and the WebVTT ASR panel (per RFD 1102 task catalog), produced through the
+service-cineform pair per RFD 1137."
 
-    scope "`6-datasource/anny-render-corpus`, `7-service/service-cineform`,\n`3-interactor/interactor-cineform`, `1-transport/transport-cineform-tui`"
+    scope "`6-datasource/anny-render-corpus`, `7-service/service-cineform`,
+`3-interactor/interactor-cineform`, `1-transport/transport-cineform-tui`"
 
     preamble ~S"""
     Shelved 2026-09-02: no encoding time budget this cycle to build the

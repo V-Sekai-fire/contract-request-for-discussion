@@ -9,9 +9,13 @@ defmodule RFD2251 do
   rfd 2251, "image to godot character as an fbd" do
     state :discussion
 
-    feature "a character-from-one-image workflow as an FBD the fbd\nteacher (RFD 2236) emits, backed by tools already on the manifest,\nrunning on the Godot binary of RFD 2239"
+    feature "a character-from-one-image workflow as an FBD the fbd
+teacher (RFD 2236) emits, backed by tools already on the manifest,
+running on the Godot binary of RFD 2239"
 
-    scope "`taskweft-function-block-diagram-teacher` and `compiler`,\nTRELLIS.2 and Pixal3D as parts generators, SkinTokens and ANNY as\nrig, Godot with SceneTreeMCP as assembly and render"
+    scope "`taskweft-function-block-diagram-teacher` and `compiler`,
+TRELLIS.2 and Pixal3D as parts generators, SkinTokens and ANNY as
+rig, Godot with SceneTreeMCP as assembly and render"
 
     decision ~S"""
     Seven function blocks in the compiler's PLCopen subset:
