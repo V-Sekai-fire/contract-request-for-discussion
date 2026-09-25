@@ -15,7 +15,8 @@ channels = ["conda-forge"]
 # feature (since dropped, 2026-09-07) could not solve there. Declared again on
 # 2026-09-07; the ane feature restricts itself to osx-arm64 below, so win-64
 # solves the gates and nothing else.
-platforms = ["osx-arm64", "win-64"]
+# linux-64 declared 2026-09-25, when Windows was blocked as a host and WSL took over.
+platforms = ["osx-arm64", "win-64", "linux-64"]
 
 # THE GATES, PINNED THE WAY `scripts/requirements.txt` ALREADY PINS THEM.
 # That file stays: it is what CI reads and it carries the reasoning for each
