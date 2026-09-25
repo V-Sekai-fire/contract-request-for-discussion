@@ -217,6 +217,7 @@ defmodule Serials.VSekaiFabric do
       serial 2259, "how-a-session-shapes-its-work"
       serial 2260, "credentials-shared-by-path-in-bao"
       serial 2261, "mbedtls-is-the-tls-library"
+      serial 2262, "make-it-with-the-pen-and-wear-it-together", flight_level: :l3
     end
 
     deleted do
