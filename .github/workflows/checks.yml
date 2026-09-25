@@ -26,14 +26,14 @@ jobs:
   # GH_TOKEN, which a local commit does not have.
   prek:
     if: github.event_name == 'pull_request' || github.event_name == 'merge_group'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           # Diff-based hooks read the base revision; a shallow clone has none.
           fetch-depth: 0
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.x"
       # The double-join hook is `language: system` and shells out to elixir, so the runner
@@ -43,13 +43,25 @@ jobs:
         with:
           otp-version: "29"
           elixir-version: "1.20.4"
+      # jose 1.11.12 (via ex_mcp) uses bare `catch`, deprecated in OTP 29. Silence it for
+      # that exact tuple only, so any version change brings the warnings back.
+      - name: silence jose's bare catch for jose 1.11.12, OTP 29, Elixir 1.20.4 only
+        run: |
+          jose=$(grep -o '"jose": {:hex, :jose, "[^"]*"' mix.lock | cut -d'"' -f4)
+          otp=$(erl -noshell -eval 'io:put_chars(erlang:system_info(otp_release)), halt().')
+          ex=$(elixir -e 'IO.write(System.version())')
+          if [ "$jose/$otp/$ex" = "1.11.12/29/1.20.4" ]; then
+            echo 'ERL_COMPILER_OPTIONS=[nowarn_deprecated_catch]' >> "$GITHUB_ENV"
+          else
+            echo "::notice::jose/OTP/Elixir is $jose/$otp/$ex, not 1.11.12/29/1.20.4; bare-catch warnings stay on"
+          fi
       # DUAL-TRACK WITH transport-shepherd. Task #83 landed 17 Elixir gate ports;
       # the `all-shepherd-gates` prek hook shells to `mix gates <name> --self-test`
       # for each. The CI runner has no goal-manifest checkout, so shepherd is
       # cloned separately here and SHEPHERD_ROOT points the wrapper at it. Skip
       # is loud (rule 3) when either half is missing.
       - name: check out transport-shepherd (dual-track)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: weftspun/transport-shepherd
           path: transport-shepherd
