@@ -21,11 +21,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # prek is the only style-check job. Everything folded in: the RFD structure,
-  # serials, numbers, canary, comment-ladder and trope-density gates each have
-  # a hook and a self-test twin in `.pre-commit-config.yaml`. Diff-based gates
-  # keep the shape they had in prek: local staged diff against HEAD, and the
-  # self-test proves the gate still fires on planted-broken input.
+  # prek is the only job: every gate is a hook in `.pre-commit-config.yaml`.
+  # The ci-* hooks sit in the manual stage because they need GATE_BASE or
+  # GH_TOKEN, which a local commit does not have.
   prek:
     if: github.event_name == 'pull_request' || github.event_name == 'merge_group'
     runs-on: ubuntu-latest
@@ -70,186 +68,11 @@ jobs:
           SHEPHERD_ROOT: ${{ github.workspace }}/transport-shepherd
           GH_TOKEN: ${{ github.token }}
         run: prek run --all-files --show-diff-on-failure --color always
-
-  # THE GOAL-MANIFEST GATE IS A CI JOB AND NOT A PREK HOOK, AND THE REASON IS THE TOKEN.
-  #
-  # It asks the GitHub organisation which repositories are archived, so it needs network and
-  # credentials. prek hooks get neither by contract -- they run on a developer's machine against
-  # files -- so wiring it there would produce a hook that fails for everyone without a token and
-  # gets skipped into uselessness.
-  #
-  # This is the failure the gate was written against, committed once already: it shipped with two
-  # firing controls and nothing that ran it, which is a gate that certifies nothing while looking
-  # official in the tree.
-  #
-  # UNREACHABLE IS A FAILURE HERE, NOT A SKIP. The script exits non-zero when it cannot read the
-  # org, so a network outage turns this job red rather than green. That is deliberate: a gate
-  # that goes quiet when it cannot check reports exactly what a passing gate reports.
-  goal-manifests:
-    if: github.event_name == 'pull_request' || github.event_name == 'merge_group'
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
-      # ONE INVOCATION, AND IT RUNS BOTH. `--self-test` performs the real check against
-      # CLAUDE.md first and the two negative controls after, exiting non-zero if either half
-      # fails.
-      - name: the rule names a live manifest, and the controls still fire
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: python scripts/check_goal_manifests.py --self-test
-
-  # THE THREE RFD GATES. `weftspun/logbook` and `weftspun/request-for-discussion` were
-  # two repositories and are one, so this file is two workflows. The prek job above is
-  # the logbook's, which pins Elixir 1.18 where the RFD half pinned 1.17. One repository
-  # gets one toolchain, and the bump is here rather than in a later surprise.
-  rfd-numbers:
-    if: github.event_name == 'pull_request' || github.event_name == 'merge_group'
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
-      - uses: ./.github/actions/render-rfds
-      # The self-test runs first. A gate that cannot reject a known-bad tree
-      # certifies the defect, so it proves itself before it judges the repo.
-      - run: python scripts/check-rfd-numbers.py --self-test
-      - run: python scripts/check-rfd-numbers.py
-
-  rfd-serials:
-    if: github.event_name == 'pull_request' || github.event_name == 'merge_group'
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          # The register is held against its own previous revision, so the
-          # base commit has to be in the checkout. A shallow clone has no
-          # previous revision and the comparison would silently do nothing.
-          fetch-depth: 0
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
-      - uses: ./.github/actions/render-rfds
       - run: pip install -r scripts/requirements.txt
-      - run: python scripts/check-rfd-serials.py --self-test
-      - run: python scripts/check-rfd-serials.py --base origin/${{ github.event.pull_request.base.ref || github.event.repository.default_branch }}
-
-  rfd-structure:
-    if: github.event_name == 'pull_request' || github.event_name == 'merge_group'
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          # --changed <base> reads git diff base...HEAD, so a shallow clone
-          # cannot see the base. Same reason rfd-serials + comment-ladder
-          # already pull with depth 0.
-          fetch-depth: 0
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
-      - uses: ./.github/actions/render-rfds
-      # The CommonMark parser is the one dependency these gates take, and it
-      # is pinned. RFD 1124 says why the AST is worth it.
-      - run: pip install -r scripts/requirements.txt
-      - run: python scripts/check-rfd-structure.py --self-test
-      - run: python scripts/check-rfd-structure.py --changed origin/${{ github.event.pull_request.base.ref || github.event.repository.default_branch }}
-
-  # THE COMMENT LADDER, A JOB RATHER THAN A prek HOOK ALONE, AND THE REASON IS THE BASE.
-  #
-  # The gate is diff-based. `prek run --all-files` stages nothing, so the hook above sees
-  # an empty change set in CI and reports a green run for a check it did not perform --
-  # the silent skip CLAUDE.md rule 3 calls a FAIL. This job names the base explicitly.
-  #
-  # fetch-depth 0 for the same reason `rfd-serials` needs it: the gate reads each changed
-  # file at the base revision, and a shallow clone has no base revision to read.
-  comment-ladder:
-    if: github.event_name == 'pull_request' || github.event_name == 'merge_group'
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
-      # Controls first: three of the five must reject known-broken input.
-      - run: python scripts/check_comment_ladder.py --self-test
-      - run: python scripts/check_comment_ladder.py --base origin/${{ github.event.pull_request.base.ref || github.event.repository.default_branch }}
-
-  # Trope density did not rise. Same diff-based shape as comment-ladder,
-  # narrower scope (rfd/*/README.md, rfd/*/DETAILS.md, logbook/*.md) so the
-  # working agreements that carry named tells verbatim stay off it.
-  trope-density:
-    if: github.event_name == 'pull_request' || github.event_name == 'merge_group'
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
-      # The gate reads prose out of a CommonMark AST, so it is no longer
-      # stdlib only. Pinned to what pixi.toml already carries.
-      - run: pip install markdown-it-py==3.0.0
-      - run: python scripts/check_tropes.py --self-test
-      - run: python scripts/check_tropes.py --base origin/${{ github.event.pull_request.base.ref || github.event.repository.default_branch }}
-
-  # EVERY NEW RFD CARRIES THE CANARY SENTENCE, which is the workspace's M&M's clause.
-  # An AI that read `CLAUDE.md` before drafting adds the sentence; one that skipped it
-  # will not, and this gate catches the omission. Scoped to RFD directories that did
-  # not exist on the base branch, so existing RFDs are outside the trap and human-only
-  # drafts add nothing they cannot truthfully attest.
-  rfd-canary:
-    if: github.event_name == 'pull_request' || github.event_name == 'merge_group'
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
-      - uses: ./.github/actions/render-rfds
-      - run: python scripts/check_rfd_canary.py --self-test
-      - run: python scripts/check_rfd_canary.py --base origin/${{ github.event.pull_request.base.ref || github.event.repository.default_branch }}
-
-  # THE RULESETS THE DOCUMENTS DESCRIBE ARE THE RULESETS THE REPOSITORY HAS. CLAUDE.md and
-  # PITFALLS.md both name a ruleset by id and state the merge policy it enforces. A ruleset
-  # that is deleted or never created leaves both documents asserting a policy nothing
-  # applies, and the file describing the gate reads as evidence the gate is there. RFD 2245
-  # merged with six of nine checks red because of exactly that gap.
-  spdx:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
-      - run: python scripts/check_spdx.py --self-test
-      - run: python scripts/check_spdx.py
-
-  rulesets:
-    if: github.event_name == 'pull_request' || github.event_name == 'merge_group'
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
-      - run: pip install markdown-it-py==3.0.0
-      - run: python scripts/check_rulesets.py --self-test
-      - run: python scripts/check_rulesets.py --repo ${{ github.repository }}
-        env:
+      - env:
+          GATE_BASE: origin/${{ github.event.pull_request.base.ref || github.event.repository.default_branch }}
           GH_TOKEN: ${{ github.token }}
+        run: >-
+          prek run --all-files --hook-stage manual --show-diff-on-failure --color always
+          ci-rfd-serials ci-rfd-structure ci-comment-ladder ci-trope-density
+          ci-rfd-canary ci-spdx ci-goal-manifests ci-rulesets

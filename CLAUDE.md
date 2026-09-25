@@ -250,9 +250,9 @@ bundle half.
 **The merge queue is ruleset 23145233**, on the default branch:
 `MERGE` method, `ALLGREEN` grouping, a 60-minute check timeout,
 batches of up to five, and a pull request required with zero
-approvals. Seven checks are required, and they are the seven that
-run on a `merge_group` event: prek, goal-manifests, rfd-numbers,
-rfd-serials, rfd-structure, comment-ladder and trope-density.
+approvals. One check is required, `prek`, because every gate is a
+prek hook: the ones needing a base ref or a token run in the manual
+stage, which the CI job calls by hook id.
 
 Requiring a check that does not run on `merge_group` hangs the
 queue for the whole timeout and then fails it, so the required set

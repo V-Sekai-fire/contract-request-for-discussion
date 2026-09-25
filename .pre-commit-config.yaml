@@ -525,6 +525,73 @@ repos:
         pass_filenames: false
         always_run: true
 
+      # CI's half of the gates: diff-based against GATE_BASE, or reading the repository
+      # through GH_TOKEN. Manual stage, so a local commit without either never runs them.
+
+      - id: ci-rfd-serials
+        name: the register still matches the RFDs against the base
+        entry: bash -c 'python scripts/check-rfd-serials.py --self-test && python scripts/check-rfd-serials.py --base "${GATE_BASE:?GATE_BASE unset}"'
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [manual]
+
+      - id: ci-rfd-structure
+        name: changed RFDs keep RFD 1000's shape against the base
+        entry: bash -c 'python scripts/check-rfd-structure.py --self-test && python scripts/check-rfd-structure.py --changed "${GATE_BASE:?GATE_BASE unset}"'
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [manual]
+
+      - id: ci-comment-ladder
+        name: no changed file climbs the comment ladder against the base
+        entry: bash -c 'python scripts/check_comment_ladder.py --base "${GATE_BASE:?GATE_BASE unset}"'
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [manual]
+
+      - id: ci-trope-density
+        name: trope density did not rise against the base
+        entry: bash -c 'python scripts/check_tropes.py --base "${GATE_BASE:?GATE_BASE unset}"'
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [manual]
+
+      - id: ci-rfd-canary
+        name: every new RFD carries its attestation against the base
+        entry: bash -c 'python scripts/check_rfd_canary.py --base "${GATE_BASE:?GATE_BASE unset}"'
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [manual]
+
+      - id: ci-spdx
+        name: every source file carries an SPDX header
+        entry: bash -c 'python scripts/check_spdx.py --self-test && python scripts/check_spdx.py'
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [manual]
+
+      - id: ci-goal-manifests
+        name: the live goal manifest is not archived
+        entry: bash -c 'python scripts/check_goal_manifests.py --self-test'
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [manual]
+
+      - id: ci-rulesets
+        name: every ruleset a document names exists
+        entry: bash -c 'python scripts/check_rulesets.py --self-test && python scripts/check_rulesets.py --repo "${GITHUB_REPOSITORY:?GITHUB_REPOSITORY unset}"'
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [manual]
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
