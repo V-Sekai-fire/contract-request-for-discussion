@@ -213,6 +213,7 @@ defmodule Serials.VSekaiFabric do
       serial 2255, "bao-ssh-tunnel"
       serial 2256, "webtransport-inside-a-sandbox-guest"
       serial 2257, "tooling-runs-in-the-linux-subsystem"
+      serial 2258, "every-ci-gate-is-a-prek-hook"
     end
 
     deleted do
