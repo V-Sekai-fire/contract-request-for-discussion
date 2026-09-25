@@ -216,6 +216,7 @@ defmodule Serials.VSekaiFabric do
       serial 2258, "every-ci-gate-is-a-prek-hook"
       serial 2259, "how-a-session-shapes-its-work"
       serial 2260, "credentials-shared-by-path-in-bao"
+      serial 2261, "mbedtls-is-the-tls-library"
     end
 
     deleted do
