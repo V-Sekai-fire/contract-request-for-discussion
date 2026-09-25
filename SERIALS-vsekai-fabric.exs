@@ -218,6 +218,7 @@ defmodule Serials.VSekaiFabric do
       serial 2260, "credentials-shared-by-path-in-bao"
       serial 2261, "mbedtls-is-the-tls-library"
       serial 2262, "make-it-with-the-pen-and-wear-it-together", flight_level: :l3
+      serial 2263, "the-skateboards-simulator-gate", flight_level: :l1
     end
 
     deleted do
