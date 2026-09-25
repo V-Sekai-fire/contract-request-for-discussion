@@ -210,6 +210,7 @@ defmodule Serials.VSekaiFabric do
       serial 2252, "llm-module-splits-and-drafts"
       serial 2253, "a-character-creator-on-anny", flight_level: :l2
       serial 2254, "order-independent-transparency-for-cad", flight_level: :l2
+      serial 2255, "bao-ssh-tunnel"
     end
 
     deleted do
