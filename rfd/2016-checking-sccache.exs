@@ -35,9 +35,6 @@ defmodule RFD2016 do
 
     related ~S"""
     - RFD 2017 compiles the engine through this cache.
-    - `CLAUDE.md` blocklists WSL as a way to run anything, so the
-      cross-shell requirement in the drivers below means PowerShell and
-      Linux, not PowerShell and WSL.
     """
 
     details_title "Checking sccache"
