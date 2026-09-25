@@ -65,6 +65,17 @@ jobs:
         with:
           repository: weftspun/transport-shepherd
           path: transport-shepherd
+      - uses: actions/cache@v6
+        with:
+          path: |
+            deps
+            _build
+            transport-shepherd/deps
+            transport-shepherd/_build
+            ~/.cache/prek
+          key: prek-otp29-ex1.20.4-${{ hashFiles('mix.lock', 'transport-shepherd/mix.lock', '.pre-commit-config.yaml') }}-${{ hashFiles('lib/**', 'mix.exs') }}
+          restore-keys: |
+            prek-otp29-ex1.20.4-${{ hashFiles('mix.lock', 'transport-shepherd/mix.lock', '.pre-commit-config.yaml') }}-
       - name: install shepherd deps
         working-directory: transport-shepherd
         run: mix deps.get
@@ -79,7 +90,15 @@ jobs:
       - env:
           SHEPHERD_ROOT: ${{ github.workspace }}/transport-shepherd
           GH_TOKEN: ${{ github.token }}
-        run: prek run --all-files --show-diff-on-failure --color always
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        # A pull request runs the hooks its diff touches; the merge queue still runs all of them.
+        run: |
+          if [ "${{ github.event_name }}" = pull_request ]; then
+            prek run --from-ref "$BASE_SHA" --to-ref "$HEAD_SHA" --show-diff-on-failure --color always
+          else
+            prek run --all-files --show-diff-on-failure --color always
+          fi
       - run: pip install -r scripts/requirements.txt
       - env:
           GATE_BASE: origin/${{ github.event.pull_request.base.ref || github.event.repository.default_branch }}
