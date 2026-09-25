@@ -184,6 +184,20 @@ jobs:
       - run: python scripts/check_comment_ladder.py --self-test
       - run: python scripts/check_comment_ladder.py --base origin/${{ github.event.pull_request.base.ref || github.event.repository.default_branch }}
 
+  line-length:
+    if: github.event_name == 'pull_request' || github.event_name == 'merge_group'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - run: python scripts/check_line_length.py --self-test
+      - run: python scripts/check_line_length.py --base origin/${{ github.event.pull_request.base.ref || github.event.repository.default_branch }}
+
   # Trope density did not rise. Same diff-based shape as comment-ladder,
   # narrower scope (rfd/*/README.md, rfd/*/DETAILS.md, logbook/*.md) so the
   # working agreements that carry named tells verbatim stay off it.
