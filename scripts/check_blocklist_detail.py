@@ -196,15 +196,16 @@ def main(argv):
         return self_test()
 
     root = pathlib.Path(argv[1] if len(argv) > 1 else ".")
-    claude, block = root / "CLAUDE.md", root / "BLOCKLIST.md"
-    for p in (claude, block):
-        if not p.exists():
-            print("FAIL: %s does not exist" % p)
-            return 1
+    block = root / "BLOCKLIST.md"
+    if not block.exists():
+        print("FAIL: %s does not exist" % block)
+        return 1
 
-    problems = check(claude.read_text(encoding="utf-8"), block.read_text(encoding="utf-8"))
+    text = block.read_text(encoding="utf-8")
+    denied = text.split("\n### ", 1)[0]
+    problems = check(denied, text)
     if not problems:
-        rows = len(table_rows(claude.read_text(encoding="utf-8")))
+        rows = len(table_rows(denied))
         secs = len(detail_sections(block.read_text(encoding="utf-8")))
         print("ok   %d rows promising an argument, %d sections, and they agree" % (rows, secs))
         return 0
