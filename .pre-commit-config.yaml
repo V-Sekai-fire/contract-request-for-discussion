@@ -228,6 +228,21 @@ repos:
         files: ^scripts/(check_comment_ladder|comment_density)\.py$
         pass_filenames: false
 
+      # A line added to Elixir stays within .formatter.exs's line_length; --fix splits it.
+      - id: line-length
+        name: no added Elixir line runs past the formatter's line_length
+        entry: python scripts/check_line_length.py
+        language: system
+        files: \.(ex|exs)$
+        pass_filenames: false
+
+      - id: line-length-self-test
+        name: the line-length gate still rejects a long added line and fixes the splittable ones
+        entry: python scripts/check_line_length.py --self-test
+        language: system
+        files: ^scripts/check_line_length\.py$
+        pass_filenames: false
+
       # Trope density does not rise. The script's diff mode uses `base...HEAD`
       # (triple-dot), which is empty on a local commit, so the hook runs the
       # report mode and the self-test twin below is what proves the gate
@@ -547,6 +562,14 @@ repos:
       - id: ci-comment-ladder
         name: no changed file climbs the comment ladder against the base
         entry: bash -c 'python scripts/check_comment_ladder.py --base "${GATE_BASE:?GATE_BASE unset}"'
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [manual]
+
+      - id: ci-line-length
+        name: no added Elixir line runs past the formatter's line_length against the base
+        entry: bash -c 'python scripts/check_line_length.py --base "${GATE_BASE:?GATE_BASE unset}"'
         language: system
         pass_filenames: false
         always_run: true
