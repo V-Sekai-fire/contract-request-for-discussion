@@ -212,6 +212,11 @@ defmodule Serials.VSekaiFabric do
       serial 2254, "order-independent-transparency-for-cad", flight_level: :l2
       serial 2255, "bao-ssh-tunnel"
       serial 2256, "webtransport-inside-a-sandbox-guest"
+      serial 2257, "tooling-runs-in-the-linux-subsystem"
+      serial 2258, "every-ci-gate-is-a-prek-hook"
+      serial 2259, "how-a-session-shapes-its-work"
+      serial 2260, "credentials-shared-by-path-in-bao"
+      serial 2261, "mbedtls-is-the-tls-library"
     end
 
     deleted do
