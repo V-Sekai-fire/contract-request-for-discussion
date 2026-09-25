@@ -9,7 +9,9 @@ defmodule RFD1124 do
   rfd 1124, "The RFD structure gate reads a CommonMark AST" do
     state :committed
 
-    scope "`scripts/check-rfd-structure.py`, `scripts/check-rfd-numbers.py`,\n`scripts/requirements.txt`, `.pre-commit-config.yaml`,\n`.github/workflows/checks.yml`"
+    scope "`scripts/check-rfd-structure.py`, `scripts/check-rfd-numbers.py`,
+`scripts/requirements.txt`, `.pre-commit-config.yaml`,
+`.github/workflows/checks.yml`"
 
     attest_in :none
 

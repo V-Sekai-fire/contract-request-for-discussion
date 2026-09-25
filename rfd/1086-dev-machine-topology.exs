@@ -74,9 +74,12 @@ defmodule RFD1086 do
     [DGX Spark]  SSH / API / builds, via NVIDIA Sync, not required for headset -> Surface LAN URL
     ```
 
-    - Headset `localhost`: `https://localhost:3000` on the headset targets the headset itself, not the Surface. Always use the Surface's own LAN IP in a headset URL.
-    - `3DAIGC-API` may run on the DGX or another host (`VITE_API_ENDPOINT`), a separate concern from where Vite serves the web app.
-    - The NVIDIA XR AI stack runs on the DGX only (`/home/sifr/xr-ai`); RFD 1095 gives its own Media Hub access path.
+    - Headset `localhost`: `https://localhost:3000` on the headset targets the headset itself, not
+    the Surface. Always use the Surface's own LAN IP in a headset URL.
+    - `3DAIGC-API` may run on the DGX or another host (`VITE_API_ENDPOINT`), a separate concern
+    from where Vite serves the web app.
+    - The NVIDIA XR AI stack runs on the DGX only (`/home/sifr/xr-ai`); RFD 1095 gives its own
+    Media Hub access path.
     """
 
     details "Reading `logs/remote-log.txt`", ~S"""
@@ -219,7 +222,8 @@ defmodule RFD1086 do
     ```powershell
     .\scripts\sync-from-dgx.ps1          # 1) DGX docs/branding -> Surface, never src/
     # 2) Resolve any src/ conflict by hand; never blind-push
-    .\scripts\sync-changes-to-dgx.ps1 -RetryUntilComplete   # 3) only if the Surface's src/ is the truth
+    .\scripts\sync-changes-to-dgx.ps1 -RetryUntilComplete   # 3) only if the Surface's src/ is the
+    truth
     ```
 
     ### Backup

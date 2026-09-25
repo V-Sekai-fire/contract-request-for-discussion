@@ -9,7 +9,9 @@ defmodule RFD1115 do
   rfd 1115, "VRM animation playback, one mixer, normalized bones" do
     state :committed
 
-    scope "`animationManager.js`, `loadMixamoAnimation.js`,\n`kimodoMotionLoader.js`, `vrmMixamoPlaybackGuard.js`,\n`viewportExpressionVrm.js`, `studioAnimations.js`"
+    scope "`animationManager.js`, `loadMixamoAnimation.js`,
+`kimodoMotionLoader.js`, `vrmMixamoPlaybackGuard.js`,
+`viewportExpressionVrm.js`, `studioAnimations.js`"
 
     attest_in :none
 

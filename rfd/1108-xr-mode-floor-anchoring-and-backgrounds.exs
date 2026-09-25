@@ -88,7 +88,8 @@ defmodule RFD1108 do
     details "Floor anchoring, model bottom to Y=0", ~S"""
     On entering either VR or AR:
 
-    1. Create an XR wrapper group (`VRSceneWrapper` or `ARSceneWrapper`) holding only model content, never lights, cameras, or helpers.
+    1. Create an XR wrapper group (`VRSceneWrapper` or `ARSceneWrapper`) holding only model
+    content, never lights, cameras, or helpers.
     2. Compute the model's bounding box and its bottom: `modelBottomY = boundingBox.min.y`.
     3. Compute the floor alignment: `floorAlignmentY = -modelBottomY`.
     4. Set the wrapper's position: `x = 0`, `y = floorAlignmentY`, `z = -0.5`.

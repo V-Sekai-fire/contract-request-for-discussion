@@ -11,7 +11,9 @@ defmodule RFD2167 do
 
     flight_level :l1
 
-    feature "distill the wavlm_cos + voxtral_wer scoring signal from\nRFD 2164.3 into a fast reward model usable in RL fine-tuning of voice\nmodels. Parallels EditScore for image edits."
+    feature "distill the wavlm_cos + voxtral_wer scoring signal from
+RFD 2164.3 into a fast reward model usable in RL fine-tuning of voice
+models. Parallels EditScore for image edits."
 
     scope "`6-datasource/anny-render-corpus`"
 

@@ -9,9 +9,13 @@ defmodule RFD2256 do
   rfd 2256, "WebTransport inside a sandbox guest" do
     state :ideation
 
-    feature "A godot-sandbox guest carries bulk game traffic over QUIC,\nHTTP/3 and WebTransport at binary-translated speed, and the first\nchannel it carries mints tokens from a key the host never sees"
+    feature "A godot-sandbox guest carries bulk game traffic over QUIC,
+HTTP/3 and WebTransport at binary-translated speed, and the first
+channel it carries mints tokens from a key the host never sees"
 
-    scope "a godot-sandbox guest ELF running the QUIC stack, the zone\nserver and clients that host it, and a token-minting channel as\nits first user; nothing is built yet"
+    scope "a godot-sandbox guest ELF running the QUIC stack, the zone
+server and clients that host it, and a token-minting channel as
+its first user; nothing is built yet"
 
     decision ~S"""
     QUIC, HTTP/3 and WebTransport run inside a RISC-V guest ELF that

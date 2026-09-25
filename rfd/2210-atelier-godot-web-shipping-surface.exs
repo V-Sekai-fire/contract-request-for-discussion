@@ -11,9 +11,11 @@ defmodule RFD2210 do
 
     flight_level :l2
 
-    feature "the atelier ships as one native Godot binary per platform;\none runtime, two heads (interactive + headless capture)"
+    feature "the atelier ships as one native Godot binary per platform;
+one runtime, two heads (interactive + headless capture)"
 
-    scope "`3-interactor/entities-godot-sandbox`, `2-contract/ggml`,\nL2 fanout at RFDs 2211/2214/2215/2216, adapter shape at RFD 2230"
+    scope "`3-interactor/entities-godot-sandbox`, `2-contract/ggml`,
+L2 fanout at RFDs 2211/2214/2215/2216, adapter shape at RFD 2230"
 
     decision ~S"""
     One runtime, one binary per platform (macOS / Windows / Linux) from

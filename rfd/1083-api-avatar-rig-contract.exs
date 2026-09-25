@@ -118,8 +118,10 @@ defmodule RFD1083 do
 
     `3DAIGC-API/scripts/blender/apply_humanoid_template_rig.py`:
 
-    1. Uniform-scale from the armature's bone span to the target mesh height (Blender Z-up, after the glTF import).
-    2. Yaw or flip the armature to face glTF -Z, before parenting; this step must not rotate the skinned mesh.
+    1. Uniform-scale from the armature's bone span to the target mesh height (Blender Z-up, after
+    the glTF import).
+    2. Yaw or flip the armature to face glTF -Z, before parenting; this step must not rotate the
+    skinned mesh.
     3. Move the foot bones to the mesh floor (the minimum Z, in Blender).
     4. Center on Blender's XY ground plane.
     5. Envelope the skin, then export the GLB with `export_apply=True`.

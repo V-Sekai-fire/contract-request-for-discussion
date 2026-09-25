@@ -9,9 +9,11 @@ defmodule RFD2252 do
   rfd 2252, "the llm module splits across cards and drafts" do
     state :discussion
 
-    feature "`modules/llm` carries the split, batch, drafter and jinja\nknobs a Gemma4-31B QAT recipe on 4090 + 3090 needs for 220 tok/s"
+    feature "`modules/llm` carries the split, batch, drafter and jinja
+knobs a Gemma4-31B QAT recipe on 4090 + 3090 needs for 220 tok/s"
 
-    scope "`4-entities/godot-language-model/modules/llm`: `LLMContext`,\n`LLMModel`, a new `LLMDraft`, `LLMChat`. No llama.cpp change."
+    scope "`4-entities/godot-language-model/modules/llm`: `LLMContext`,
+`LLMModel`, a new `LLMDraft`, `LLMChat`. No llama.cpp change."
 
     decision ~S"""
     Ten properties land. `LLMModel` gains `split_mode`, `main_gpu`
@@ -135,7 +137,8 @@ defmodule RFD2252 do
     not the ceiling. Four rungs beyond it, each one a smaller step
     and a narrower assumption. The multipliers compound against
     rung 4; where a rung already has a measured multiplier it is
-    cited, and where it does not the rung is marked projected with the assumption stated. Rung 8 sits at roughly twice rung 4,
+    cited, and where it does not the rung is marked projected with the assumption stated. Rung 8
+    sits at roughly twice rung 4,
     and the second half of the ladder is what buys that factor.
 
     | rung | config | knob | tok/s | source |

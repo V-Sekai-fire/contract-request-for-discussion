@@ -9,7 +9,8 @@ defmodule RFD2161 do
   rfd 2161, "Cleanroom Gemma-Avatar as a visual novel, on MaskScore" do
     state :discussion
 
-    feature "VN with location travel and prompt-driven talking-head\ninteractions, cleanroom-rebuilt on the RFD 1173 stack"
+    feature "VN with location travel and prompt-driven talking-head
+interactions, cleanroom-rebuilt on the RFD 1173 stack"
 
     scope "taskweft, taskweft-godot-sandbox"
 

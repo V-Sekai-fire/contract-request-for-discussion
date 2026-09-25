@@ -9,7 +9,8 @@ defmodule RFD1113 do
   rfd 1113, "Image preview stays 250px, the expand modal stays separate" do
     state :committed
 
-    scope "`src/components/expandedImagePreview.css`,\n`ImagePanelPreview.{css,jsx}`, `TextureExtractor.css`"
+    scope "`src/components/expandedImagePreview.css`,
+`ImagePanelPreview.{css,jsx}`, `TextureExtractor.css`"
 
     attest_in :none
 

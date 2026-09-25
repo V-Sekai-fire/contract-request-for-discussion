@@ -11,9 +11,15 @@ defmodule RFD2207 do
 
     state :discussion
 
-    feature "shipped demos and artifacts pick a named FOSS design\npalette (Nord as the default, Solarized / Catppuccin / Tokyo Night\n/ Rose Pine / Gruvbox as acceptable peers) rather than the warm\namber-on-panel look that Claude artifacts default to"
+    feature "shipped demos and artifacts pick a named FOSS design
+palette (Nord as the default, Solarized / Catppuccin / Tokyo Night
+/ Rose Pine / Gruvbox as acceptable peers) rather than the warm
+amber-on-panel look that Claude artifacts default to"
 
-    scope "every shipped browser demo under `7-service/*/docs/` and\nevery Artifact this workspace publishes as a deliverable; the same\nrule does not bind private one-shot artifacts an operator uses to\ninspect an intermediate"
+    scope "every shipped browser demo under `7-service/*/docs/` and
+every Artifact this workspace publishes as a deliverable; the same
+rule does not bind private one-shot artifacts an operator uses to
+inspect an intermediate"
 
     decision ~S"""
     A demo or artifact that ships as a reviewable surface picks one of

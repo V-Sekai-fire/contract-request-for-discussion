@@ -11,7 +11,8 @@ defmodule RFD1149 do
 
     feature "the toon material and how it renders"
 
-    scope "`6-datasource/anny-render-corpus/mtoon.py`,\n`mtoon_forward.py`, `mtoon.slang`, `check_mtoon_reference.py`"
+    scope "`6-datasource/anny-render-corpus/mtoon.py`,
+`mtoon_forward.py`, `mtoon.slang`, `check_mtoon_reference.py`"
 
     attest_in :none
 
@@ -105,7 +106,8 @@ defmodule RFD1149 do
     | wide forward, Dr.Jit, llvm_ad_rgb | 40.6 | 0.337 s | yes |
 
     The deferred path silently dropped the shadow ray, which is the whole reason the test shape is
-    an abacus rather than a sphere: a convex shape cannot occlude itself. So it was slower AND lost
+    an abacus rather than a sphere: a convex shape cannot occlude itself. So it was slower AND
+    lost
     the thing the shape was chosen for.
     """
 

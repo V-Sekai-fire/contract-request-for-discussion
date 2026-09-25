@@ -11,9 +11,12 @@ defmodule RFD2253 do
 
     flight_level :l2
 
-    feature "a character creator a person opens: sliders over the baked ANNY\nasset in the one Godot binary, exporting the shuttle that\nRFD 2251's chain consumes"
+    feature "a character creator a person opens: sliders over the baked ANNY
+asset in the one Godot binary, exporting the shuttle that
+RFD 2251's chain consumes"
 
-    scope "`4-entities/anny-creator`, a Godot project the RFD 2239 binary runs;\nthe baked ANNY asset; RFD 2251's `rig` through `render`"
+    scope "`4-entities/anny-creator`, a Godot project the RFD 2239 binary runs;
+the baked ANNY asset; RFD 2251's `rig` through `render`"
 
     decision ~S"""
     The creator is RFD 2251's second front door: where 2251 hands the

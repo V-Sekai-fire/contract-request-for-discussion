@@ -11,9 +11,11 @@ defmodule RFD1175 do
 
     flight_level :l2
 
-    feature "one native binary that is both the interactive demo and\nthe video head that records it"
+    feature "one native binary that is both the interactive demo and
+the video head that records it"
 
-    scope "`3-interactor/entities-godot-sandbox`; every part the\natelier ships lands in this binary"
+    scope "`3-interactor/entities-godot-sandbox`; every part the
+atelier ships lands in this binary"
 
     attest_in :none
 

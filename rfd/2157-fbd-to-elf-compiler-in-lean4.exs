@@ -9,7 +9,8 @@ defmodule RFD2157 do
   rfd 2157, "Lean 4 FBD -> RISC-V ELF compiler" do
     state :prediscussion
 
-    feature "RECTGTN in IEC 61131-3 FBD (PLCopen XML) -> RISC-V ELF\ngodot-sandbox loads. Spirit of UdonSharp and SafeGDScript."
+    feature "RECTGTN in IEC 61131-3 FBD (PLCopen XML) -> RISC-V ELF
+godot-sandbox loads. Spirit of UdonSharp and SafeGDScript."
 
     scope "new `3-interactor/taskweft-fbd-compiler` (Lean 4)"
 

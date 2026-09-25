@@ -13,9 +13,16 @@ defmodule RFD2243 do
 
     flight_level :l2
 
-    feature "the enumeration of what blocks one `gitassembly` cycle\nfrom completing, parked as a record. The measured answer inverts the\nquestion: a git-assembler cycle completes unattended today. What\nremains blocked is the Elixir reimplementation, and separately the\ncorrectness of a tree that a completing cycle does not check."
+    feature "the enumeration of what blocks one `gitassembly` cycle
+from completing, parked as a record. The measured answer inverts the
+question: a git-assembler cycle completes unattended today. What
+remains blocked is the Elixir reimplementation, and separately the
+correctness of a tree that a completing cycle does not check."
 
-    scope "`4-entities/entities-assembly` (`gitassembly`,\n`update_godot_v_sekai.exs`, `lib/assembler/`), the\n`V-Sekai-fire/egit` fork, and `entities-godot`'s\n`.github/CODEOWNERS` as assembled"
+    scope "`4-entities/entities-assembly` (`gitassembly`,
+`update_godot_v_sekai.exs`, `lib/assembler/`), the
+`V-Sekai-fire/egit` fork, and `entities-godot`'s
+`.github/CODEOWNERS` as assembled"
 
     decision ~S"""
     Operator, 2026-09-10, answering "which cycle should the blockers

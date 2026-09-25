@@ -95,19 +95,37 @@ defmodule RFD2188 do
 
     ### 331b9cba resolution
 
-    The first close-out claimed the template mechanism had been restructured and dk16/dk56 could not be added. That was wrong. The template shape on consolidated matches sam3 exactly; adding two head-dim slots was a mechanical change once the vec dispatch was ruled out.
+    The first close-out claimed the template mechanism had been restructured and dk16/dk56 could
+    not be added. That was wrong. The template shape on consolidated matches sam3 exactly; adding
+    two head-dim slots was a mechanical change once the vec dispatch was ruled out.
 
-    PR https://github.com/weftspun/ggml/pull/1 adds 16 template instantiations (dk16, dk56 × 8 K/V dtypes) plus 2 entries in the head-size whitelist in supports_op. Vec templates omitted because `ggml_metal_op_flash_attn_ext_use_vec` gates on `ne00 % 32 == 0`, which excludes 16 and 56. **Merged 2026-09-03.**
+    PR https://github.com/weftspun/ggml/pull/1 adds 16 template instantiations (dk16, dk56 × 8 K/V
+    dtypes) plus 2 entries in the head-size whitelist in supports_op. Vec templates omitted
+    because `ggml_metal_op_flash_attn_ext_use_vec` gates on `ne00 % 32 == 0`, which excludes 16
+    and 56. **Merged 2026-09-03.**
 
-    **Verified on Apple M2 Pro.** `test-backend-ops`'s default FLASH\_ATTN\_EXT generator loops hsk over `{ 40, 64, 72, 80, 96, 128, 192, 256, 320, 512, 576 }`, no 16 and no 56. With 16 added test cases enumerating hsk=16 and hsk=56 across all 8 K/V dtypes and `-b MTL0`: **4768/4768 tests passed** against the CPU reference (baseline 4752 + 16 new = 4768), and the Metal pipeline compile log confirmed the new kernels were actually reached: `kernel_flash_attn_ext_{f16,f32,bf16}_dk{16,56}_dv{16,56}`. Wall clock 49 s.
+    **Verified on Apple M2 Pro.** `test-backend-ops`'s default FLASH\_ATTN\_EXT generator loops
+    hsk over `{ 40, 64, 72, 80, 96, 128, 192, 256, 320, 512, 576 }`, no 16 and no 56. With 16
+    added test cases enumerating hsk=16 and hsk=56 across all 8 K/V dtypes and `-b MTL0`:
+    **4768/4768 tests passed** against the CPU reference (baseline 4752 + 16 new = 4768), and the
+    Metal pipeline compile log confirmed the new kernels were actually reached:
+    `kernel_flash_attn_ext_{f16,f32,bf16}_dk{16,56}_dv{16,56}`. Wall clock 49 s.
 
-    Household anchor: this is a build+test on the same M2 Pro that runs the rest of the desk. The "no Metal build+run capability" caveat that appeared in the first PR body was wrong and has been retracted from the PR body it stood in.
+    Household anchor: this is a build+test on the same M2 Pro that runs the rest of the desk. The
+    "no Metal build+run capability" caveat that appeared in the first PR body was wrong and has
+    been retracted from the PR body it stood in.
 
     The `sam3-metal-ops` branch stays for archaeology.
 
     ### Correction the record keeps
 
-    The first close-out was too fast. Two claims failed the same test: "the newer surface restructured the target" was said without reading whether the restructure actually broke the port. The re-investigation kept the same three intents already-covered verdicts, added the WIN\_PART/WIN\_UNPART deferral (which the first pass called "not clearly needed" without evidence), and reversed the dk16/dk56 verdict from "not portable" to "portable with 18 lines." The verdicts moved because they were re-measured; the retraction stays here rather than being tidied out.
+    The first close-out was too fast. Two claims failed the same test: "the newer surface
+    restructured the target" was said without reading whether the restructure actually broke the
+    port. The re-investigation kept the same three intents already-covered verdicts, added the
+    WIN\_PART/WIN\_UNPART deferral (which the first pass called "not clearly needed" without
+    evidence), and reversed the dk16/dk56 verdict from "not portable" to "portable with 18 lines."
+    The verdicts moved because they were re-measured; the retraction stays here rather than being
+    tidied out.
     """
 
     details "Compatibility test matrix", ~S"""

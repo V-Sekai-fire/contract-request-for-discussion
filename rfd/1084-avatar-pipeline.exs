@@ -135,7 +135,8 @@ defmodule RFD1084 do
 
     details "Tests", ~S"""
     ```bash
-    node node_modules/vitest/vitest.mjs run src/__tests__/avatarPipelineCatalog.test.js src/__tests__/taskManagerTemplateRig.test.js
+    node node_modules/vitest/vitest.mjs run src/__tests__/avatarPipelineCatalog.test.js
+    src/__tests__/taskManagerTemplateRig.test.js
     ```
     """
 

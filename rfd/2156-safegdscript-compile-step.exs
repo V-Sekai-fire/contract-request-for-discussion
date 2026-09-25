@@ -9,7 +9,8 @@ defmodule RFD2156 do
   rfd 2156, "SafeGDScript compile step for RECTGTN GDScript output" do
     state :discussion
 
-    feature "compile taskweft-emitted GDScript (RFD 2155) into a\nRISC-V ELF the Godot Sandbox (RFD 2154) loads"
+    feature "compile taskweft-emitted GDScript (RFD 2155) into a
+RISC-V ELF the Godot Sandbox (RFD 2154) loads"
 
     scope "taskweft (a `mix openplc.gd-compile` task) or a sidecar"
 

@@ -66,7 +66,8 @@ defmodule RFD2015 do
     """
 
     details "More Information", ~S"""
-    The one-concern-per-PR rule is the work-in-progress bound; the changelog and MADR practice is the compaction step.
+    The one-concern-per-PR rule is the work-in-progress bound; the changelog and MADR practice is
+    the compaction step.
     """
 
     drafted_by :ai

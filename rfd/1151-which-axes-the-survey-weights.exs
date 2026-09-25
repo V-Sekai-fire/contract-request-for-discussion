@@ -11,7 +11,8 @@ defmodule RFD1151 do
 
     feature "allocating corpus and clip time across axes"
 
-    scope "`6-datasource/anny-render-corpus/render_mtoon_frames.py`,\n`placeholder_cards.py`, `CORPUS_DESIGN.md`"
+    scope "`6-datasource/anny-render-corpus/render_mtoon_frames.py`,
+`placeholder_cards.py`, `CORPUS_DESIGN.md`"
 
     attest_in :none
 

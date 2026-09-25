@@ -11,7 +11,10 @@ defmodule RFD2163 do
 
     flight_level :l1
 
-    feature "MaskScore Text stub filled by prompting Gemma-4-12B on\neach (frame_a, frame_b) render pair. The instruction column becomes a\nmodel-devised description of the observed edit, ranked into 10\ncandidates per the RFD 1173 gradient scheme."
+    feature "MaskScore Text stub filled by prompting Gemma-4-12B on
+each (frame_a, frame_b) render pair. The instruction column becomes a
+model-devised description of the observed edit, ranked into 10
+candidates per the RFD 1173 gradient scheme."
 
     scope "`6-datasource/anny-render-corpus`"
 

@@ -9,7 +9,8 @@ defmodule RFD2146 do
   rfd 2146, "Bao is the secret store, cert-auth is the fence" do
     state :discussion
 
-    scope "the workspace's Bao instance and every consumer that\nalready presents a per-identity TLS leaf."
+    scope "the workspace's Bao instance and every consumer that
+already presents a per-identity TLS leaf."
 
     attest_in :details
 

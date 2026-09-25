@@ -11,16 +11,19 @@ defmodule RFD2184 do
 
     state :discussion
 
-    feature "GGUF Q4_K_M inference of OmniGen2 via stable-diffusion.cpp, with\nLean4 proofs certifying the ggml graph agrees with the PyTorch reference"
+    feature "GGUF Q4_K_M inference of OmniGen2 via stable-diffusion.cpp, with
+Lean4 proofs certifying the ggml graph agrees with the PyTorch reference"
 
-    scope "new project `3-interactor/omnigen2-sdcpp-port` (C++/ggml + Lean4);\nnew upstream mirror `3-interactor/stable-diffusion-cpp-upstream`"
+    scope "new project `3-interactor/omnigen2-sdcpp-port` (C++/ggml + Lean4);
+new upstream mirror `3-interactor/stable-diffusion-cpp-upstream`"
 
     decision ~S"""
     Add a Lumina2 block family to stable-diffusion.cpp, then compose the
     OmniGen2 DiT out of those blocks, then land the GGUF weight loader that
     maps `calcuis/omnigen2-gguf`'s Q4_K_M safetensors to ggml tensors.
 
-    `DETAILS.md` carries the milestones, verification, scope revisions and what is not in this RFD.
+    `DETAILS.md` carries the milestones, verification, scope revisions and what is not in this
+    RFD.
     """
 
     problem ~S"""

@@ -11,9 +11,11 @@ defmodule RFD2148 do
 
     state :prediscussion
 
-    feature "taskweft domains authored as compact IEC 60848 GRAFCET,\nlowered to HTN at load, driven over `2-contract/bus`"
+    feature "taskweft domains authored as compact IEC 60848 GRAFCET,
+lowered to HTN at load, driven over `2-contract/bus`"
 
-    scope "taskweft, taskweft-nmm-personas, and any future planner\ndomain that fits the propositional-with-parameters class"
+    scope "taskweft, taskweft-nmm-personas, and any future planner
+domain that fits the propositional-with-parameters class"
 
     decision ~S"""
     Author domains as compact IEC 60848 GRAFCET (SFC-shaped notation) in

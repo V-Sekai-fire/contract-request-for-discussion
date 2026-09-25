@@ -9,9 +9,12 @@ defmodule RFD2245 do
   rfd 2245, "WebGPU allowed inside Godot engine" do
     state :discussion
 
-    feature "carve-out on the WebGPU blocklist row: WebGPU is allowed\ninside a Godot engine fork; workspace deployment target stays Vulkan"
+    feature "carve-out on the WebGPU blocklist row: WebGPU is allowed
+inside a Godot engine fork; workspace deployment target stays Vulkan"
 
-    scope "`CLAUDE.md` (row cell unchanged), `BLOCKLIST.md`\n(section body amended), `weftspun-keypoint/default.xml` (add\nentities-webgpu fork alongside entities-godot)"
+    scope "`CLAUDE.md` (row cell unchanged), `BLOCKLIST.md`
+(section body amended), `weftspun-keypoint/default.xml` (add
+entities-webgpu fork alongside entities-godot)"
 
     decision ~S"""
     WebGPU is allowed as a RenderingDevice driver inside a Godot

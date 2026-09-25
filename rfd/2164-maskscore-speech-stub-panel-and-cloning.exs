@@ -11,7 +11,10 @@ defmodule RFD2164 do
 
     flight_level :l1
 
-    feature "MaskScore Speech stub filled along two axes -- a panel of\ndiverse ASR judges (12 tracks per audio) and a 10-rank ladder of\nvoice-cloned candidates. Together they cover the transcript and audio\ndimensions the reward model needs to score."
+    feature "MaskScore Speech stub filled along two axes -- a panel of
+diverse ASR judges (12 tracks per audio) and a 10-rank ladder of
+voice-cloned candidates. Together they cover the transcript and audio
+dimensions the reward model needs to score."
 
     scope "`6-datasource/anny-render-corpus`"
 

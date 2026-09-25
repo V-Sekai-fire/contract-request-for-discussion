@@ -175,7 +175,8 @@ defmodule RFD1173 do
     25x slower than the RFD 1170 presence-loop sub-500ms target. Block
     diffusion iterates to convergence across the full block; an
     autoregressive VLM streams from the first forward pass. The family
-    (LLaDA-o, iLLaDA, LLaDA-1.5) is blocklisted. The MaskScore technique transfers to Gemma-4-12B (or any VLM)
+    (LLaDA-o, iLLaDA, LLaDA-1.5) is blocklisted. The MaskScore technique transfers to Gemma-4-12B
+    (or any VLM)
     without change. Masking operates on latents, not on the model that
     fills them.
     """

@@ -9,7 +9,8 @@ defmodule RFD2215 do
   rfd 2215, "one binary, two heads" do
     state :discussion
 
-    feature "one runtime serves both the marketing video (headless\ncapture head) and the game (interactive head)"
+    feature "one runtime serves both the marketing video (headless
+capture head) and the game (interactive head)"
 
     scope "native binary entrypoints for both heads, CineForm video\nmuxing for the capture head"
 

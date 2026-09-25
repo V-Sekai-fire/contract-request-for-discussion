@@ -67,7 +67,8 @@ defmodule RFD1027 do
     | Wan-VACE 14B (image + video gen) |  bf16  |  ~28 GB |  ~8 GB  | 24 GB* |
     | OmniGen2                         |  bf16  |   ~4 GB |   ~4 GB | 24 GB |
 
-    *Wan-VACE at bf16 exceeds 24 GB total; runs staged (encoder/UNet/decoder freed in turn) with peak ~8 GB. No QAFT release upstream (RFD 2139 survey).
+    *Wan-VACE at bf16 exceeds 24 GB total; runs staged (encoder/UNet/decoder freed in turn) with
+    peak ~8 GB. No QAFT release upstream (RFD 2139 survey).
 
     ### 3D + rigging
 

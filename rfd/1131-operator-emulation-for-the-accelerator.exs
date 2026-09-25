@@ -147,7 +147,8 @@ defmodule RFD1131 do
     needed to be a tensor dimension: emit one small block per slot and `Concat`. More nodes, all
     of them measured passing.
 
-    **Watch the numerics, not just the parse.** `max(a,b) = (a+b+|a-b|)/2` cancels catastrophically
+    **Watch the numerics, not just the parse.** `max(a,b) = (a+b+|a-b|)/2` cancels
+    catastrophically
     when operands differ in magnitude, a `-1e30` padding sentinel returned `0.0` instead of
     `3.0`, and the error is about `eps * max(|a|,|b|)` absolute, so at float32 a large sentinel
     alone costs ~1e-3. And an `eps` inside `sqrt(t*t + eps)` biases the weight by `sqrt(eps)` at

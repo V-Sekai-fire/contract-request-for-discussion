@@ -69,8 +69,10 @@ defmodule RFD1104 do
 
     Passthrough policy, uploads only:
 
-    1. Facing (VRM0): `applyVrm0SceneForwardFix(vrm.scene)`, on the scene root only, when `forward.z > 0.5`.
-    2. Flags: set `vrm.scene.userData.vrmNormalized = true` and `vrm.scene.userData.vrmBindPassthrough = true`.
+    1. Facing (VRM0): `applyVrm0SceneForwardFix(vrm.scene)`, on the scene root only, when
+    `forward.z > 0.5`.
+    2. Flags: set `vrm.scene.userData.vrmNormalized = true` and
+    `vrm.scene.userData.vrmBindPassthrough = true`.
     3. No scale, center, floor snap, rebind, bone rename, or AIGC rig repair on upload.
 
     Log line: `[VRM] Upload passthrough, scene yaw only if needed; no
@@ -114,8 +116,10 @@ defmodule RFD1104 do
     `SceneManager.exportToVRM`.
 
     1. Rebind skinned meshes before the glTF parse, when `userData.vrm` or `vrmNormalized` is set.
-    2. Yaw only if the model's world-forward has `z > 0.5`, the same rule as upload; never a blind `rotateY(π)` on an already-correct upload.
-    3. Strip internal flags from the exported GLB: `vrmNormalized`, `preserveExportedOrientation`, `fromAigc`, and so on (`glbExportUtils.stripInternalExportUserData`).
+    2. Yaw only if the model's world-forward has `z > 0.5`, the same rule as upload; never a blind
+    `rotateY(π)` on an already-correct upload.
+    3. Strip internal flags from the exported GLB: `vrmNormalized`, `preserveExportedOrientation`,
+    `fromAigc`, and so on (`glbExportUtils.stripInternalExportUserData`).
     4. Restore the viewport quaternion after export, if a temporary yaw was applied.
 
     Round-trip test: export a multi-skin reference model, re-import it,
@@ -139,7 +143,8 @@ defmodule RFD1104 do
     1. Hard refresh the dev tab (`Ctrl+Shift+R`).
     2. Upload a multi-skin VRM0 reference model.
     3. Grep the remote log for `[VRM] Multi-skin layout` and the scene-root rotation line.
-    4. Solid mode: textures correct. Skeleton mode: eye bones on the eye mesh, finger joints on the finger mesh.
+    4. Solid mode: textures correct. Skeleton mode: eye bones on the eye mesh, finger joints on
+    the finger mesh.
     5. Export the VRM, re-import it, confirm the same alignment.
     """
 

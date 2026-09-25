@@ -11,9 +11,13 @@ defmodule RFD2204 do
 
     state :discussion
 
-    feature "peers pick their next work item by running the same RECTGTN\nquery against one shared fleet domain, rather than by reading prose\nrelayed from the coordinator"
+    feature "peers pick their next work item by running the same RECTGTN
+query against one shared fleet domain, rather than by reading prose
+relayed from the coordinator"
 
-    scope "every session that participates in the coordinate-agents\nceremony (RFD 2201); the Taskweft engine already in tree; a new\nfleet-domain document"
+    scope "every session that participates in the coordinate-agents
+ceremony (RFD 2201); the Taskweft engine already in tree; a new
+fleet-domain document"
 
     decision ~S"""
     Feed the Taskweft engine a **fleet domain**, a single JSON-LD

@@ -99,9 +99,11 @@ defmodule RFD1099 do
     bash scripts/sync-changes-to-pc.sh --retry-until-complete   # after edits, preferred
     bash scripts/sync-changes-to-pc.sh                          # changes only, one pass
     bash scripts/sync-to-pc.sh                                  # full sync, every DGX-owned path
-    bash scripts/sync-changes-to-pc.sh --include-src --retry-until-complete   # only when the DGX owned those src/ edits
+    bash scripts/sync-changes-to-pc.sh --include-src --retry-until-complete   # only when the DGX
+    owned those src/ edits
     bash scripts/sync-changes-to-pc.sh --include-agent-context --retry-until-complete
-    bash scripts/sync-cheatsheet-to-desktop.sh   # Desktop mirror, after a cheatsheet edit; also runs automatically when this file is part of the incremental sync
+    bash scripts/sync-cheatsheet-to-desktop.sh   # Desktop mirror, after a cheatsheet edit; also
+    runs automatically when this file is part of the incremental sync
     ```
 
     `sync-changes-to-pc.sh` reads `git status`, touching only changed
@@ -148,7 +150,8 @@ defmodule RFD1099 do
     Kill whatever holds port 3000, from the Surface (PowerShell):
 
     ```powershell
-    $pid = (Get-NetTCPConnection -LocalPort 3000 -State Listen).OwningProcess; Stop-Process -Id $pid -Force
+    $pid = (Get-NetTCPConnection -LocalPort 3000 -State Listen).OwningProcess; Stop-Process -Id
+    $pid -Force
     ```
 
     Debug URLs (replace the IP if it differs):
@@ -178,8 +181,10 @@ defmodule RFD1099 do
     From the DGX, over SSH to the Surface, running in the repository:
 
     ```bash
-    ssh Surface-PC-Tailscale "cd C:/Users/alfao/Documents/GitHub/Weftspun3DStudio && npm run test:anim-smoke"
-    ssh Surface-PC-Tailscale "cd C:/Users/alfao/Documents/GitHub/Weftspun3DStudio && set MOTION_JOB_ID=90cc20fe-da7d-4175-8601-f40e1819515e&& npm run test:bone-audit"
+    ssh Surface-PC-Tailscale "cd C:/Users/alfao/Documents/GitHub/Weftspun3DStudio && npm run
+    test:anim-smoke"
+    ssh Surface-PC-Tailscale "cd C:/Users/alfao/Documents/GitHub/Weftspun3DStudio && set
+    MOTION_JOB_ID=90cc20fe-da7d-4175-8601-f40e1819515e&& npm run test:bone-audit"
     ```
 
     A named reference rig, "Eagle Knight" (a SkinTokens GLB): job
@@ -406,14 +411,16 @@ defmodule RFD1099 do
     `outputs/worlds/<job_id>/`:
 
     ```bash
-    /home/sifr/3DAIGC-API/venv/bin/python /home/sifr/Weftspun3DStudio/scripts/dgx-rehydrate-world-job.py JOB_ID
+    /home/sifr/3DAIGC-API/venv/bin/python
+    /home/sifr/Weftspun3DStudio/scripts/dgx-rehydrate-world-job.py JOB_ID
     ```
 
     This re-registers the completed job in Redis, from the on-disk
     `world.manifest.json` and `environment.ply`. Verify with:
 
     ```bash
-    curl -sS -o /dev/null -w '%{http_code}\n' 'http://127.0.0.1:7842/api/v1/system/jobs/JOB_ID/download?asset=manifest'
+    curl -sS -o /dev/null -w '%{http_code}\n'
+    'http://127.0.0.1:7842/api/v1/system/jobs/JOB_ID/download?asset=manifest'
     ```
 
     Expect `200`. Use `3DAIGC-API`'s own venv Python; the system
@@ -422,7 +429,8 @@ defmodule RFD1099 do
     Query a job in the SQLite archive, on the DGX:
 
     ```bash
-    /home/sifr/3DAIGC-API/venv/bin/python /home/sifr/Weftspun3DStudio/scripts/dgx-query-job-sqlite.py JOB_ID
+    /home/sifr/3DAIGC-API/venv/bin/python
+    /home/sifr/Weftspun3DStudio/scripts/dgx-query-job-sqlite.py JOB_ID
     ```
 
     This prints `(job_id, status, feature)`, or `NOT_IN_SQLITE`; it is
@@ -511,7 +519,8 @@ defmodule RFD1099 do
       '{"mesh_path": "assets/example_uv/igea.obj", "output_format": "obj"}'
 
     # Retopology (needs the Instant Meshes binary)
-    python scripts/verify_model.py adapters.instant_meshes_adapter InstantMeshesRetopologyAdapter \
+    python scripts/verify_model.py adapters.instant_meshes_adapter InstantMeshesRetopologyAdapter
+    \
       '{"mesh_path": "assets/example_retopo/001.obj", "target_vertex_count": 2000}'
 
     # Segmentation (heavy GPU)
@@ -530,10 +539,13 @@ defmodule RFD1099 do
     """
 
     details "9. Avatar pipeline smoke test, on the DGX", ~S"""
-    1. Place a master rig: `cp /path/to/your/master.vrm /home/sifr/3DAIGC-API/assets/example_autorig/template.vrm`.
-    2. Download weights if needed: `cd /home/sifr/3DAIGC-API && ./scripts/download_models.sh -m triposplat`.
+    1. Place a master rig: `cp /path/to/your/master.vrm
+    /home/sifr/3DAIGC-API/assets/example_autorig/template.vrm`.
+    2. Download weights if needed: `cd /home/sifr/3DAIGC-API && ./scripts/download_models.sh -m
+    triposplat`.
     3. Restart the API (section 5).
-    4. In this project, on the Surface: either "Avatar from Image," upload a photo, and start; or "Image to 3D," load a mesh, then "Auto Rigging," rig mode "Template VRM."
+    4. In this project, on the Surface: either "Avatar from Image," upload a photo, and start; or
+    "Image to 3D," load a mesh, then "Auto Rigging," rig mode "Template VRM."
     """
 
     details "10. SessionMem and Memory Bank", ~S"""

@@ -107,19 +107,27 @@ defmodule RFD1130 do
             Moving it to a USB4 dock re-enumerated it from `usb/001:001` to `usb/001:009` and the
             warning stopped. Every figure above was taken after the move.
 
-            **The evidence is the absence of the firmware's own flag, not a power reading**, and the
+            **The evidence is the absence of the firmware's own flag, not a power reading**, and
+            the
             distinction is worth keeping. Neither direct route works: `measure-power` fails with
             `HAILO_OPEN_FILE_FAILURE(13)`, and `monitor`, whose help promises "on H10, presents
-            performance and health stats", reports it "is not supported on Windows". So temperature is
-            the only proxy available, and **this RFD should not promise a power figure it cannot take.**
+            performance and health stats", reports it "is not supported on Windows". So
+            temperature is
+            the only proxy available, and **this RFD should not promise a power figure it cannot
+            take.**
 
-            **The comparison that would have priced the limit is gone.** No throughput was taken at
-            1.5A before the move, so the cost of the power limit is unmeasured and only recoverable by
+            **The comparison that would have priced the limit is gone.** No throughput was taken
+            at
+            1.5A before the move, so the cost of the power limit is unmeasured and only
+            recoverable by
             plugging back in on purpose.
 
-            **Backfilled 2026-08-29: throughput at 1.5A now exists, and it is the same.** A frame ladder
-            of raw uint8 transport, a 1x1 convolution, so the compute is negligible, leaving the number as
-            the link, was run at pipeline depth 4 across three different ports, each advertising 1.5A:
+            **Backfilled 2026-08-29: throughput at 1.5A now exists, and it is the same.** A frame
+            ladder
+            of raw uint8 transport, a 1x1 convolution, so the compute is negligible, leaving the
+            number as
+            the link, was run at pipeline depth 4 across three different ports, each advertising
+            1.5A:
 
                 frame    in MB   out MB   ms/frame   frames/s   MB/s
                 512p      1.05     0.26      4.83       207       272
@@ -127,47 +135,66 @@ defmodule RFD1130 do
                 1080p     8.29     2.07     33.59        29       302
                 4K       33.18     8.29    144.80         7       286
 
-            The link plateaus at ~285-300 MB/s and holds there across a 32x range of frame sizes, and
-            across `usb/004:013`, `usb/001:001` and `usb/004:001` the 4K figure reproduced to within
-            0.07%. So the 1.5A ports do not differ from each other, and the ~176 MB/s this RFD measured
-            for the keypoint model sits comfortably under that ceiling, which is why that model never
+            The link plateaus at ~285-300 MB/s and holds there across a 32x range of frame sizes,
+            and
+            across `usb/004:013`, `usb/001:001` and `usb/004:001` the 4K figure reproduced to
+            within
+            0.07%. So the 1.5A ports do not differ from each other, and the ~176 MB/s this RFD
+            measured
+            for the keypoint model sits comfortably under that ceiling, which is why that model
+            never
             felt the limit. **The power question is still open**: every port reached on this desk
-            advertised 1.5A, so a run at 3.0A remains untaken and the plateau is a 1.5A number until one
-            is. What is now closed is the within-1.5A comparison the paragraph above called unrecoverable.
+            advertised 1.5A, so a run at 3.0A remains untaken and the plateau is a 1.5A number
+            until one
+            is. What is now closed is the within-1.5A comparison the paragraph above called
+            unrecoverable.
 
             **Two software knobs that did not move it.** `HAILO_POWER_MODE_ULTRA_PERFORMANCE` and
-            `VDevice::dma_map` on the caller's frame buffer were each measured at 4K, depth 4, against a
-            baseline: 145.8 ms, ultra 146.2 ms, DMA-mapped 144.1 ms, both 146.7 ms, all within 1.5%,
-            which is noise. The bounce copy DMA mapping removes is a 33 MB `memcpy` at 25.7 GB/s, 1.29 ms,
-            0.9% of a frame's 145 ms. At this link speed the copy is not the cost, so zero-copy transport
+            `VDevice::dma_map` on the caller's frame buffer were each measured at 4K, depth 4,
+            against a
+            baseline: 145.8 ms, ultra 146.2 ms, DMA-mapped 144.1 ms, both 146.7 ms, all within
+            1.5%,
+            which is noise. The bounce copy DMA mapping removes is a 33 MB `memcpy` at 25.7 GB/s,
+            1.29 ms,
+            0.9% of a frame's 145 ms. At this link speed the copy is not the cost, so zero-copy
+            transport
             buys under one percent and its value here is multi-process topology, not throughput.
 
             **Pipelining is where the bus idle time converts to rate.** Queueing frames through
-            `run_async` instead of one synchronous call climbed 724 -> 2094 FPS on a 16 KB block, 2.89x,
-            and flattened exactly at the device's own reported async queue depth of 32. That isolates
-            ~0.9 ms of the 1.38 ms single-shot latency as USB round trip, the same crossing this RFD
+            `run_async` instead of one synchronous call climbed 724 -> 2094 FPS on a 16 KB block,
+            2.89x,
+            and flattened exactly at the device's own reported async queue depth of 32. That
+            isolates
+            ~0.9 ms of the 1.38 ms single-shot latency as USB round trip, the same crossing this
+            RFD
             priced at 1.68 ms for the larger keypoint frame.
             """
 
     details "The controlled-input path needed a shim, and the flat C API does not work on H10",
             ~S"""
             `hailortcli` generates its own random inputs and dumps no outputs, so it cannot answer
-            whether a host-side change reaches the device. HailoRT's flat C API is exported and binds
-            cleanly, all 17 declarations in `hailo/hailort.sigs` resolve against `libhailort.dll` --
+            whether a host-side change reaches the device. HailoRT's flat C API is exported and
+            binds
+            cleanly, all 17 declarations in `hailo/hailort.sigs` resolve against `libhailort.dll`
+            --
             and the Hailo-10H **rejects it**:
 
                 hailo_init_configure_params_by_vdevice -> HAILO_NOT_IMPLEMENTED(7)
                 [HailoRT] [error] Did you try calling create_configure_params on H10?
                                   If so, use InferModel instead
 
-            `InferModel` returns `Expected<std::shared_ptr<InferModel>>`, which ctypes cannot call, and
-            the DLL exports no `extern "C"` entry points for it, 245 mangled C++ symbols and no flat
-            ones. `hailo_platform`, Hailo's Python bindings, are not on PyPI and are not shipped with
+            `InferModel` returns `Expected<std::shared_ptr<InferModel>>`, which ctypes cannot
+            call, and
+            the DLL exports no `extern "C"` entry points for it, 245 mangled C++ symbols and no
+            flat
+            ones. `hailo_platform`, Hailo's Python bindings, are not on PyPI and are not shipped
+            with
             the HailoRT 5.3.2 Windows install: `lib/` holds `libhailort.lib` and cmake files only.
 
             So `hailort_shim.cpp` wraps `InferModel` in six `extern "C"` functions, declared in
             `hailort_shim.sigs` and bound by `sigs_ctypes.py`, the same declarative-ABI convention
-            this workspace uses for `iceoryx2.sigs` and `openvr_api.sigs`. 178 KB, built with clang++
+            this workspace uses for `iceoryx2.sigs` and `openvr_api.sigs`. 178 KB, built with
+            clang++
             against `libhailort.lib`.
 
             With it, on `efficientnet_lite0`:

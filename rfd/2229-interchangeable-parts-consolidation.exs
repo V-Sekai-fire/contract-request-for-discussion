@@ -13,9 +13,13 @@ defmodule RFD2229 do
 
     flight_level :l3
 
-    feature "codify the interchangeable-parts directive from\n2026-09-05 as workspace policy plus name the concrete candidates\nalready visible in the goal manifest"
+    feature "codify the interchangeable-parts directive from
+2026-09-05 as workspace policy plus name the concrete candidates
+already visible in the goal manifest"
 
-    scope "`weftspun-keypoint/default.xml` (goal manifest), all\nfuture RFDs that add a new module / fork / build fragment /\nloader path, memory `consolidate-interchangeable-parts`"
+    scope "`weftspun-keypoint/default.xml` (goal manifest), all
+future RFDs that add a new module / fork / build fragment /
+loader path, memory `consolidate-interchangeable-parts`"
 
     decision ~S"""
     Operator directive 2026-09-05, verbatim: *"like ford's factories

@@ -47,7 +47,8 @@ defmodule RFD2121 do
 
     details "The prefix survives in five live names", ~S"""
     ```sh
-    gh api "orgs/v-sekai-multiplayer-fabric/repos?per_page=100" --paginate --jq '.[].name' | grep '^fabric-'
+    gh api "orgs/v-sekai-multiplayer-fabric/repos?per_page=100" --paginate --jq '.[].name' | grep
+    '^fabric-'
     ```
 
     Fifteen names carry the prefix. The bare `fabric` is the sixteenth match for
@@ -185,7 +186,8 @@ defmodule RFD2121 do
     Three of the five carry no README at all, which is the larger half of this gap:
 
     ```sh
-    for d in entities-lean-*; do printf '%-28s %s\n' "$d" "$(git -C "$d" ls-files | grep -ci readme)"; done
+    for d in entities-lean-*; do printf '%-28s %s\n' "$d" "$(git -C "$d" ls-files | grep -ci
+    readme)"; done
     # entities-lean-combat       0
     # entities-lean-loot         0
     # entities-lean-progression  0

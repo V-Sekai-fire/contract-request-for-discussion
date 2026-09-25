@@ -9,9 +9,12 @@ defmodule RFD2250 do
   rfd 2250, "cloth-fit ships as one Burrito binary" do
     state :discussion
 
-    feature "cloth-fit ships as a single self-contained Elixir Burrito CLI\nthat drives the PolyFEM garment solver over OpenUSD, with no runtime\ntoolchain on the target"
+    feature "cloth-fit ships as a single self-contained Elixir Burrito CLI
+that drives the PolyFEM garment solver over OpenUSD, with no runtime
+toolchain on the target"
 
-    scope "`V-Sekai-fire/cloth-fit`, `fabric-stage-runtime` and its\n`stage_runtime` Hex package, and the four build triplets"
+    scope "`V-Sekai-fire/cloth-fit`, `fabric-stage-runtime` and its
+`stage_runtime` Hex package, and the four build triplets"
 
     decision ~S"""
     One binary per triplet, carrying its own native artifacts. The C++

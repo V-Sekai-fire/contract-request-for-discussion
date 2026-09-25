@@ -75,7 +75,8 @@ defmodule RFD1088 do
     details "Option 3: manual certificate generation", ~S"""
     ```bash
     mkdir certs
-    openssl req -x509 -newkey rsa:4096 -keyout certs/localhost-key.pem -out certs/localhost.pem -days 365 -nodes -subj "/C=US/ST=State/L=City/O=Organization/CN=localhost"
+    openssl req -x509 -newkey rsa:4096 -keyout certs/localhost-key.pem -out certs/localhost.pem
+    -days 365 -nodes -subj "/C=US/ST=State/L=City/O=Organization/CN=localhost"
     ```
 
     Restart the dev server; Vite picks up the certificates
@@ -98,7 +99,8 @@ defmodule RFD1088 do
     details "Troubleshooting", ~S"""
     - Certificate errors: confirm the certificates sit in `certs/`, with the exact expected names.
     - Connection refused: check firewall settings, and confirm port 3000 is open.
-    - WebXR still not working: confirm HTTPS, not HTTP, and confirm the certificate warning was accepted.
+    - WebXR still not working: confirm HTTPS, not HTTP, and confirm the certificate warning was
+    accepted.
     """
 
     drafted_by :ai

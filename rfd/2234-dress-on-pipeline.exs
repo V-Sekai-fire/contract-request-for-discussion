@@ -139,7 +139,8 @@ defmodule RFD2234 do
 
     details "Pipeline, per target", ~S"""
     ```
-    identity seed ──► [anny env] anny_body.py ──► body.glb, mask_front.glb, mask_back.glb, phenotype.json
+    identity seed ──► [anny env] anny_body.py ──► body.glb, mask_front.glb, mask_back.glb,
+    phenotype.json
                                                        │
     garment row ──► [matting env] mask_offline.py ──► front/back .alpha.png
                                                        │
@@ -185,7 +186,8 @@ defmodule RFD2234 do
     - ANNY is known to work on torch 2.11+cu128 (the mujoco env already runs it).
 
     ### `tools/anny_body.py` (anny env), identity → body.glb + mask.glb
-    - Build the model with `anny.Anny(rig="anny", topology="anny", phenotypes="all", local_changes="default", skinning_method="lbs")`
+    - Build the model with `anny.Anny(rig="anny", topology="anny", phenotypes="all",
+    local_changes="default", skinning_method="lbs")`
      , the same `CORPUS_CONFIG` as `6-datasource/anny-render-corpus/anny_rig.py:78-80`,
       minus `facial_actions` and minus the corpus's forearm twist fix (not wanted here).
     - Phenotypes come from `tools/identity_appendix_e.py` (below), which returns
@@ -208,7 +210,8 @@ defmodule RFD2234 do
       `trimesh.creation.box` volumes → same unit transform → `mask_front.glb`,
       `mask_back.glb`. Store the 8 corners of each box in `phenotype.json` so the
       2D projection step needs no re-parse of the GLB.
-    - Export with `trimesh.Scene().export("*.glb")`, `anny/src/anny/examples/interactive_demo.py:84-102`.
+    - Export with `trimesh.Scene().export("*.glb")`,
+    `anny/src/anny/examples/interactive_demo.py:84-102`.
       No skeleton, no UVs: VoxHammer flattens to a static mesh and deletes all
       materials (`bpy_render.py:93-94, 166-171`), so static geometry is exactly right.
     - Emits `phenotype.json` (seed, 11 floats, anny version SHA) for the row.
@@ -322,7 +325,9 @@ defmodule RFD2234 do
       `scene.integrator = path`, film `rgba`, `sensor.film.pixel_format = "rgba"`,
       no envmap emitter behind the object; a constant emitter for the three-point
       fill that `bpy_render.py:112-134` hard-codes.
-    - `transforms.json`, `{"aabb": [[-0.5]*3, [0.5]*3], "scale": s, "offset": [ox,oy,oz], "frames": [{"file_path": "NNN.png", "camera_angle_x": 0.6981 (40° in rad), "transform_matrix": c2w}]}`
+    - `transforms.json`, `{"aabb": [[-0.5]*3, [0.5]*3], "scale": s, "offset": [ox,oy,oz],
+    "frames": [{"file_path": "NNN.png", "camera_angle_x": 0.6981 (40° in rad), "transform_matrix":
+    c2w}]}`
       where `c2w` is in the **Blender/OpenGL convention**, camera looks down its
       −Z with +Y up, because line 49 flips columns 1:3 to reach OpenCV before
       inverting. Build it from `mi.ScalarTransform4f.look_at(origin, target=(0,0,0), up=(0,0,1))`
@@ -458,10 +463,13 @@ defmodule RFD2234 do
     ```
     key string ("dress_on/<identity_key>/<garment_id>")
     task_type, dimension, input_column, input_asset, input_asset_kind   (register vocab)
-    identity_source, target_stature_m, achieved_stature_m, target_mass_kg, achieved_mass_kg, unmapped_measurements
+    identity_source, target_stature_m, achieved_stature_m, target_mass_kg, achieved_mass_kg,
+    unmapped_measurements
     pheno_gender … pheno_caucasian (11 × float32)   ← also the SOMA-X identity vector
-    garment_id, garment_source, garment_front, garment_back, garment_brand, matted_front, matted_back
-    mask_front_glb, mask_back_glb, hammersley_seed_front, hammersley_seed_back, view_index_front, view_index_back
+    garment_id, garment_source, garment_front, garment_back, garment_brand, matted_front,
+    matted_back
+    mask_front_glb, mask_back_glb, hammersley_seed_front, hammersley_seed_back, view_index_front,
+    view_index_back
     composite_method, voxhammer_config
     body_provenance, garment_provenance      (interned provenance classes)
     ```
@@ -482,7 +490,8 @@ defmodule RFD2234 do
     (candidate, judge): `(row_key, candidate, judge_base, judge_adapter, judge_precision,
     judge_num_pass, prompt_sha, instruction, overall, refused)`, the record
     `score_edits.py:154-163` already emits. Judge = EditScore (Apache-2,
-    `omnigen2/OmniGen2-RL`; `EditScore(backbone="qwen3vl", …, score_range=25).evaluate([src, edited], instruction)`),
+    `omnigen2/OmniGen2-RL`; `EditScore(backbone="qwen3vl", …, score_range=25).evaluate([src,
+    edited], instruction)`),
     fed the front `render_2d` and the candidate's front render with the instruction
     "dress this body in the garment shown" plus the garment photo. Frozen-judge
     doctrine: the (base, adapter, precision, num_pass, prompt) tuple is pinned before
@@ -649,7 +658,8 @@ defmodule RFD2234 do
       on the writer**: swapping rank1's asset for rank5's must make the emit exit
       non-zero on the negative control.
     - **Step 6** viewer screenshot of the throwaway repo showing the join.
-    - **Step 7** read-back: `HfApi().list_repo_files` shows `data/dress_on/train-00000-of-00001.parquet`
+    - **Step 7** read-back: `HfApi().list_repo_files` shows
+    `data/dress_on/train-00000-of-00001.parquet`
       plus the four satellites and the referenced assets;
       `load_dataset("chibifire/anny-dress-on-stage-train", "dress_on")` returns 10 rows,
       each with 3 candidates.
@@ -660,7 +670,8 @@ defmodule RFD2234 do
     details "Delivery after the edit: SOMA-X correctives, no twist bones (follow-on, not this pass)",
             ~S"""
             The dressed body leaves VoxHammer as a static mesh. Making it an animatable
-            avatar is the step the operator's "ANNY-SOMAX-PHENOTYPES-CORRECTIVE-BLENDSHAPES-TWISTBONES"
+            avatar is the step the operator's
+            "ANNY-SOMAX-PHENOTYPES-CORRECTIVE-BLENDSHAPES-TWISTBONES"
             names, and the workspace has already settled its two halves:
 
             - **Correctives**: SOMA-X's unified pose correctives (`soma/correctives_model.py`,

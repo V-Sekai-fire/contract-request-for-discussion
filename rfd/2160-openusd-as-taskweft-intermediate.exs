@@ -11,7 +11,9 @@ defmodule RFD2160 do
 
     state :prediscussion
 
-    feature "one bidirectional intermediate that carries the source\nFBD, every derived artefact (`.gd`, Udon asm, `.elf`, `.uasset`),\nand provenance to round-trip between them"
+    feature "one bidirectional intermediate that carries the source
+FBD, every derived artefact (`.gd`, Udon asm, `.elf`, `.uasset`),
+and provenance to round-trip between them"
 
     scope "taskweft, taskweft-fbd-compiler, all emitters, taskweft-godot-sandbox"
 
