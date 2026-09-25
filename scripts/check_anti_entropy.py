@@ -121,12 +121,12 @@ mismatch = [f"{n}-{sl}" for n, sl in rows if n in docs and f"{n}-{sl}" not in do
 check("slug matches document name", not mismatch, f"mismatches: {mismatch or 'none'}")
 
 # --- C. blocklist rows vs sections, enumerated ----------------------------------------
-cl = (RFD/"CLAUDE.md").read_text(); bl = (RFD/"BLOCKLIST.md").read_text()
-rows = [l for l in cl.splitlines() if l.startswith("|") and "see below" in l.lower()]
+bl = (RFD/"BLOCKLIST.md").read_text(); cl = bl.split("\n### ", 1)[0]
+rows = [l for l in cl.splitlines() if l.startswith("- ") and "see below" in l.lower()]
 secs = [l for l in bl.splitlines() if l.startswith("### ")]
 check("blocklist rows == sections", len(rows)==len(secs), f"{len(rows)} rows / {len(secs)} sections")
 check("  control: counter finds a planted row", 
-      len([l for l in (cl+"\n| planted | See Below |").splitlines() if l.startswith("|") and "see below" in l.lower()]) == len(rows)+1,
+      len([l for l in (cl+"\n- planted: See Below").splitlines() if l.startswith("- ") and "see below" in l.lower()]) == len(rows)+1,
       "case-insensitive match verified against a planted row")
 
 # --- D. linkfiles, enumerated ----------------------------------------------------------

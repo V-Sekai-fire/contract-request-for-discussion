@@ -80,15 +80,11 @@ def table_rows(claude_md):
     """
     rows = []
     for line in claude_md.split("\n"):
-        if not line.startswith("|"):
-            continue
-        cells = [c.strip() for c in line.strip("|").split("|")]
-        if len(cells) < 2 or set(cells[0]) <= set("- "):
-            continue
-        if cells[0].lower().startswith("source"):
+        if not line.startswith("- ") or ": " not in line:
             continue
         if "see below" in line.lower():
-            rows.append((cells[0], tokens(cells[0])))
+            subject = line[2:].split(": ", 1)[0]
+            rows.append((subject, tokens(subject)))
     return rows
 
 
@@ -151,9 +147,8 @@ def check(claude_md, blocklist_md):
 def self_test():
     """Controls. Each broken input must FAIL, or the gate certifies the drift."""
     good_table = (
-        "| source | reason |\n| --- | --- |\n"
-        "| **Blender** | renders are not reproducible -- see below |\n"
-        "| CMU mocap | provenance |\n"
+        "- **Blender**: renders are not reproducible -- see below\n"
+        "- CMU mocap: provenance\n"
     )
     good_detail = "### Blender is blocklisted, and reproducibility is why\n\nbody\n"
 
@@ -161,7 +156,7 @@ def self_test():
         ("a row with its section, and a row needing none", good_table, good_detail, True),
         (
             "a row promising an argument that does not exist",
-            good_table + "| **Krea 2** | revenue-gated -- see below |\n",
+            good_table + "- **Krea 2**: revenue-gated -- see below\n",
             good_detail,
             False,
         ),
@@ -173,12 +168,12 @@ def self_test():
         ),
         (
             "a row matched only by a stopword must NOT count as matched",
-            "| source | reason |\n| --- | --- |\n| **the model** | see below |\n",
+            "- **the model**: see below\n",
             "### Blender is blocklisted, and reproducibility is why\n",
             False,
         ),
         ("an empty detail document", good_table, "", False),
-        ("a table with no promises at all", "| source | reason |\n| --- | --- |\n", good_detail, False),
+        ("a list with no promises at all", "- CMU mocap: provenance\n", good_detail, False),
     ]
 
     print("controls:")
@@ -201,15 +196,16 @@ def main(argv):
         return self_test()
 
     root = pathlib.Path(argv[1] if len(argv) > 1 else ".")
-    claude, block = root / "CLAUDE.md", root / "BLOCKLIST.md"
-    for p in (claude, block):
-        if not p.exists():
-            print("FAIL: %s does not exist" % p)
-            return 1
+    block = root / "BLOCKLIST.md"
+    if not block.exists():
+        print("FAIL: %s does not exist" % block)
+        return 1
 
-    problems = check(claude.read_text(encoding="utf-8"), block.read_text(encoding="utf-8"))
+    text = block.read_text(encoding="utf-8")
+    denied = text.split("\n### ", 1)[0]
+    problems = check(denied, text)
     if not problems:
-        rows = len(table_rows(claude.read_text(encoding="utf-8")))
+        rows = len(table_rows(denied))
         secs = len(detail_sections(block.read_text(encoding="utf-8")))
         print("ok   %d rows promising an argument, %d sections, and they agree" % (rows, secs))
         return 0
