@@ -98,6 +98,18 @@ V-Sekai client and server that host the loop"
     - VRM is delivery: what a player loads and shares.
     """
 
+    details "The grade that teaches", ~S"""
+    The loop ends in a critique, not only a wearable. The score step returns a
+    grade with annotations on the drawing, so a person reads where it marked
+    them down and learns to draw better; the wearable and the lesson come from
+    one pass.
+
+    The grader is a decision model, EditScore retrained, and it runs inside the
+    loop, so it is sized to the loop. A checkpoint that needs a workstation to
+    answer is too large; the target is a compact retrain that answers in the
+    sandbox, not the biggest model available.
+    """
+
     details "Moving in it: the mocap track, parked", ~S"""
     Wearing it and moving together needs body motion to drive the avatar.
     That track is Sinew, inertial motion capture from a worn suit. It sits
