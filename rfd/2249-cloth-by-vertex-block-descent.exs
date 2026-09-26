@@ -10,7 +10,7 @@ defmodule RFD2249 do
       "Cloth by vertex block descent, on the GPU" do
     state :discussion
 
-    flight_level :l2
+    flight_level :l1
 
     feature "a cloth solver with no global linear solve, no Eigen and no convex approximation of the body"
 

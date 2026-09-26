@@ -11,6 +11,8 @@ defmodule RFD2230 do
 
     state :discussion
 
+    flight_level :l2
+
     feature "ggml lives as a single native module inside\n`entities-godot-sandbox`; model-specific adapter code (tokenizer,\nprompt templates, LoRA scaling, sampler config, per-model quirks)\nmoves out of per-project C++ into GDScript loaded at runtime with\nsandbox permissions"
 
     scope "`entities-godot-sandbox/modules/ggml/` (new), motion-\nbricks-cpp / kimodo / skin-tokens-cpp adapter code, RFD 2212\n(motion-bricks-as-native-module rescopes), RFD 2229 (this is one\nof its named consolidations landing)"
