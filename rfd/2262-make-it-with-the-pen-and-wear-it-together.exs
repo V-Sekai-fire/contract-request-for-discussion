@@ -95,5 +95,31 @@ V-Sekai client and server that host the loop"
       per stroke, the boundary mark a per-curve primvar).
     - VRM is delivery: what a player loads and shares.
     """
+
+    details "Moving in it: the mocap track, parked", ~S"""
+    Wearing it and moving together needs body motion to drive the avatar.
+    That track is Sinew, inertial motion capture from a worn suit. It sits
+    behind the vehicles above, recorded here so it is not lost and not
+    scheduled.
+
+    - Shelved 2026-09-26: the mount-drift calibrator's training corpus
+      shipped as `chibifire/mount-drift-caldata-motion` (558 rows of
+      continuous microduck-gated clips, human and starforged phenotypes).
+      Training the calibrator on it and measuring arm and hand mount
+      recovery against a real-caldata baseline remains. Unpark when GPU
+      budget and a held-out real capture are both in hand.
+    - Shelved 2026-09-26: the IMU-recovery half, raw sensor to per-tracker
+      orientation, stays unproven. Unpark with a clean low-IK recapture,
+      the worn suit with motion smoothing and IK off, so the vendor pose
+      approximates the raw tracker orientations for a direct match.
+    - Shelved 2026-09-26: motion generation runs on the owned GPUs now
+      (CUDA in WSL, both cards, via the bf16 op_repeat fix in the shared
+      ggml). Unpark to scale the corpus with continuous motion-matching
+      sequences when training needs more than the pilot.
+    - Shelved 2026-09-26: fleet agents mint GitHub tokens from the bao
+      GitHub secrets engine and land PRs through the merge queue. Unpark to
+      make that the standing path when multi-agent coordination is the card
+      in motion.
+    """
   end
 end
