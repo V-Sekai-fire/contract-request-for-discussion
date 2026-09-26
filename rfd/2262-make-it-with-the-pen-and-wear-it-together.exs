@@ -23,8 +23,10 @@ V-Sekai client and server that host the loop"
     front of real people to test one assumption, never a car missing a
     wheel. One card moves at a time; later cards change with what the
     one in motion teaches. The loop is godot-sandbox guest ELFs a host
-    loads, with no engine module of its own. OpenUSD is the internal
-    format, VRM the one a player shares.
+    loads, with no engine module of its own. The scoring it relies on
+    runs the same shape: EditScore and MaskScore are decision models,
+    godot-sandbox guests on ggml-rd and compute-rd, not a second
+    runtime. OpenUSD is the internal format, VRM the one a player shares.
     """
 
     problem ~S"""
