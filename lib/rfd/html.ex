@@ -66,7 +66,7 @@ defmodule RFD.HTML do
   def entry_table(entries) do
     rows =
       entries
-      |> Enum.sort_by(&{level_rank(&1.flight_level), -&1.serial})
+      |> RFD.Board.sort()
       |> Enum.map_join("\n", fn e ->
         dim = if e.state in [:abandoned, :moved], do: ~s( class="dim"), else: ""
 
@@ -84,12 +84,6 @@ defmodule RFD.HTML do
 
   def level(nil), do: ""
   def level(l), do: l |> Atom.to_string() |> String.upcase()
-
-  # The register sorts by level L3, L2, L1 then the unlevelled, serial descending within each.
-  defp level_rank(:l3), do: 0
-  defp level_rank(:l2), do: 1
-  defp level_rank(:l1), do: 2
-  defp level_rank(nil), do: 3
 
   defp inline(nil), do: ""
 
