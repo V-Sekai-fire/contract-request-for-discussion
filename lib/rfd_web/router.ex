@@ -163,31 +163,32 @@ defmodule RFDWeb.Router do
   end
 
   get "/serials" do
-    sections =
-      Enum.map_join(Corpus.registers(), "\n", fn {file, r} ->
-        {a, d} = RFD.Register.tables(r)
-
-        rows = fn table, kind ->
-          Enum.map_join(Enum.sort(table), "\n", fn {s, v} ->
-            link =
-              case {kind, Corpus.entry(s)} do
-                {:allocated, %{slug: slug}} -> ~s(<a href="/rfd/#{s}-#{slug}">#{escape(v)}</a>)
-                _ -> escape(v)
-              end
-
-            "<tr><td>#{s}</td><td>#{link}</td></tr>"
-          end)
-        end
-
-        """
-        <h2>#{escape(r.name)} · site #{r.layer[:site]} · <code>#{file}.usda</code></h2>
-        <p class="meta">#{escape(r.thesis)}</p>
-        <h3>Allocated (#{map_size(a)})</h3><table><tbody>#{rows.(a, :allocated)}</tbody></table>
-        <h3>Deleted (#{map_size(d)})</h3><table><tbody>#{rows.(d, :deleted)}</tbody></table>
-        """
+    {a, d} =
+      Enum.reduce(Corpus.registers(), {%{}, %{}}, fn {_f, r}, {aa, dd} ->
+        {ra, rd} = RFD.Register.tables(r)
+        {Map.merge(aa, ra), Map.merge(dd, rd)}
       end)
 
-    html(conn, "Serials", "<h1>Serial registers</h1>\n" <> sections)
+    rows = fn table, kind ->
+      Enum.map_join(Enum.sort(table), "\n", fn {s, v} ->
+        link =
+          case {kind, Corpus.entry(s)} do
+            {:allocated, %{slug: slug}} -> ~s(<a href="/rfd/#{s}-#{slug}">#{escape(v)}</a>)
+            _ -> escape(v)
+          end
+
+        "<tr><td>#{s}</td><td>#{link}</td></tr>"
+      end)
+    end
+
+    html(conn, "Serials", """
+    <h1>Serial register</h1>
+    <p class="meta">Every serial this workspace has allocated or retired.
+    A serial is appended once and never reused; the registers are the Elixir
+    DSL sources <code>SERIALS.exs</code> and <code>SERIALS-vsekai-fabric.exs</code>.</p>
+    <h3>Allocated (#{map_size(a)})</h3><table><tbody>#{rows.(a, :allocated)}</tbody></table>
+    <h3>Deleted (#{map_size(d)})</h3><table><tbody>#{rows.(d, :deleted)}</tbody></table>
+    """)
   end
 
   get "/SERIALS.usda" do
