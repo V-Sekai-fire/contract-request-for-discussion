@@ -132,6 +132,20 @@ defmodule RFD1037 do
     because it is the largest of the five.
     """
 
+    details "A decision model is an action, not a runtime", ~S"""
+    A decision model answers one typed question: EditScore rates an edit
+    against its instruction, and MaskScore is EditScore retrained to rate a
+    matte, so one architecture answers both. In a domain it is an action's
+    body or a `validate` guard, and the planner orders it among the other
+    steps and replans when it fails.
+
+    It runs on the loop's own stack, a godot-sandbox guest on ggml-rd and
+    compute-rd, with no model server to reach. That is the difference from a
+    standalone runtime that serves decision models over a socket: the typed
+    question, the plan that asks it, and the model that answers it sit in the
+    process the host already loads.
+    """
+
     drafted_by :ai
   end
 end
