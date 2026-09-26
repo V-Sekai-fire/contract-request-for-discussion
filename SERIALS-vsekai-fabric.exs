@@ -204,7 +204,7 @@ defmodule Serials.VSekaiFabric do
       serial 2246, "editscore-omnigen-bootstrap-for-unmapped-parts"
       serial 2247, "property-testing-in-every-language"
       serial 2248, "the-avatar-body-is-a-closed-solid"
-      serial 2249, "cloth-by-vertex-block-descent", flight_level: :l2
+      serial 2249, "cloth-by-vertex-block-descent", flight_level: :l1
       serial 2250, "cloth-fit-as-one-burrito-binary"
       serial 2251, "image-to-godot-character-as-an-fbd"
       serial 2252, "llm-module-splits-and-drafts"
