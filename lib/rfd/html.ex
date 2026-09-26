@@ -65,7 +65,9 @@ defmodule RFD.HTML do
   @doc "A table of RFD entries: serial, title, state, scope, level."
   def entry_table(entries) do
     rows =
-      Enum.map_join(entries, "\n", fn e ->
+      entries
+      |> RFD.Board.sort()
+      |> Enum.map_join("\n", fn e ->
         dim = if e.state in [:abandoned, :moved], do: ~s( class="dim"), else: ""
 
         """
