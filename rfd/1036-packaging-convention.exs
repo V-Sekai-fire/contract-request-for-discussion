@@ -9,8 +9,6 @@ defmodule RFD1036 do
   rfd 1036, "Model packaging convention" do
     state :committed
 
-    flight_level :l2
-
     feature "model packaging"
 
     attest_in :none

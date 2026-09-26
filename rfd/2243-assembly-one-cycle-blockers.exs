@@ -11,8 +11,6 @@ defmodule RFD2243 do
 
     state :discussion
 
-    flight_level :l2
-
     feature "the enumeration of what blocks one `gitassembly` cycle
 from completing, parked as a record. The measured answer inverts the
 question: a git-assembler cycle completes unattended today. What

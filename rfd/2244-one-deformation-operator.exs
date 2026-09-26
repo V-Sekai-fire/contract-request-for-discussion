@@ -9,8 +9,6 @@ defmodule RFD2244 do
   rfd 2244, "One deformation operator over corners, not one stage per category" do
     state :discussion
 
-    flight_level :l2
-
     compact_head true
 
     feature "one deform stage — blendshapes, correctives, driver bones — with no per-category branch"

@@ -17,8 +17,6 @@ defmodule RFD2172 do
 
     state :committed
 
-    flight_level :l2
-
     feature "prose voice for code comments, RFDs, and changelog entries"
 
     scope "every `.md`, `.qmd`, and code-comment file in the workspace"

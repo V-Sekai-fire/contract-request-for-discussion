@@ -10,8 +10,6 @@ defmodule RFD2238 do
       "Sim-to-real for the body on the G1 rig: the environment, the ROM envelope and the smoke run" do
     state :discussion
 
-    flight_level :l2
-
     feature "the microduck formula (mjlab on MuJoCo Warp, PPO through rsl-rl, 50 Hz control, ONNX with the normaliser baked in) stood up on the Unitree G1 rig inside WSL2 on the desk's own 4090, with the Appendix E.3 joint envelope as one artefact and a throwaway smoke run proving train, roll-out and export end to end"
 
     scope "`3-interactor/motion-bricks-cpp/mujoco` (`pixi.toml`, `rom_envelope.py`, `mjlab_motionbricks/`), the WSL2 host on this desk, RFD 1138's source list"

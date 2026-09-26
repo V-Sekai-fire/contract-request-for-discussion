@@ -11,8 +11,6 @@ defmodule RFD2242 do
 
     state :discussion
 
-    flight_level :l2
-
     feature "each ggml consumer in the workspace becomes a native
 Godot engine C++ module inside `entities-godot-sandbox/modules/`,
 all stacked on a foundational `modules/ggml/` that hosts the

@@ -9,8 +9,6 @@ defmodule RFD2237 do
   rfd 2237, "The body reacts through a per-frame diagram scan" do
     state :discussion
 
-    flight_level :l2
-
     feature "a Function Block Diagram run once per frame between the gamepad, the mocap trackers and motion-bricks.cpp: inputs in, a motion command and a chain mask out, the planner generating the sequences, a Lean reference the guest is measured against"
 
     scope "`3-interactor/taskweft-fbd-compiler`, `3-interactor/taskweft-godot-sandbox`, `3-interactor/motion-bricks-cpp` as the actuator"

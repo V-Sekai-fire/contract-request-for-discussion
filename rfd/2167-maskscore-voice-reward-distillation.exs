@@ -9,8 +9,6 @@ defmodule RFD2167 do
   rfd 2167, "Voice-clone reward-model distillation" do
     state :discussion
 
-    flight_level :l1
-
     feature "distill the wavlm_cos + voxtral_wer scoring signal from
 RFD 2164.3 into a fast reward model usable in RL fine-tuning of voice
 models. Parallels EditScore for image edits."

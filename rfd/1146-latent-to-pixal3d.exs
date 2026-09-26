@@ -9,8 +9,6 @@ defmodule RFD1146 do
   rfd 1146, "The latent-to-Pixal3D loop" do
     state :published
 
-    flight_level :l1
-
     feature "loop 4 of the four-loop plan"
 
     scope "`fourloops-plan.usda`"

@@ -9,8 +9,6 @@ defmodule RFD1027 do
   rfd 1027, "GPU tier per model" do
     state :committed
 
-    flight_level :l2
-
     feature "capacity planning"
 
     attest_in :none

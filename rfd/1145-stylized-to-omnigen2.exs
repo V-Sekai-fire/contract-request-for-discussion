@@ -9,8 +9,6 @@ defmodule RFD1145 do
   rfd 1145, "The stylized-to-OmniGen2 loop" do
     state :published
 
-    flight_level :l1
-
     feature "loop 3 of the four-loop plan"
 
     scope "`fourloops-plan.usda`"

@@ -9,8 +9,6 @@ defmodule RFD2236 do
   rfd 2236, "A teacher that exports Function Block Diagrams, gained in three steps" do
     state :discussion
 
-    flight_level :l2
-
     feature "the model behind `/fbd` on the taskweft-acp door: a constructed EditScore-shaped corpus, continued pretraining of Gemma 4 E2B under QAT, then reinforcement training with the compiler and the sandbox as the hard half of the reward"
 
     scope "`3-interactor/taskweft-fbd-teacher`, `3-interactor/taskweft-fbd-compiler`"
