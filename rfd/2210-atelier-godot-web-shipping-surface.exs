@@ -9,8 +9,6 @@ defmodule RFD2210 do
   rfd 2210, "atelier shipping surface" do
     state :discussion
 
-    flight_level :l2
-
     feature "the atelier ships as one native Godot binary per platform;
 one runtime, two heads (interactive + headless capture)"
 

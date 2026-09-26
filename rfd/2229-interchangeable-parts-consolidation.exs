@@ -11,8 +11,6 @@ defmodule RFD2229 do
 
     state :discussion
 
-    flight_level :l3
-
     feature "codify the interchangeable-parts directive from
 2026-09-05 as workspace policy plus name the concrete candidates
 already visible in the goal manifest"

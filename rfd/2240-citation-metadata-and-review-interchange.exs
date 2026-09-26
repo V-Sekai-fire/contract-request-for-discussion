@@ -10,8 +10,6 @@ defmodule RFD2240 do
       "One citation, one metadata serialization, one vector pair, one intermediate, one review timeline" do
     state :discussion
 
-    flight_level :l2
-
     feature "how a deliverable is stored and reviewed: the citation record as the master, its XMP serialization in a sidecar beside every asset, SVG and Lottie for vector, CineForm for the intermediate, OpenTimelineIO for the review timeline"
 
     scope "every repository that ships a deliverable; `2-contract/manuals-weftspun` (the converter and its gate), the three CineForm repositories, and the `CITATION.cff` beside every placed project"

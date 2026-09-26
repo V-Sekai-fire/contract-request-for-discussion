@@ -9,8 +9,6 @@ defmodule RFD1175 do
   rfd 1175, "game" do
     state :discussion
 
-    flight_level :l2
-
     feature "one native binary that is both the interactive demo and
 the video head that records it"
 

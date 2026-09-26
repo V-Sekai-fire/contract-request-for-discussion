@@ -9,8 +9,6 @@ defmodule RFD2162 do
   rfd 2162, "MaskScore Video-stub USDZ skinning + 15-edit emit" do
     state :discussion
 
-    flight_level :l1
-
     feature "proper 104-joint skin bindings inside the Video-stub USDZ,\nplus emit coverage of the 5 pose edits added alongside the 10 face\nedits under RFD 1173."
 
     scope "`6-datasource/anny-render-corpus`"

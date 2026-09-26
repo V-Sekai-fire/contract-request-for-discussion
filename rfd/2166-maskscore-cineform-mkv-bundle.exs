@@ -9,8 +9,6 @@ defmodule RFD2166 do
   rfd 2166, "MaskScore Cineform MKV bundle per RFD 1137" do
     state :discussion
 
-    flight_level :l1
-
     feature "one Cineform MKV per edit bundling the video frames,
 audio, and the WebVTT ASR panel (per RFD 1102 task catalog), produced through the
 service-cineform pair per RFD 1137."

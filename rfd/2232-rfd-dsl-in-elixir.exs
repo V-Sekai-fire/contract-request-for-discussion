@@ -9,8 +9,6 @@ defmodule RFD2232 do
   rfd 2232, "RFD authoring as an Elixir DSL" do
     state :discussion
 
-    flight_level :l2
-
     feature "one `rfd/NNNN-slug.exs` per RFD and one `SERIALS*.exs` per site, compiled by `rfd_dsl`; the Markdown and the `.usda` registers are renderings of them and are not tracked"
 
     scope "the Mix project at the repository root, every `rfd/*.exs`, `SERIALS.exs` and `SERIALS-vsekai-fabric.exs`, the site and the MCP endpoint it serves"

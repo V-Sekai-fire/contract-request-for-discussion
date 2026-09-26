@@ -11,8 +11,6 @@ defmodule RFD2182 do
 
     state :committed
 
-    flight_level :l2
-
     feature "name the operator, the partner project, and the market"
 
     scope "RFD titles, public prose, README taglines, pitch material"

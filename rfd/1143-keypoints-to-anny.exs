@@ -9,8 +9,6 @@ defmodule RFD1143 do
   rfd 1143, "The keypoints-to-ANNY loop" do
     state :published
 
-    flight_level :l1
-
     feature "loop 1 of the four-loop plan"
 
     scope "`fourloops-plan.usda`"

@@ -10,8 +10,6 @@ defmodule RFD2241 do
       "The audio and video leg: keypoints and monocular geometry over a speech corpus, evaluated on constructed bodies" do
     state :discussion
 
-    flight_level :l2
-
     feature "an audio-pose training corpus built from a licence-clean speech-and-video set by two inference passes, published with its provenance, and measured only on constructed data"
 
     scope "`3-interactor/rf-detr-cpp` (the keypoint pass), `3-interactor/moge-upstream` (the geometry pass), `3-interactor/taskweft-fbd-teacher` (the selector, packer and tables), `7-service/service-cineform` (the aligned record), and the private Hub repositories the corpus lands in"

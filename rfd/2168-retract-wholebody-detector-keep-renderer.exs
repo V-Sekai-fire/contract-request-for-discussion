@@ -9,8 +9,6 @@ defmodule RFD2168 do
   rfd 2168, "Retract RFD 1122's bespoke wholebody detector; keep the renderer" do
     state :published
 
-    flight_level :l1
-
     feature "documentation retraction"
 
     scope "`rfd/1122-the-wholebody-gap`"

@@ -9,8 +9,6 @@ defmodule RFD2170 do
   rfd 2170, "allosaurus runs universal + a 27-language commercial localization set" do
     state :committed
 
-    flight_level :l2
-
     feature "phone-inventory controls for the ASR panel"
 
     scope "`6-datasource/anny-render-corpus/emit_10track_panel.py`, `6-datasource/anny-render-corpus/add_allosaurus_control.py`"

@@ -9,8 +9,6 @@ defmodule RFD1102 do
   rfd 1102, "The supported task catalog, one live source" do
     state :committed
 
-    flight_level :l2
-
     scope "RFDs 1036 (packaging), 1173 (pipeline), 2136 (gacha ladder), 2188 (one ggml across workspace), 2210 (atelier surface), 2230 (ggml adapters)"
 
     attest_in :none

@@ -9,8 +9,6 @@ defmodule RFD2165 do
   rfd 2165, "MaskScore unified 8-stub emit refactor" do
     state :discussion
 
-    flight_level :l1
-
     feature "one emit script covering all 8 MaskScore stubs (mesh,
 depth, pose, keypoints, multimodal, text, speech, video) at 10 ranks
 per candidate per edit, ETNF three-parquet form."

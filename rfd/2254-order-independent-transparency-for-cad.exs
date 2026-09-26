@@ -9,8 +9,6 @@ defmodule RFD2254 do
   rfd 2254, "order-independent transparency for computer-aided design" do
     state :prediscussion
 
-    flight_level :l2
-
     feature "Mix-blended surfaces composite in any draw order on the
 Mobile and Forward+ renderers, so a CAD assembly with parts
 turned transparent reads correctly from every angle"

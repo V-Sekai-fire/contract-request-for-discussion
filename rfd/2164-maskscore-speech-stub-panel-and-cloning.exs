@@ -9,8 +9,6 @@ defmodule RFD2164 do
   rfd 2164, "MaskScore Speech-stub 12-track ASR panel + 10-rank voice cloning" do
     state :discussion
 
-    flight_level :l1
-
     feature "MaskScore Speech stub filled along two axes -- a panel of
 diverse ASR judges (12 tracks per audio) and a 10-rank ladder of
 voice-cloned candidates. Together they cover the transcript and audio

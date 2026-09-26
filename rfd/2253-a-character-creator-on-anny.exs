@@ -9,8 +9,6 @@ defmodule RFD2253 do
   rfd 2253, "a character creator on ANNY" do
     state :prediscussion
 
-    flight_level :l2
-
     feature "a character creator a person opens: sliders over the baked ANNY
 asset in the one Godot binary, exporting the shuttle that
 RFD 2251's chain consumes"

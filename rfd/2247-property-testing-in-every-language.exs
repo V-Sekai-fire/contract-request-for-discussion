@@ -10,8 +10,6 @@ defmodule RFD2247 do
       "Property testing in every language, with falsification" do
     state :discussion
 
-    flight_level :l1
-
     feature "every test suite in the workspace states invariants a generator searches, and ships the negative control that must fail"
 
     scope "every language in the workspace: Elixir (StreamData), Python (Hypothesis), C++ (RapidCheck), Rust (proptest), Go (testing/quick, rapid), GDScript/C# (FsCheck where hosted)"

@@ -17,8 +17,6 @@ defmodule RFD2171 do
 
     state :committed
 
-    flight_level :l2
-
     feature "naming the pipeline and the deliverable"
 
     scope "public-facing prose, RFD titles, changelog entries"

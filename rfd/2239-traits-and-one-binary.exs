@@ -10,8 +10,6 @@ defmodule RFD2239 do
       "Three efforts fold into the FBD teacher's traits, and the runtime ships as one binary" do
     state :discussion
 
-    flight_level :l2
-
     feature "the queued plan amended to its open items: dress-on, generate-pose and generate-identity become rows of the FBD teacher (ten traits at 100,000 rows, one generated anchor), the teacher's tools are ported to Elixir before any new trait, the DSL gains codebooks whose codes are enums, and the runtime with ggml inside ships as one native Godot binary"
 
     scope "`3-interactor/taskweft-fbd-teacher`, `3-interactor/taskweft-fbd-compiler`, `3-interactor/entities-godot-sandbox`, `3-interactor/voxhammer-upstream/tools`, the goal manifest `weftspun/weftspun-keypoint`"
