@@ -11,9 +11,9 @@ defmodule RFD2262 do
 
     flight_level :l3
 
-    feature "A person makes their own character and outfit with the meshing
-pen, wears it in V-Sekai's shared world, moves and emotes with others, and
-shares it"
+    feature "Pen meshing in a shared world with graded annotations: a person
+draws their character and outfit with the meshing pen, wears it where others
+see it, and gets a grade that teaches them to draw better"
 
     scope "interactor-dress-on, transport-meshing-pen, and the
 V-Sekai client and server that host the loop"
